@@ -1,0 +1,46 @@
+@font-face {
+    font-family: "WhitneyMedium";
+    src: url('WhitneyMedium.ttf');
+}
+
+body{
+    font-family: WhitneyMedium, Calibri;
+    background-color: lightgrey;
+    margin-top:170px;
+    margin-left: 330px;
+}
+
+header{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    background: #00889e;
+    z-index: 3;
+    height: 150px;
+}
+
+#logo{
+    height: 60px;
+    margin-top: 40px;
+    margin-left: 20px;
+}
+
+#marge{
+    position: absolute;
+    left: 0px;
+    top: 150px;
+    z-index: 1;
+    width: 315px;
+    color: white;
+    background: midnightblue;
+    display: block;
+    overflow: hidden;
+    height: 300px;
+}
+
+#menu{
+    text-align: center;
+    text-decoration: underline;
+    font-size: 26px;
+}
