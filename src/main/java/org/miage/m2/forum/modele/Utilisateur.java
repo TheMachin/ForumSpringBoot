@@ -1,10 +1,6 @@
 package org.miage.m2.forum.modele;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import java.io.Serializable;
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,32 +12,27 @@ public class Utilisateur {
 	private String pseudo;
 	private String mdp;
 	private boolean admin;
-	@OneToMany
+	@OneToMany(mappedBy = "author")
 	private Set<Message> message = new HashSet<Message>();
-	@ManyToMany
-	private Set<Projet> acces = new HashSet<Projet>();
-	@OneToMany
+	@OneToMany(mappedBy = "creators")
 	private Set<Projet> creators = new HashSet<Projet>();
+	@OneToMany(mappedBy = "creator")
+	private Set<Topic> listTopicCreate = new HashSet<Topic>();
 	@ManyToMany
-	private Set<Topic> lecture = new HashSet<Topic>();
-	@ManyToMany
-	private Set<Topic> ecriture = new HashSet<Topic>();
-	@OneToMany
-	private Set<Topic> creator = new HashSet<Topic>();
-	@ManyToMany
+	@JoinTable(name = "suiveurs_topic",
+			joinColumns = @JoinColumn(name = "utilisateur_id"),
+			inverseJoinColumns = @JoinColumn(name = "topic_titre")
+	)
 	private Set<Topic> suivi = new HashSet<Topic>();
 
-	public Utilisateur(String email, String pseudo, String mdp, boolean admin, Set<Message> message, Set<Projet> acces, Set<Projet> creators, Set<Topic> lecture, Set<Topic> ecriture, Set<Topic> creator, Set<Topic> suivi) {
+	public Utilisateur(String email, String pseudo, String mdp, boolean admin, Set<Message> message, Set<Projet> creators, Set<Topic> listTopicCreate, Set<Topic> suivi) {
 		this.email = email;
 		this.pseudo = pseudo;
 		this.mdp = mdp;
 		this.admin = admin;
 		this.message = message;
-		this.acces = acces;
 		this.creators = creators;
-		this.lecture = lecture;
-		this.ecriture = ecriture;
-		this.creator = creator;
+		this.listTopicCreate = listTopicCreate;
 		this.suivi = suivi;
 	}
 
@@ -88,14 +79,6 @@ public class Utilisateur {
 		this.message = message;
 	}
 
-	public Set<Projet> getAcces() {
-		return acces;
-	}
-
-	public void setAcces(Set<Projet> acces) {
-		this.acces = acces;
-	}
-
 	public Set<Projet> getCreators() {
 		return creators;
 	}
@@ -104,28 +87,13 @@ public class Utilisateur {
 		this.creators = creators;
 	}
 
-	public Set<Topic> getLecture() {
-		return lecture;
+
+	public Set<Topic> getListTopicCreate() {
+		return listTopicCreate;
 	}
 
-	public void setLecture(Set<Topic> lecture) {
-		this.lecture = lecture;
-	}
-
-	public Set<Topic> getEcriture() {
-		return ecriture;
-	}
-
-	public void setEcriture(Set<Topic> ecriture) {
-		this.ecriture = ecriture;
-	}
-
-	public Set<Topic> getCreator() {
-		return creator;
-	}
-
-	public void setCreator(Set<Topic> creator) {
-		this.creator = creator;
+	public void setListTopicCreate(Set<Topic> creator) {
+		this.listTopicCreate = creator;
 	}
 
 	public Set<Topic> getSuivi() {

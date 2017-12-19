@@ -1,7 +1,6 @@
 package org.miage.m2.forum.modele;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -16,12 +15,19 @@ public class Projet {
 	private boolean invite;
 	@ManyToMany
 	private Set<Utilisateur> acces = new HashSet<Utilisateur>();
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="CREATOR_ID")
 	private Utilisateur creators;
+	@OneToMany(mappedBy = "projet")
+	private Set<Topic> topics = new HashSet<Topic>();
 	@OneToMany
-	private Set<Topic> acteur = new HashSet<Topic>();
+	@JoinTable(name = "Sous_projet",
+			joinColumns = @JoinColumn(name = "Projet_titre"),
+			inverseJoinColumns = @JoinColumn(name = "Sous_projet_titre")
+	)
+	private Set<Projet> sousProjet = new HashSet<Projet>();
 
-	public Projet(String titre, String description, Date dateCreation, boolean invite, Set<Utilisateur> acces, Utilisateur creator, Set<Topic> acteur) {
+	public Projet(String titre, String description, Date dateCreation, boolean invite, Set<Utilisateur> acces, Utilisateur creator, Set<Topic> topics) {
 	}
 
 	public Projet() {
@@ -75,11 +81,11 @@ public class Projet {
 		this.creators = creators;
 	}
 
-	public Set<Topic> getActeur() {
-		return acteur;
+	public Set<Topic> getTopics() {
+		return topics;
 	}
 
-	public void setActeur(Set<Topic> acteur) {
-		this.acteur = acteur;
+	public void setTopics(Set<Topic> acteur) {
+		this.topics = acteur;
 	}
 }

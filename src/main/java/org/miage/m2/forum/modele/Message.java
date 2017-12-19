@@ -12,15 +12,17 @@ public class Message {
 	private int id;
 	private String message;
 	private Date date;
-	@ManyToOne
-	private Utilisateur utilisateur;
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="AUTHOR_ID")
+	private Utilisateur author;
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="TOPIC_ID")
 	private Topic topic;
 
 	public Message(String message, Date date, Utilisateur utilisateur, Topic topic) {
 		this.message = message;
 		this.date = date;
-		this.utilisateur = utilisateur;
+		this.author = utilisateur;
 		this.topic = topic;
 	}
 
@@ -44,11 +46,11 @@ public class Message {
 	}
 
 	public Utilisateur getUtilisateur() {
-		return utilisateur;
+		return author;
 	}
 
 	public void setUtilisateur(Utilisateur utilisateur) {
-		this.utilisateur = utilisateur;
+		this.author = utilisateur;
 	}
 
 	public Topic getTopic() {

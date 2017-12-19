@@ -1,7 +1,6 @@
 package org.miage.m2.forum.modele;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -13,21 +12,35 @@ public class Topic {
 	private String titre;
 	private Date dateCreation;
 	private boolean invite;
-	@OneToMany
+	@OneToMany(mappedBy = "topic")
 	private Set<Message> message = new HashSet<Message>();
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="TOPIC_ID")
 	private Projet projet;
 	@ManyToMany
+	@JoinTable(name = "lecture_topic",
+			joinColumns = @JoinColumn(name = "topic_titre"),
+			inverseJoinColumns = @JoinColumn(name = "utilisateur_id")
+	)
 	private Set<Utilisateur> lecture = new HashSet<Utilisateur>();
 	@ManyToMany
+	@JoinTable(name = "ecriture_topic",
+			joinColumns = @JoinColumn(name = "topic_titre"),
+			inverseJoinColumns = @JoinColumn(name = "utilisateur_id")
+	)
 	private Set<Utilisateur> ecriture = new HashSet<Utilisateur>();
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="USER_CREATOR_ID")
 	private Utilisateur creator;
 	@ManyToMany
-	private Set<Utilisateur> suivi = new HashSet<Utilisateur>();
+	@JoinTable(name = "suiveurs_topic",
+			joinColumns = @JoinColumn(name = "topic_titre"),
+			inverseJoinColumns = @JoinColumn(name = "utilisateur_id")
+	)
+	private Set<Utilisateur> suiveurs = new HashSet<Utilisateur>();
 
 
-	public Topic(String titre, Date dateCreation, boolean invite, Set<Message> message, Projet projet, Set<Utilisateur> lecture, Set<Utilisateur> ecriture, Utilisateur creator, Set<Utilisateur> suivi) {
+	public Topic(String titre, Date dateCreation, boolean invite, Set<Message> message, Projet projet, Set<Utilisateur> lecture, Set<Utilisateur> ecriture, Utilisateur creator, Set<Utilisateur> suiveurs) {
 		this.titre = titre;
 		this.dateCreation = dateCreation;
 		this.invite = invite;
@@ -36,7 +49,7 @@ public class Topic {
 		this.lecture = lecture;
 		this.ecriture = ecriture;
 		this.creator = creator;
-		this.suivi = suivi;
+		this.suiveurs = suiveurs;
 	}
 
 	public Topic() {
@@ -106,11 +119,11 @@ public class Topic {
 		this.creator = creator;
 	}
 
-	public Set<Utilisateur> getSuivi() {
-		return suivi;
+	public Set<Utilisateur> getSuiveurs() {
+		return suiveurs;
 	}
 
-	public void setSuivi(Set<Utilisateur> suivi) {
-		this.suivi = suivi;
+	public void setSuiveurs(Set<Utilisateur> suivi) {
+		this.suiveurs = suivi;
 	}
 }
