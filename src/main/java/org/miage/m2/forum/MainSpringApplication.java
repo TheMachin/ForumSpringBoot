@@ -11,7 +11,7 @@ import javax.persistence.Persistence;
 public class MainSpringApplication {
     public static void main(String[] args) {
         SpringApplication.run(MainSpringApplication.class, args);
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("forum");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("FORUM");
         EntityManager em = emf.createEntityManager();
         em.close();
         emf.close();
