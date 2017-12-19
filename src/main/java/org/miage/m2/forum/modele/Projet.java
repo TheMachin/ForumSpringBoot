@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-public class Projet implements Serializable {
+public class Projet {
 
 	@Id
 	private String titre;
@@ -22,13 +22,9 @@ public class Projet implements Serializable {
 	private Set<Topic> acteur = new HashSet<Topic>();
 
 	public Projet(String titre, String description, Date dateCreation, boolean invite, Set<Utilisateur> acces, Utilisateur creator, Set<Topic> acteur) {
-		this.titre = titre;
-		this.description = description;
-		this.dateCreation = dateCreation;
-		this.invite = invite;
-		this.acces = acces;
-		this.creators = creator;
-		this.acteur = acteur;
+	}
+
+	public Projet() {
 	}
 
 	public String getTitre() {

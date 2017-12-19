@@ -1,11 +1,15 @@
 package org.miage.m2.forum.modele;
 
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Message implements Serializable {
+@Entity
+public class Message {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
 	private String message;
 	private Date date;
 	@ManyToOne
@@ -18,6 +22,9 @@ public class Message implements Serializable {
 		this.date = date;
 		this.utilisateur = utilisateur;
 		this.topic = topic;
+	}
+
+	public Message() {
 	}
 
 	public String getMessage() {

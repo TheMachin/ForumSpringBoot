@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-public class Topic implements Serializable {
+public class Topic {
 
 	@Id
 	private String titre;
@@ -37,6 +37,9 @@ public class Topic implements Serializable {
 		this.ecriture = ecriture;
 		this.creator = creator;
 		this.suivi = suivi;
+	}
+
+	public Topic() {
 	}
 
 	public String getTitre() {

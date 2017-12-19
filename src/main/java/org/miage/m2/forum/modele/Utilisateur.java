@@ -9,7 +9,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-public class Utilisateur implements Serializable {
+public class Utilisateur {
 
 	@Id
 	private String email;
@@ -43,6 +43,9 @@ public class Utilisateur implements Serializable {
 		this.ecriture = ecriture;
 		this.creator = creator;
 		this.suivi = suivi;
+	}
+
+	public Utilisateur() {
 	}
 
 	public String getEmail() {
