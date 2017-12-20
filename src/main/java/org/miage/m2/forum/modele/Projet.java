@@ -1,6 +1,7 @@
 package org.miage.m2.forum.modele;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -9,7 +10,9 @@ import java.util.Set;
 public class Projet {
 
 	@Id
+	@NotNull
 	private String titre;
+	@NotNull
 	private String description;
 	private Date dateCreation;
 	private boolean invite;
@@ -17,6 +20,7 @@ public class Projet {
 	private Set<Utilisateur> acces = new HashSet<Utilisateur>();
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="CREATOR_ID")
+	@NotNull
 	private Utilisateur creators;
 	@OneToMany(mappedBy = "projet")
 	private Set<Topic> topics = new HashSet<Topic>();
