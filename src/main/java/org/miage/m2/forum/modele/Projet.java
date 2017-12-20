@@ -1,5 +1,7 @@
 package org.miage.m2.forum.modele;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
@@ -31,7 +33,15 @@ public class Projet {
 	)
 	private Set<Projet> sousProjet = new HashSet<Projet>();
 
-	public Projet(String titre, String description, Date dateCreation, boolean invite, Set<Utilisateur> acces, Utilisateur creator, Set<Topic> topics) {
+	@Autowired
+	public Projet(String titre, String description, Date dateCreation, boolean invite, Set<Utilisateur> acces, Utilisateur creators, Set<Topic> topics) {
+		this.titre = titre;
+		this.description = description;
+		this.dateCreation = dateCreation;
+		this.invite = invite;
+		this.acces = acces;
+		this.creators = creators;
+		this.topics = topics;
 	}
 
 	public Projet() {
@@ -92,4 +102,60 @@ public class Projet {
 	public void setTopics(Set<Topic> acteur) {
 		this.topics = acteur;
 	}
+
+    public Set<Projet> getSousProjet() {
+        return sousProjet;
+    }
+
+    public void setSousProjet(Set<Projet> sousProjet) {
+        this.sousProjet = sousProjet;
+    }
+
+    /**
+     * On ajoute un projet à un projet
+     * On vérifie son existance à partir du nom du projet
+     * @param projet
+     * @return succes du traitement
+     */
+	public boolean addSousProjet(Projet projet){
+		for(Projet p : this.sousProjet){
+		    if(p.getTitre().equals(projet.getTitre())){
+		        return false;
+            }
+        }
+		this.sousProjet.add(projet);
+		return true;
+	}
+
+    /**
+     * Ajoute des utilisateurs pour accéder au projet
+     * @param users
+     */
+	public void addUserAccess(Set<Utilisateur> users){
+	    if(acces==null){
+	        acces = new HashSet<Utilisateur>();
+        }
+	    if(acces.isEmpty()){
+	        this.setAcces(users);
+	        return;
+        }
+	    for(Utilisateur u : users){
+	        if(!acces.contains(u)){
+	            acces.add(u);
+            }
+        }
+    }
+
+    /**
+     * Supprime l'acces des utilisateurs au projet
+     * @param users
+     */
+    public void removeUserAccess(Set<Utilisateur> users){
+        for(Utilisateur u : users){
+            if(!acces.contains(u)){
+                acces.remove(u);
+            }
+        }
+    }
+
 }

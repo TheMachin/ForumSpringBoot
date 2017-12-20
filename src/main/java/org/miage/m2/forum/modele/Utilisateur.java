@@ -1,5 +1,7 @@
 package org.miage.m2.forum.modele;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -25,6 +27,7 @@ public class Utilisateur {
 	)
 	private Set<Topic> suivi = new HashSet<Topic>();
 
+	@Autowired
 	public Utilisateur(String email, String pseudo, String mdp, boolean admin, Set<Message> message, Set<Projet> creators, Set<Topic> listTopicCreate, Set<Topic> suivi) {
 		this.email = email;
 		this.pseudo = pseudo;
