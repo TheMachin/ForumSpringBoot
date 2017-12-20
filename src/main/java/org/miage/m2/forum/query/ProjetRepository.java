@@ -1,7 +1,9 @@
 package org.miage.m2.forum.query;
 
 import org.miage.m2.forum.modele.Projet;
-import org.springframework.data.repository.Repository;
+import org.springframework.data.repository.CrudRepository;
 
-public interface ProjetRepository extends Repository<Projet, Long> {
+@org.springframework.stereotype.Repository
+public interface ProjetRepository extends CrudRepository<Projet, String> {
+
 }
