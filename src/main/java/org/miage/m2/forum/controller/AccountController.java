@@ -13,17 +13,6 @@ import java.util.Set;
 @RequestMapping("/account/")
 public class AccountController {
 
-    public static boolean createUser(String email, String pseudo, String mdp, boolean admin, Set<Message> message, Set<Projet> creators, Set<Topic> listTopicCreate, Set<Topic> suivi) {
-        Utilisateur newUser = new Utilisateur();
-        newUser.setEmail(email);
-        newUser.setPseudo(pseudo);
-        newUser.setMdp(mdp);
-        newUser.setAdmin(admin);
-        newUser.setMessage(message);
-        newUser.setCreators(creators);
-        newUser.setListTopicCreate(listTopicCreate);
-        newUser.setSuivi(suivi);
-        return true;
-    }
+
 
 }

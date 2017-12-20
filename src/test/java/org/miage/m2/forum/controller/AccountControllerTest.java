@@ -5,6 +5,7 @@ import org.junit.runner.RunWith;
 import org.miage.m2.forum.modele.Message;
 import org.miage.m2.forum.modele.Projet;
 import org.miage.m2.forum.modele.Topic;
+import org.miage.m2.forum.service.AccountService;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -18,7 +19,7 @@ public class AccountControllerTest {
 
     @Test
     public final void testCreateUser(){
-        boolean test = AccountController.createUser("test@test.com", "test", "testmdp", false, new HashSet<Message>(), new HashSet<Projet>(), new HashSet<Topic>(), new HashSet<Topic>());
+        boolean test = AccountService.createUser("test@test.com", "test", "testmdp", false, new HashSet<Message>(), new HashSet<Projet>(), new HashSet<Topic>(), new HashSet<Topic>());
         assertTrue(test);
     }
 
