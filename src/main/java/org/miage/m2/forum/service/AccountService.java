@@ -12,4 +12,5 @@ import java.util.Set;
 public interface AccountService {
     public Utilisateur getUtilisateurByPseudo(String pseudo);
     public Utilisateur createUser(Utilisateur user);
+    public boolean deleteUser(Utilisateur user);
 }

@@ -79,4 +79,18 @@ public class AccountControllerTest {
         Utilisateur testUserDuplicateExpected = accountService.createUser(testUser);
         assertThat(testUserDuplicateExpected).isNull();
     }
+
+    @Test
+    public void testDeleteUser(){
+        Utilisateur testUser = new Utilisateur("testazerty@test.com", "testazerty", "testmdp", false, new HashSet<Message>(), new HashSet<Projet>(), new HashSet<Topic>(), new HashSet<Topic>());
+        boolean check = accountService.deleteUser(testUser);
+        assertTrue(check);
+    }
+
+    @Test
+    public void testDeleteUserNotExist(){
+        Utilisateur testUser = new Utilisateur("testqwerty@test.com", "testqwerty", "testmdp", false, new HashSet<Message>(), new HashSet<Projet>(), new HashSet<Topic>(), new HashSet<Topic>());
+        boolean check = accountService.deleteUser(testUser);
+        assertFalse(check);
+    }
 }

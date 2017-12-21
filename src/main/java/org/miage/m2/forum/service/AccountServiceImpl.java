@@ -30,12 +30,21 @@ public class AccountServiceImpl implements AccountService {
 
     public Utilisateur createUser(Utilisateur user) {
         boolean check = checkUser(user);
-        if (check){
+        if (check) {
             return utilisateurRepository.save(user);
         } else {
             return null;
         }
     }
 
+    public boolean deleteUser(Utilisateur user) {
+        boolean check = checkUser(user);
+        if (check){
+            utilisateurRepository.delete(user);
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 }
