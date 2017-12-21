@@ -8,6 +8,7 @@ import org.miage.m2.forum.query.UtilisateurRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.rmi.CORBA.Util;
 import java.util.Set;
 
 @Service
@@ -20,17 +21,7 @@ public class AccountServiceImpl implements AccountService {
         return utilisateurRepository.findByPseudo(pseudo);
     }
 
-    public boolean createUser(String email, String pseudo, String mdp, boolean admin, Set<Message> message, Set<Projet> creators, Set<Topic> listTopicCreate, Set<Topic> suivi) {
-        Utilisateur newUser = new Utilisateur();
-        newUser.setEmail(email);
-        newUser.setPseudo(pseudo);
-        newUser.setMdp(mdp);
-        newUser.setAdmin(admin);
-        newUser.setMessage(message);
-        newUser.setCreators(creators);
-        newUser.setListTopicCreate(listTopicCreate);
-        newUser.setSuivi(suivi);
-
-        return true;
+    public Utilisateur createUser(Utilisateur user) {
+        return utilisateurRepository.save(user);
     }
 }
