@@ -21,7 +21,21 @@ public class AccountServiceImpl implements AccountService {
         return utilisateurRepository.findByPseudo(pseudo);
     }
 
-    public Utilisateur createUser(Utilisateur user) {
-        return utilisateurRepository.save(user);
+    public boolean checkUser(Utilisateur user) {
+        if (utilisateurRepository.findOne(user.getEmail()) != null || utilisateurRepository.findByPseudo(user.getPseudo()) != null) {
+            return false;
+        }
+        return true;
     }
+
+    public Utilisateur createUser(Utilisateur user) {
+        boolean check = checkUser(user);
+        if (check){
+            return utilisateurRepository.save(user);
+        } else {
+            return null;
+        }
+    }
+
+
 }

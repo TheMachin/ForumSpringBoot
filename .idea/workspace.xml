@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="773e058c-6fcf-4e9a-894c-7c729511e3f9" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/miage/m2/forum/query/UtilisateurRepository.java" afterPath="$PROJECT_DIR$/src/main/java/org/miage/m2/forum/query/UtilisateurRepository.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/miage/m2/forum/service/AccountService.java" afterPath="$PROJECT_DIR$/src/main/java/org/miage/m2/forum/service/AccountService.java" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/miage/m2/forum/service/AccountServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/org/miage/m2/forum/service/AccountServiceImpl.java" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" />
       <change beforePath="$PROJECT_DIR$/src/test/java/org/miage/m2/forum/controller/AccountControllerTest.java" afterPath="$PROJECT_DIR$/src/test/java/org/miage/m2/forum/controller/AccountControllerTest.java" />
@@ -45,8 +43,8 @@
       <file leaf-file-name="AccountControllerTest.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/org/miage/m2/forum/controller/AccountControllerTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="42" column="5" lean-forward="false" selection-start-line="42" selection-start-column="5" selection-end-line="42" selection-end-column="5" />
+            <state relative-caret-position="-145">
+              <caret line="47" column="47" lean-forward="false" selection-start-line="47" selection-start-column="47" selection-end-line="47" selection-end-column="47" />
               <folding />
             </state>
           </provider>
@@ -55,8 +53,8 @@
       <file leaf-file-name="AdministrationServiceImplTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/org/miage/m2/forum/service/AdministrationServiceImplTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="78" column="48" lean-forward="true" selection-start-line="78" selection-start-column="48" selection-end-line="78" selection-end-column="48" />
+            <state relative-caret-position="204">
+              <caret line="48" column="8" lean-forward="false" selection-start-line="48" selection-start-column="8" selection-end-line="49" selection-end-column="40" />
               <folding />
             </state>
           </provider>
@@ -77,13 +75,11 @@
       <file leaf-file-name="AccountServiceImpl.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/miage/m2/forum/service/AccountServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="20" column="37" lean-forward="false" selection-start-line="20" selection-start-column="37" selection-end-line="20" selection-end-column="37" />
+            <state relative-caret-position="459">
+              <caret line="36" column="9" lean-forward="false" selection-start-line="36" selection-start-column="9" selection-end-line="36" selection-end-column="9" />
               <folding>
                 <element signature="e#628#629#0" expanded="true" />
                 <element signature="e#693#694#0" expanded="true" />
-                <element signature="e#748#749#0" expanded="true" />
-                <element signature="e#803#804#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -114,7 +110,7 @@
       <file leaf-file-name="AdministrationServiceImpl.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/miage/m2/forum/service/AdministrationServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
+            <state relative-caret-position="442">
               <caret line="38" column="18" lean-forward="false" selection-start-line="38" selection-start-column="18" selection-end-line="38" selection-end-column="18" />
               <folding>
                 <element signature="e#1027#1028#0" expanded="true" />
@@ -127,7 +123,7 @@
       <file leaf-file-name="Utilisateur.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/miage/m2/forum/modele/Utilisateur.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="276">
+            <state relative-caret-position="884">
               <caret line="68" column="19" lean-forward="false" selection-start-line="68" selection-start-column="19" selection-end-line="68" selection-end-column="19" />
               <folding>
                 <element signature="e#1572#1573#0" expanded="true" />
@@ -642,39 +638,39 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="AccountControllerTest - 2017.12.21 at 17h 04m 12s.xml">
+    <history-entry file="AccountControllerTest - 2017.12.21 at 18h 06m 35s.xml">
       <configuration name="AccountControllerTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="AccountControllerTest - 2017.12.21 at 17h 23m 58s.xml">
+    <history-entry file="AccountControllerTest - 2017.12.21 at 18h 08m 00s.xml">
       <configuration name="AccountControllerTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="AccountControllerTest - 2017.12.21 at 17h 28m 16s.xml">
+    <history-entry file="AccountControllerTest - 2017.12.21 at 18h 08m 19s.xml">
       <configuration name="AccountControllerTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="AccountControllerTest - 2017.12.21 at 17h 31m 16s.xml">
+    <history-entry file="AccountControllerTest - 2017.12.21 at 18h 13m 59s.xml">
       <configuration name="AccountControllerTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="AccountControllerTest - 2017.12.21 at 17h 33m 12s.xml">
+    <history-entry file="AccountControllerTest - 2017.12.21 at 18h 15m 34s.xml">
       <configuration name="AccountControllerTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="AccountControllerTest - 2017.12.21 at 17h 33m 34s.xml">
+    <history-entry file="AccountControllerTest - 2017.12.21 at 18h 30m 56s.xml">
       <configuration name="AccountControllerTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="AccountControllerTest - 2017.12.21 at 17h 48m 47s.xml">
+    <history-entry file="AccountControllerTest - 2017.12.21 at 18h 32m 15s.xml">
       <configuration name="AccountControllerTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="AccountControllerTest - 2017.12.21 at 17h 49m 54s.xml">
+    <history-entry file="AccountControllerTest - 2017.12.21 at 18h 33m 02s.xml">
       <configuration name="AccountControllerTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="AccountControllerTest - 2017.12.21 at 17h 50m 59s.xml">
+    <history-entry file="AccountControllerTest - 2017.12.21 at 18h 33m 18s.xml">
       <configuration name="AccountControllerTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="AccountControllerTest - 2017.12.21 at 17h 51m 20s.xml">
+    <history-entry file="AccountControllerTest - 2017.12.21 at 18h 35m 10s.xml">
       <configuration name="AccountControllerTest" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="30936000" />
+    <option name="totallyTimeSpent" value="33355000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="0" width="1294" height="1047" extended-state="0" />
@@ -697,7 +693,7 @@
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32601535" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32601535" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32903227" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="16" side_tool="true" content_ui="tabs" />
@@ -748,7 +744,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="2" />
+      <option name="time" value="4" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -986,24 +982,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/miage/m2/forum/query/ProjetRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="17" lean-forward="false" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/org/miage/m2/forum/service/AdministrationServiceImplTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="78" column="48" lean-forward="true" selection-start-line="78" selection-start-column="48" selection-end-line="78" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/miage/m2/forum/service/AdministrationService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -1023,17 +1001,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/miage/m2/forum/modele/Utilisateur.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="68" column="19" lean-forward="false" selection-start-line="68" selection-start-column="19" selection-end-line="68" selection-end-column="19" />
-          <folding>
-            <element signature="e#1572#1573#0" expanded="true" />
-            <element signature="e#1591#1592#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
@@ -1042,13 +1009,44 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/miage/m2/forum/query/UtilisateurRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="25" lean-forward="true" selection-start-line="9" selection-start-column="25" selection-end-line="9" selection-end-column="25" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/miage/m2/forum/query/ProjetRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="17" lean-forward="false" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/miage/m2/forum/service/AdministrationServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
+        <state relative-caret-position="442">
           <caret line="38" column="18" lean-forward="false" selection-start-line="38" selection-start-column="18" selection-end-line="38" selection-end-column="18" />
           <folding>
             <element signature="e#1027#1028#0" expanded="true" />
             <element signature="e#1081#1082#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/miage/m2/forum/modele/Utilisateur.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="884">
+          <caret line="68" column="19" lean-forward="false" selection-start-line="68" selection-start-column="19" selection-end-line="68" selection-end-column="19" />
+          <folding>
+            <element signature="e#1572#1573#0" expanded="true" />
+            <element signature="e#1591#1592#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1065,31 +1063,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/miage/m2/forum/service/AccountServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="20" column="37" lean-forward="false" selection-start-line="20" selection-start-column="37" selection-end-line="20" selection-end-column="37" />
+        <state relative-caret-position="459">
+          <caret line="36" column="9" lean-forward="false" selection-start-line="36" selection-start-column="9" selection-end-line="36" selection-end-column="9" />
           <folding>
             <element signature="e#628#629#0" expanded="true" />
             <element signature="e#693#694#0" expanded="true" />
-            <element signature="e#748#749#0" expanded="true" />
-            <element signature="e#803#804#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/miage/m2/forum/query/UtilisateurRepository.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/org/miage/m2/forum/service/AdministrationServiceImplTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="25" lean-forward="true" selection-start-line="9" selection-start-column="25" selection-end-line="9" selection-end-column="25" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="204">
+          <caret line="48" column="8" lean-forward="false" selection-start-line="48" selection-start-column="8" selection-end-line="49" selection-end-column="40" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/org/miage/m2/forum/controller/AccountControllerTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="42" column="5" lean-forward="false" selection-start-line="42" selection-start-column="5" selection-end-line="42" selection-end-column="5" />
+        <state relative-caret-position="-145">
+          <caret line="47" column="47" lean-forward="false" selection-start-line="47" selection-start-column="47" selection-end-line="47" selection-end-column="47" />
           <folding />
         </state>
       </provider>

@@ -40,6 +40,12 @@ public class AccountControllerTest {
 
     @Before
     public void setUp() {
+        Utilisateur testUser = new Utilisateur("test@test.com", "test", "testmdp", false, new HashSet<Message>(), new HashSet<Projet>(), new HashSet<Topic>(), new HashSet<Topic>());
+        utilisateurRepository.delete(testUser);
+        testUser = new Utilisateur("testazerty@test.com", "test", "testmdp", false, new HashSet<Message>(), new HashSet<Projet>(), new HashSet<Topic>(), new HashSet<Topic>());
+        utilisateurRepository.delete(testUser);
+        testUser = new Utilisateur("test@test.com", "test2", "testmdp", false, new HashSet<Message>(), new HashSet<Projet>(), new HashSet<Topic>(), new HashSet<Topic>());
+        utilisateurRepository.delete(testUser);
     }
 
     @Test
@@ -58,4 +64,19 @@ public class AccountControllerTest {
         assertThat(found.getPseudo()).isEqualTo(pseudo);
     }
 
+    @Test
+    public void testCreateDuplicateUserEmail(){
+        Utilisateur testUser = new Utilisateur("test@test.com", "test2", "testmdp", false, new HashSet<Message>(), new HashSet<Projet>(), new HashSet<Topic>(), new HashSet<Topic>());
+        accountService.createUser(testUser);
+        Utilisateur testUserDuplicateExpected = accountService.createUser(testUser);
+        assertThat(testUserDuplicateExpected).isNull();
+    }
+
+    @Test
+    public void testCreateDuplicateUserPseudo(){
+        Utilisateur testUser = new Utilisateur("testazerty@test.com", "test", "testmdp", false, new HashSet<Message>(), new HashSet<Projet>(), new HashSet<Topic>(), new HashSet<Topic>());
+        accountService.createUser(testUser);
+        Utilisateur testUserDuplicateExpected = accountService.createUser(testUser);
+        assertThat(testUserDuplicateExpected).isNull();
+    }
 }
