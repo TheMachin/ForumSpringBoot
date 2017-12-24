@@ -9,8 +9,9 @@ import org.springframework.stereotype.Service;
 import java.util.Set;
 
 @Service
-
 public interface AccountService {
     public Utilisateur getUtilisateurByPseudo(String pseudo);
-    public boolean createUser(String email, String pseudo, String mdp, boolean admin, Set<Message> message, Set<Projet> creators, Set<Topic> listTopicCreate, Set<Topic> suivi);
+    public Utilisateur createUser(Utilisateur user);
+    public boolean deleteUser(Utilisateur user);
+    public Utilisateur modifyUser(Utilisateur user, String emailModify, String pseudoModify, String mdpModify, boolean adminModify);
 }

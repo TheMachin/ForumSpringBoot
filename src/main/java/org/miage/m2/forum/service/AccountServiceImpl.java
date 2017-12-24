@@ -1,14 +1,9 @@
 package org.miage.m2.forum.service;
 
-import org.miage.m2.forum.modele.Message;
-import org.miage.m2.forum.modele.Projet;
-import org.miage.m2.forum.modele.Topic;
 import org.miage.m2.forum.modele.Utilisateur;
 import org.miage.m2.forum.query.UtilisateurRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Set;
 
 @Service
 public class AccountServiceImpl implements AccountService {
@@ -20,17 +15,50 @@ public class AccountServiceImpl implements AccountService {
         return utilisateurRepository.findByPseudo(pseudo);
     }
 
-    public boolean createUser(String email, String pseudo, String mdp, boolean admin, Set<Message> message, Set<Projet> creators, Set<Topic> listTopicCreate, Set<Topic> suivi) {
-        Utilisateur newUser = new Utilisateur();
-        newUser.setEmail(email);
-        newUser.setPseudo(pseudo);
-        newUser.setMdp(mdp);
-        newUser.setAdmin(admin);
-        newUser.setMessage(message);
-        newUser.setCreators(creators);
-        newUser.setListTopicCreate(listTopicCreate);
-        newUser.setSuivi(suivi);
-
+    public boolean checkUser(Utilisateur user) {
+        if (utilisateurRepository.findOne(user.getEmail()) != null || utilisateurRepository.findByPseudo(user.getPseudo()) != null) {
+            return false;
+        }
         return true;
     }
+
+    public Utilisateur createUser(Utilisateur user) {
+        boolean check = checkUser(user);
+        if (check) {
+            return utilisateurRepository.save(user);
+        } else {
+            return null;
+        }
+    }
+
+    public boolean deleteUser(Utilisateur user) {
+        boolean check = checkUser(user);
+        if (!check) {
+            utilisateurRepository.delete(user);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public Utilisateur modifyUser(Utilisateur user, String emailModify, String pseudoModify, String mdpModify, boolean adminModify) {
+        Utilisateur userModify = new Utilisateur(emailModify, pseudoModify, mdpModify, adminModify, user.getMessage(), user.getCreators(), user.getListTopicCreate(), user.getSuivi());
+        Utilisateur userFound;
+        if (user.getEmail().equals(userModify.getEmail()) && user.getPseudo().equals(userModify.getPseudo())) {
+            return utilisateurRepository.save(userModify);
+        }
+        if (user.getEmail().equals(userModify.getEmail()) && !user.getPseudo().equals(userModify.getPseudo())){
+            userFound = getUtilisateurByPseudo(userModify.getPseudo());
+            if (userFound == null){
+                return utilisateurRepository.save(userModify);
+            } else {
+                return null;
+            }
+        }
+        if (!user.getEmail().equals(userModify.getEmail()) && user.getPseudo().equals(userModify.getPseudo())){
+            return utilisateurRepository.save(userModify);
+        }
+        return null;
+    }
+
 }

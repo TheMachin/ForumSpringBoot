@@ -1,12 +1,11 @@
 package org.miage.m2.forum.query;
 
 import org.miage.m2.forum.modele.Utilisateur;
-
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
 
 
 @org.springframework.stereotype.Repository
-public interface UtilisateurRepository extends JpaRepository<Utilisateur,Long> {
+public interface UtilisateurRepository extends CrudRepository<Utilisateur,String> {
 
     public Utilisateur findByPseudo(String pseudo);
 }
