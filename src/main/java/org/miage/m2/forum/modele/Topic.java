@@ -40,7 +40,8 @@ public class Topic {
 	private Set<Utilisateur> suiveurs = new HashSet<Utilisateur>();
 
 
-	public Topic(String titre, Date dateCreation, boolean invite, Set<Message> message, Projet projet, Set<Utilisateur> lecture, Set<Utilisateur> ecriture, Utilisateur creator, Set<Utilisateur> suiveurs) {
+	public Topic(String titre, Date dateCreation, boolean invite, Set<Message> message, Projet projet,
+                 Set<Utilisateur> lecture, Set<Utilisateur> ecriture, Utilisateur creator, Set<Utilisateur> suiveurs) {
 		this.titre = titre;
 		this.dateCreation = dateCreation;
 		this.invite = invite;
@@ -54,6 +55,22 @@ public class Topic {
 
 	public Topic() {
 	}
+
+    /**
+     * Ajoute des messages au topic
+     * @param messages
+     */
+    public void addMessage(Set<Message> messages){
+        if(message.isEmpty()){
+            this.setMessage(messages);
+            return;
+        }
+        for(Message u : messages){
+            if(!message.contains(u)){
+                message.add(u);
+            }
+        }
+    }
 
 	public String getTitre() {
 		return titre;

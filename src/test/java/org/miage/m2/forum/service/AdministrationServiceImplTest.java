@@ -39,7 +39,7 @@ public class AdministrationServiceImplTest {
     private Projet projet;
 
     /**
-     * On utilise le meme objet projet qu'on l'initialise avant les tests
+     * On utilise le meme objet projet qu'on initialise avant les tests
      */
     @Before
     public void setup(){

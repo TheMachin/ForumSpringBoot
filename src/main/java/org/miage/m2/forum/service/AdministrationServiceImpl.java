@@ -22,7 +22,7 @@ public class AdministrationServiceImpl implements AdministrationService {
     public Projet createProject(Projet projet) {
 
         if(!projet.getCreators().isAdmin()){
-            System.out.println("fnot admin");
+            System.out.println("not admin");
             return null;
         }
 

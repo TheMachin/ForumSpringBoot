@@ -34,7 +34,8 @@ public class Projet {
 	private Set<Projet> sousProjet = new HashSet<Projet>();
 
 	@Autowired
-	public Projet(String titre, String description, Date dateCreation, boolean invite, Set<Utilisateur> acces, Utilisateur creators, Set<Topic> topics) {
+	public Projet(String titre, String description, Date dateCreation, boolean invite, Set<Utilisateur> acces,
+				  Utilisateur creators, Set<Topic> topics) {
 		this.titre = titre;
 		this.description = description;
 		this.dateCreation = dateCreation;
