@@ -5,7 +5,7 @@ import org.springframework.data.repository.CrudRepository;
 
 
 @org.springframework.stereotype.Repository
-public interface UtilisateurRepository extends CrudRepository<Utilisateur,String> {
+public interface UtilisateurRepository extends CrudRepository<Utilisateur,String>, UtilisateurRepositoryCustom {
 
-    public Utilisateur findByPseudo(String pseudo);
+
 }

@@ -1,6 +1,8 @@
 package org.miage.m2.forum.controller;
 
+import org.miage.m2.forum.formValidation.SignUpForm;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,13 +18,8 @@ public class MainController {
         return "index";
     }
 
-    @GetMapping(value = "/login")
-    public String login(Map<String, Object> model){
-        return "login";
-    }
-
     @GetMapping(value = "/formProject")
-    public String formProject(Map<String, Object> model){
+    public String formProject(Model model){
         return "index";
     }
 

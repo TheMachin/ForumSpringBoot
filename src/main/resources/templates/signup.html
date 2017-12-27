@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Sign up</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <h2>Sign up on ForumSpringBoot</h2>
+        <table>
+            <form action="#" th:action="@{/account/signup}" th:object="${signUpForm}" method="POST">
+                <tr>
+                    <td>Enter email:</td>
+                    <td><input type="text" th:field="*{email}"/></td>
+                    <td th:if="${#fields.hasErrors('email')}" class="errors" th:errors="*{email}"></td>
+                </tr>
+                <tr>
+                    <td>Enter username:</td>
+                    <td><input type="text" th:field="*{username}"/></td>
+                    <td th:if="${#fields.hasErrors('username')}" class="errors" th:errors="*{username}"></td>
+                </tr>
+                <tr>
+                    <td>Enter password:</td>
+                    <td><input type="password" th:field="*{password}"/></td>
+                    <td th:if="${#fields.hasErrors('password')}" class="errors" th:errors="*{password}"></td>
+                </tr>
+                <tr>
+                    <td>Confirm password:</td>
+                    <td><input type="password" th:field="*{confirmPassword}"/></td>
+                    <td th:if="${#fields.hasErrors('confirmPassword')}" class="errors" th:errors="*{confirmPassword}"></td>
+                </tr>
+                <tr>
+                    <td><button type="submit">Submit</button></td>
+                </tr>
+            </form>
+        </table>
+</body>
+</html>
