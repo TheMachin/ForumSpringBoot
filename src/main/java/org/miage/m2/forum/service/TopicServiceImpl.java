@@ -41,7 +41,7 @@ public class TopicServiceImpl implements TopicService{
         return topicRepository.findOne(title);
     }
 
-
+    @Override
     public Topic addMessageToTopic(Topic topic, Set<Message> message) {
 
         if(topic==null){
@@ -55,46 +55,97 @@ public class TopicServiceImpl implements TopicService{
 
     @Override
     public Topic removeMessageToTopic(Topic topic, Set<Message> message) {
-        return null;
+        if(topic==null){
+            return null;
+        }
+
+        topic.removeMessage(message);
+
+        return topicRepository.save(topic);
     }
 
     @Override
     public Topic changePermissionForVisitor(Topic topic, boolean invite) {
-        return null;
+        if(topic==null){
+            return null;
+        }
+
+        topic.setInvite(invite);
+
+        return topicRepository.save(topic);
     }
 
     @Override
     public Topic addUserToEcriture(Topic topic, Set<Utilisateur> ecriture) {
-        return null;
+        if(topic==null){
+            return null;
+        }
+
+        topic.addEcriture(ecriture);
+
+        return topicRepository.save(topic);
     }
 
     @Override
     public Topic addUserToLecture(Topic topic, Set<Utilisateur> lecture) {
-        return null;
+        if(topic==null){
+            return null;
+        }
+
+        topic.addEcriture(lecture);
+
+        return topicRepository.save(topic);
     }
 
     @Override
-    public Topic addUserToSuiveurs(Topic topic, Set<Utilisateur> suiveurs) {
-        return null;
+    public Topic addUserToSuiveur(Topic topic, Set<Utilisateur> suiveur) {
+        if(topic==null){
+            return null;
+        }
+
+        topic.addEcriture(suiveur);
+
+        return topicRepository.save(topic);
     }
 
     @Override
     public Topic removeUserToEcriture(Topic topic, Set<Utilisateur> ecriture) {
-        return null;
+        if(topic==null){
+            return null;
+        }
+
+        topic.removeEcriture(ecriture);
+
+        return topicRepository.save(topic);
     }
 
     @Override
     public Topic removeUserToLecture(Topic topic, Set<Utilisateur> lecture) {
-        return null;
+        if(topic==null){
+            return null;
+        }
+
+        topic.removeLecture(lecture);
+
+        return topicRepository.save(topic);
     }
 
     @Override
     public Topic removeUserToSuiveurs(Topic topic, Set<Utilisateur> suiveurs) {
-        return null;
+        if(topic==null){
+            return null;
+        }
+
+        topic.removeSuiveur(suiveurs);
+
+        return topicRepository.save(topic);
     }
 
-    @Override
-    public Topic changeDescription(Topic topic, String description) {
-        return null;
+    private boolean save(Topic topic){
+        Topic t = topicRepository.save(topic);
+        if(t==null){
+            return false;
+        }
+        return true;
     }
 }

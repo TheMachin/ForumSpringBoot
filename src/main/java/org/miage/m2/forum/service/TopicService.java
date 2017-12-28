@@ -16,9 +16,8 @@ public interface TopicService {
     public Topic changePermissionForVisitor(Topic topic, boolean invite);
     public Topic addUserToEcriture(Topic topic, Set<Utilisateur> ecriture);
     public Topic addUserToLecture(Topic topic, Set<Utilisateur> lecture);
-    public Topic addUserToSuiveurs(Topic topic, Set<Utilisateur> suiveurs);
+    public Topic addUserToSuiveur(Topic topic, Set<Utilisateur> suiveur);
     public Topic removeUserToEcriture(Topic topic, Set<Utilisateur> ecriture);
     public Topic removeUserToLecture(Topic topic, Set<Utilisateur> lecture);
     public Topic removeUserToSuiveurs(Topic topic, Set<Utilisateur> suiveurs);
-    public Topic changeDescription(Topic topic, String description);
 }

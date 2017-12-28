@@ -153,7 +153,7 @@ public class Projet {
      */
     public void removeUserAccess(Set<Utilisateur> users){
         for(Utilisateur u : users){
-            if(!acces.contains(u)){
+            if(acces.contains(u)){
                 acces.remove(u);
             }
         }

@@ -57,7 +57,6 @@ public class AdministrationServiceImpl implements AdministrationService {
     @Override
     public Projet changePermissionForVisitor(Projet projet, boolean invite) {
         if(projet==null){
-            System.out.println("here");
             return null;
         }
 
