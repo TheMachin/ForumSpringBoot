@@ -16,6 +16,12 @@
             You have been logged out.
         </div>
     </div>
+    <div th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">
+        <div class="alert alert-info">
+            <p><a href="/" th:href="@{/index.html}">You are connected go to home page</a></p>
+        </div>
+    </div>
+
     <table>
         <form action="#" th:action="@{/account/login}" th:object="${loginForm}" method="POST">
             <tr>
@@ -33,6 +39,7 @@
             </tr>
         </form>
     </table>
+    <p><a th:href="@{/account/signup}">Not registered? Create an account</a></p>
     <p><a href="/" th:href="@{/index.html}">Back to home page</a></p>
 </body>
 </html>
