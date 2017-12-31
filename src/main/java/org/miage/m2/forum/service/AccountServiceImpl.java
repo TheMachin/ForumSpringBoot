@@ -30,6 +30,7 @@ public class AccountServiceImpl implements AccountService {
         boolean check = checkUser(user);
         if (check) {
             //user.setMdp(getSecurePassword(user.getMdp()));
+            user.setEnable(true);
             return utilisateurRepository.save(user);
         } else {
             return null;
@@ -48,32 +49,32 @@ public class AccountServiceImpl implements AccountService {
 
     public Utilisateur modifyUser(Utilisateur user, String emailModify, String pseudoModify, String mdpModify, boolean adminModify) {
         Utilisateur userModify = new Utilisateur(emailModify, pseudoModify, mdpModify, adminModify, user.getMessage(), user.getCreators(), user.getListTopicCreate(), user.getSuivi());
-        Utilisateur userFound;
-        if (user.getEmail().equals(userModify.getEmail()) && user.getPseudo().equals(userModify.getPseudo())) {
-            return utilisateurRepository.save(userModify);
+
+        //if user does'nt change password
+        if(mdpModify.isEmpty()){
+            user.setMdp(user.getMdp());
         }
-        if (user.getEmail().equals(userModify.getEmail()) && !user.getPseudo().equals(userModify.getPseudo())){
+        user.setAdmin(adminModify);
+        user.setEnable(true);
+        Utilisateur userFound;
+        //Si l'adresse mail et le pseudo n'ont pas été modifié
+        if (user.getEmail().equals(userModify.getEmail()) && user.getPseudo().equals(userModify.getPseudo())) {
+            return utilisateurRepository.save(user);
+        }
+        //Sinon on vérifie si le pseudo a changé et qu'il est disponible
+        if(!user.getPseudo().equals(userModify.getPseudo())) {
             userFound = getUtilisateurByPseudo(userModify.getPseudo());
-            if (userFound == null){
-                return utilisateurRepository.save(userModify);
-            } else {
+            if (userFound == null) {
+                user.setPseudo(pseudoModify);
+            }else{
                 return null;
             }
         }
-        if (!user.getEmail().equals(userModify.getEmail()) && user.getPseudo().equals(userModify.getPseudo())){
-            return utilisateurRepository.save(userModify);
-        }
-        return null;
+        return utilisateurRepository.save(user);
     }
 
     public void setUtilisateurRepository(UtilisateurRepository utilisateurRepository) {
         this.utilisateurRepository = utilisateurRepository;
-    }
-
-    @Override
-    public Utilisateur connection(String email, String password) {
-        Utilisateur user = utilisateurRepository.findByEmailAndPassword(email,getSecurePassword(password));
-        return user;
     }
 
     private static String getSecurePassword(String passwordToHash)

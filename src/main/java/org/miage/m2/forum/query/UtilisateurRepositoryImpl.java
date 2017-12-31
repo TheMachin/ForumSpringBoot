@@ -24,18 +24,4 @@ public class UtilisateurRepositoryImpl implements UtilisateurRepositoryCustom {
         Utilisateur user = result.get(0);
         return user;
     }
-
-    @Override
-    public Utilisateur findByEmailAndPassword(String email, String password) {
-        String q = "SELECT u FROM Utilisateur u WHERE u.email=:email AND u.mdp=:mdp";
-        Query query = entityManager.createQuery(q);
-        query.setParameter("email",email);
-        query.setParameter("mdp",password);
-        List<Utilisateur> result = query.getResultList();
-        if(result.isEmpty()){
-            return null;
-        }
-        Utilisateur user = result.get(0);
-        return user;
-    }
 }

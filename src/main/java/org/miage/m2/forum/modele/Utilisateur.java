@@ -41,11 +41,12 @@ public class Utilisateur {
 
 	@Autowired
 	public Utilisateur(String email, String pseudo, String mdp, boolean admin, Set<Message> message, Set<Projet> creators, Set<Topic> listTopicCreate, Set<Topic> suivi) {
+		addUserRole();
 		this.email = email;
 		this.pseudo = pseudo;
 		this.mdp = mdp;
 		this.enable=true;
-		this.admin = admin;
+		this.setAdmin(admin);
 		this.message = message;
 		this.creators = creators;
 		this.listTopicCreate = listTopicCreate;
@@ -53,6 +54,7 @@ public class Utilisateur {
 	}
 
 	public Utilisateur() {
+		addUserRole();
 	}
 
 	public String getEmail() {
@@ -80,11 +82,21 @@ public class Utilisateur {
 	}
 
 	public boolean isAdmin() {
+		Roles rolesAdmin = new Roles();
+		rolesAdmin.setName("ROLE_ADMIN");
+		if(roles.contains(rolesAdmin)){
+			return true;
+		}
 		return admin;
 	}
 
 	public void setAdmin(boolean admin) {
 		this.admin = admin;
+		if(admin){
+			addAdminRole();
+		}else{
+			removeAdminRole();
+		}
 	}
 
 	public Set<Message> getMessage() {
@@ -124,7 +136,7 @@ public class Utilisateur {
      * Add a role for user
      * @param roleName
      */
-	public void addRole(String roleName){
+	private void addRole(String roleName){
 	    //check if the set exists or to initialize it
 		if(this.roles==null){
 			roles = new HashSet<Roles>();
@@ -136,12 +148,22 @@ public class Utilisateur {
 		}
 	}
 
-	public void removeRole(String roleName){
+	public void addUserRole(){
+		addRole("ROLE_USER");
+	}
+
+	public void addAdminRole(){
+		addRole("ROLE_ADMIN");
+		this.enable=true;
+	}
+
+	public void removeAdminRole(){
 		if(this.roles!=null){
 			Roles role = new Roles();
-			role.setName(roleName);
+			role.setName("ROLE_ADMIN");
 			roles.remove(role);
 		}
+		this.enable=false;
 	}
 
     public boolean isEnable() {

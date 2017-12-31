@@ -12,7 +12,7 @@ import org.miage.m2.forum.formValidation.annotation.FieldsValueMatch;
                 //message = "{message.key}" for internalization
         )
 })
-public class SignUpForm {
+public class SettingForm {
 
     @NotEmpty
     @Email
@@ -21,10 +21,8 @@ public class SignUpForm {
     @NotEmpty
     private String username;
 
-    @NotEmpty
     private String password;
 
-    @NotEmpty
     private String confirmPassword;
 
     public String getEmail() {
@@ -61,7 +59,7 @@ public class SignUpForm {
 
     @Override
     public String toString() {
-        return "SignUpForm{" +
+        return "SettingForm{" +
                 "email='" + email + '\'' +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +

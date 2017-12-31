@@ -5,6 +5,5 @@ import org.miage.m2.forum.modele.Utilisateur;
 public interface UtilisateurRepositoryCustom {
 
     public Utilisateur findByPseudo(String pseudo);
-    public Utilisateur findByEmailAndPassword(String email, String password);
 
 }

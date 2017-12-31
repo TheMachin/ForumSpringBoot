@@ -6,17 +6,18 @@
 </head>
 <body>
     <h2>Sign up on ForumSpringBoot</h2>
+    <div th:if="${fail != null}" >Email or username already exist</div>
         <table>
             <form action="#" th:action="@{/account/signup}" th:object="${signUpForm}" method="POST">
                 <tr>
                     <td>Enter email:</td>
                     <td><input type="text" th:field="*{email}"/></td>
-                    <td th:if="${#fields.hasErrors('email')}" class="errors" th:errors="*{email}"></td>
+                    <td th:if="${#fields.hasErrors('email')}" class="errors" th:errors="*{email}"  ></td>
                 </tr>
                 <tr>
                     <td>Enter username:</td>
                     <td><input type="text" th:field="*{username}"/></td>
-                    <td th:if="${#fields.hasErrors('username')}" class="errors" th:errors="*{username}"></td>
+                    <td th:if="${#fields.hasErrors('username')}" class="errors" th:errors="*{username}" ></td>
                 </tr>
                 <tr>
                     <td>Enter password:</td>
