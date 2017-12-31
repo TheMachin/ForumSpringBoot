@@ -4,3 +4,4 @@
 *.iml
 .idea/
 src/main/resources/hibernate.properties
+src/main/resources/hibernate.properties
