@@ -21,6 +21,7 @@ import static junit.framework.TestCase.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class) //lien entre les fonctionnalités de test Spring Boot et JUnit
+//specifie la configuration de h2 pour les tests
 @SpringBootTest(classes = {MainSpringApplication.class, H2JpaConfig.class})
 public class AccountServiceImplTest {
 

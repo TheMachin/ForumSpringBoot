@@ -10,6 +10,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 @Service
+@Transactional
 public class AccountServiceImpl implements AccountService {
 
     @Autowired
@@ -19,6 +20,11 @@ public class AccountServiceImpl implements AccountService {
         return utilisateurRepository.findByPseudo(pseudo);
     }
 
+    /**
+     * Check if user exist with this email and this username
+     * @param user
+     * @return
+     */
     public boolean checkUser(Utilisateur user) {
         if (utilisateurRepository.findOne(user.getEmail()) != null || utilisateurRepository.findByPseudo(user.getPseudo()) != null) {
             return false;
@@ -47,6 +53,16 @@ public class AccountServiceImpl implements AccountService {
         }
     }
 
+    /**
+     * Modifie un utilisateur
+     * on vérifie si on accepte ou non les modifications avant de les sauvegarder
+     * @param user utilisateur à modifier (sans les modifs)
+     * @param emailModify
+     * @param pseudoModify
+     * @param mdpModify
+     * @param adminModify
+     * @return utilisateur avec modification
+     */
     public Utilisateur modifyUser(Utilisateur user, String emailModify, String pseudoModify, String mdpModify, boolean adminModify) {
         Utilisateur userModify = new Utilisateur(emailModify, pseudoModify, mdpModify, adminModify, user.getMessage(), user.getCreators(), user.getListTopicCreate(), user.getSuivi());
 

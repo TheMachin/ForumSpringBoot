@@ -41,6 +41,9 @@ public class AccountController {
 
     @GetMapping(value = "/setting")
     public String setting(Model model){
+
+        accountService.setUtilisateurRepository(utilisateurRepository);
+
         String user = getCurrentNameUser();
         Utilisateur utilisateur = utilisateurRepository.findOne(user);
         SettingForm settingForm = new SettingForm();
@@ -75,6 +78,7 @@ public class AccountController {
         utilisateur.setPseudo(signUpForm.getUsername());
         utilisateur.setMdp(signUpForm.getPassword());
         Utilisateur userCreate = accountService.createUser(utilisateur);
+
         if(userCreate!=null) {
             model.addAttribute("accountCreate",true);
             return login(model);
@@ -130,6 +134,14 @@ public class AccountController {
         }
         User user = (User) principal;
         return user.getUsername();
+    }
+
+    public void setUtilisateurRepository(UtilisateurRepository utilisateurRepository){
+        this.utilisateurRepository=utilisateurRepository;
+    }
+
+    public void setAccountService(AccountService accountService){
+        this.accountService = accountService;
     }
 
 }
