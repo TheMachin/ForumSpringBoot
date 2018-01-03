@@ -2,18 +2,22 @@ package org.miage.m2.forum;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import org.springframework.context.annotation.Bean;
+import org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect;
+import org.thymeleaf.spring4.SpringTemplateEngine;
+import org.thymeleaf.templateresolver.ITemplateResolver;
 
 @SpringBootApplication
 public class MainSpringApplication {
     public static void main(String[] args) {
         SpringApplication.run(MainSpringApplication.class, args);
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("FORUM");
-        EntityManager em = emf.createEntityManager();
-        em.close();
-        emf.close();
+    }
+
+    @Bean
+    public SpringTemplateEngine templateEngine(ITemplateResolver templateResolver, SpringSecurityDialect sec) {
+        final SpringTemplateEngine templateEngine = new SpringTemplateEngine();
+        templateEngine.setTemplateResolver(templateResolver);
+        templateEngine.addDialect(sec); // Enable use of "sec"
+        return templateEngine;
     }
 }

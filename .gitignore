@@ -3,7 +3,7 @@
 *.iml
 *.iml
 .idea/
-.idea/ForumSpringBoot.iml
-.idea/ForumSpringBoot.iml
 .idea/workspace.xml
 src/main/resources/META-INF/persistence.xml
+src/main/resources/hibernate.properties
+src/main/resources/hibernate.properties
