@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title>Access user</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" type="text/css"/>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/bootstrap-multiselect.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/bootstrap-multiselect.css}" type="text/css"/>
+
+</head>
+<body>
+    <h2>Give access user to project <span th:text="${title}"></span></h2>
+    <div th:if="${errorInvite != null}" >Access has already been assigned for all</div>
+    <div th:if="${error != null}" >The changes could not be saved </div>
+    <div th:if="${success != null}" >The changes have been saved </div>
+    <table>
+        <form action="#" th:action="@{/administration/access}" th:object="${accessProject}" method="POST">
+            <tr>
+                <td><input th:type="hidden" th:field="*{title}"  th:value="${accessProject.title}" /></td>
+            </tr>
+            <tr>
+                <td>Select username to give access at the project <span th:text="${title}"></span>:
+                    <input th:type="text" th:field="*{userAccess}" />
+                </td>
+                <td th:if="${#fields.hasErrors('userAccess')}" class="errors" th:errors="*{userAccess}"></td>
+            </tr>
+            <tr>
+                <td>Select username to remove access at the project <span th:text="${title}"></span>}:
+                    <input th:type="text" th:field="*{userRemove}" />
+                </td>
+                <td th:if="${#fields.hasErrors('userRemove')}" class="errors" th:errors="*{userRemove}"></td>
+            </tr>
+            <tr>
+                <td><button type="submit">Submit</button></td>
+            </tr>
+        </form>
+    </table>
+    <a th:href="@{|/administration/project/${title}|}">Update project</a>
+    <a th:href="@{/administration}">Administration main</a>
+</body>
+</html>

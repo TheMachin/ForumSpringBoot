@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Administration</title>
+</head>
+    <body>
+        <h2>Administration</h2>
+
+        <h3>Update project <span th:text="${title}"></span></h3>
+        <div th:if="${successProject != null}" >Project is updated</div>
+        <div th:if="${failProject != null}" >Project title is already exist</div>
+        <table>
+            <form action="#" th:action="@{/administration/project/update}" th:object="${projectForm}" method="POST">
+                <tr>
+                    <td>Enter title:</td>
+                    <td><input type="text" th:field="*{titre}"/></td>
+                    <td th:if="${#fields.hasErrors('titre')}" class="errors" th:errors="*{titre}"  th:value="${projectForm.titre}"></td>
+                </tr>
+                <tr>
+                    <td>Enter description:</td>
+                    <td><input type="text" th:field="*{description}"/></td>
+                    <td th:if="${#fields.hasErrors('description')}" class="errors" th:errors="*{description}"  th:value="${projectForm.description}"></td>
+                </tr>
+                <tr>
+                    <td>Give access at anonymous user:</td>
+                    <td><input type="checkbox" th:field="*{invite}"/></td>
+                    <td th:if="${#fields.hasErrors('invite')}" class="errors" th:errors="*{invite}" th:value="${projectForm.invite}"></td>
+                </tr>
+                <tr>
+                    <td><button type="submit">Submit</button></td>
+                </tr>
+            </form>
+        </table>
+        <a th:href="@{|/administration/access/${title}|}">Manage access project</a>
+    </body>
+</html>

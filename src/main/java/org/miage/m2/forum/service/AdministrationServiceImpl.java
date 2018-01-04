@@ -6,6 +6,7 @@ import org.miage.m2.forum.query.ProjetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Service
@@ -36,8 +37,36 @@ public class AdministrationServiceImpl implements AdministrationService {
 
     }
 
+    @Override
+    public Projet update(Projet projet, String titre, String description, boolean invite) {
+        if(projet==null){
+            return null;
+        }
+
+        if(!projet.getTitre().equals(titre))
+        {
+            if(findOne(titre)==null){
+                projet.setTitre(titre);
+            }else{
+                return null;
+            }
+        }
+
+        projet.setDescription(description);
+        projet.setInvite(invite);
+        if(save(projet)){
+            return projet;
+        }
+        return null;
+    }
+
     public Projet findOne(String title){
         return projetRepository.findOne(title);
+    }
+
+    @Override
+    public Iterable<Projet> findAll() {
+        return projetRepository.findAll();
     }
 
     @Override
@@ -92,7 +121,6 @@ public class AdministrationServiceImpl implements AdministrationService {
     @Override
     public Projet changeDescription(Projet projet, String description) {
         if(projet==null){
-            System.out.println("null");
             return null;
         }
 
@@ -107,5 +135,9 @@ public class AdministrationServiceImpl implements AdministrationService {
             return false;
         }
         return true;
+    }
+
+    public void setProjetRepository(ProjetRepository projetRepository) {
+        this.projetRepository = projetRepository;
     }
 }

@@ -126,6 +126,10 @@ public class AccountController {
 
     }
 
+    /**
+     * Obtenir la session de l'utilisateur si il est connecté
+     * @return email de l'utilisateur connecté
+     */
     private String getCurrentNameUser(){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Object principal = auth.getPrincipal();

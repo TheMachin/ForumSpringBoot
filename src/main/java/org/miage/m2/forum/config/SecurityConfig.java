@@ -41,8 +41,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
         http.authorizeRequests()
-                .antMatchers("/","/account/login*","/account/signup*").permitAll()
-                .antMatchers("/formProject/**").access("hasRole('ADMIN')")
+                .antMatchers("/","/account/login**","/account/signup**").permitAll()
+                .antMatchers("/administration/**").access("hasRole('ADMIN')")
                 .and()
                     .formLogin()
                         .loginPage("/account/login")
@@ -54,14 +54,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
-        auth.inMemoryAuthentication()
+        /*auth.inMemoryAuthentication()
                 .withUser("user")
                 .password("password")
                 .roles("USER")
                 .and()
                 .withUser("admin")
                 .password("admin")
-                .roles("ADMIN");
+                .roles("ADMIN");*/
     }
 
 }
