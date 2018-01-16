@@ -40,7 +40,11 @@
             </tr>
         </form>
     </table>
-    <p><a th:href="@{/account/signup}">Not registered? Create an account</a></p>
-    <p><a href="/" th:href="@{/index.html}">Back to home page</a></p>
+
+    <div th:if="${not #authorization.expression('hasRole(''ROLE_USER'')')}">
+        <p><a th:href="@{/account/signup}">Not registered? Create an account</a></p>
+        <a th:href="@{/oauth/google}">Login with google</a>
+    </div>
+    <p><a href="/" th:href="@{/}">Back to home page</a></p>
 </body>
 </html>

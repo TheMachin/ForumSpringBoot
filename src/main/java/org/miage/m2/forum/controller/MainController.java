@@ -1,5 +1,6 @@
 package org.miage.m2.forum.controller;
 
+import org.miage.m2.forum.formValidation.LoginForm;
 import org.miage.m2.forum.formValidation.SignUpForm;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +22,11 @@ public class MainController {
     @GetMapping(value = "/formProject")
     public String formProject(Model model){
         return "index";
+    }
+
+    @GetMapping(value = "/403")
+    public String accessDenied(Model model){
+        return "403";
     }
 
 }

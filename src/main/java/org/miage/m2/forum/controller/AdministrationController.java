@@ -35,6 +35,11 @@ public class AdministrationController {
 
     AdministrationService administrationService = new AdministrationServiceImpl();
 
+    /**
+     * send a list of all projects
+     * @param model
+     * @return
+     */
     @GetMapping(value = "")
     public String index(Model model){
         administrationService.setProjetRepository(projetRepository);
@@ -45,6 +50,12 @@ public class AdministrationController {
         return "administration/index";
     }
 
+    /**
+     * Get one project
+     * @param title
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/project/{title}", method = RequestMethod.GET)
     public String getProjectForUpdate(@PathVariable String title, Model model){
         administrationService.setProjetRepository(projetRepository);
@@ -69,6 +80,13 @@ public class AdministrationController {
         return "administration/access";
     }
 
+    /**
+     * Create a noew project
+     * @param projectForm
+     * @param bindingResult
+     * @param model
+     * @return
+     */
     @PostMapping(value = "/")
     public String createProject(
              @Valid ProjectForm projectForm
@@ -99,6 +117,13 @@ public class AdministrationController {
         }
     }
 
+    /**
+     * Update a project
+     * @param projectForm
+     * @param bindingResult
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/project/update", method = RequestMethod.POST)
     public String updateProject(
             @Valid ProjectForm projectForm
@@ -129,6 +154,13 @@ public class AdministrationController {
     }
 
 
+    /**
+     * Update access of a project
+     * @param accessProject
+     * @param bindingResult
+     * @param model
+     * @return
+     */
     @PostMapping("/access")
     public String udpdateAccess(
             @Valid AccessProject accessProject
@@ -138,6 +170,8 @@ public class AdministrationController {
         administrationService.setProjetRepository(projetRepository);
         Projet projet = administrationService.findOne(accessProject.getTitle());
         model.addAttribute("title", projet.getTitre());
+
+        //if error on form
         if(bindingResult.hasErrors()){
             return "administration/access";
         }
@@ -188,4 +222,11 @@ public class AdministrationController {
         return user.getUsername();
     }
 
+    public void setUtilisateurRepository(UtilisateurRepository utilisateurRepository) {
+        this.utilisateurRepository = utilisateurRepository;
+    }
+
+    public void setProjetRepository(ProjetRepository projetRepository) {
+        this.projetRepository = projetRepository;
+    }
 }

@@ -1,7 +1,10 @@
 package org.miage.m2.forum.service;
 
+import org.miage.m2.forum.controller.AccountController;
 import org.miage.m2.forum.modele.Utilisateur;
 import org.miage.m2.forum.query.UtilisateurRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +22,8 @@ public class AccountServiceImpl implements AccountService {
     public Utilisateur getUtilisateurByPseudo(String pseudo) {
         return utilisateurRepository.findByPseudo(pseudo);
     }
+
+    public static final Logger logger = LoggerFactory.getLogger(AccountServiceImpl.class);
 
     /**
      * Check if user exist with this email and this username
@@ -67,22 +72,26 @@ public class AccountServiceImpl implements AccountService {
         Utilisateur userModify = new Utilisateur(emailModify, pseudoModify, mdpModify, adminModify, user.getMessage(), user.getCreators(), user.getListTopicCreate(), user.getSuivi());
 
         //if user does'nt change password
-        if(mdpModify.isEmpty()){
-            user.setMdp(user.getMdp());
+        if(mdpModify!=null) {
+            if (mdpModify.isEmpty()) {
+                user.setMdp(user.getMdp());
+            }
         }
         user.setAdmin(adminModify);
-        user.setEnable(true);
         Utilisateur userFound;
         //Si l'adresse mail et le pseudo n'ont pas été modifié
         if (user.getEmail().equals(userModify.getEmail()) && user.getPseudo().equals(userModify.getPseudo())) {
+            logger.info("update user password");
             return utilisateurRepository.save(user);
         }
         //Sinon on vérifie si le pseudo a changé et qu'il est disponible
         if(!user.getPseudo().equals(userModify.getPseudo())) {
             userFound = getUtilisateurByPseudo(userModify.getPseudo());
             if (userFound == null) {
+                logger.info("update user pseudo");
                 user.setPseudo(pseudoModify);
             }else{
+                logger.info("fail");
                 return null;
             }
         }

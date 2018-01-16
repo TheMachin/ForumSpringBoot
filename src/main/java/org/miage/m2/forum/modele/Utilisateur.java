@@ -30,14 +30,14 @@ public class Utilisateur {
 	private Set<Topic> suivi = new HashSet<Topic>();
 
     //list of roles of user
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(
 			name = "users_roles",
 			joinColumns = @JoinColumn(
 					name = "user_email", referencedColumnName = "email"),
 			inverseJoinColumns = @JoinColumn(
 					name = "role_name", referencedColumnName = "name"))
-	private Set<Roles> roles;
+	private Set<Roles> roles = new HashSet<Roles>();
 
 	@Autowired
 	public Utilisateur(String email, String pseudo, String mdp, boolean admin, Set<Message> message, Set<Projet> creators, Set<Topic> listTopicCreate, Set<Topic> suivi) {
@@ -155,6 +155,7 @@ public class Utilisateur {
 	public void addAdminRole(){
 		addRole("ROLE_ADMIN");
 		this.enable=true;
+		this.admin=true;
 	}
 
 	public void removeAdminRole(){
@@ -163,7 +164,7 @@ public class Utilisateur {
 			role.setName("ROLE_ADMIN");
 			roles.remove(role);
 		}
-		this.enable=false;
+		this.admin=false;
 	}
 
     public boolean isEnable() {
