@@ -2,74 +2,89 @@
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
         <title>Administration</title>
+        <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" type="text/css"/>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+        <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
     </head>
     <body>
-        <h2>Administration</h2>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-2"></div>
+                <div class="col-lg-8">
+                    <h2>Administration</h2>
 
-        <h3>Create project</h3>
-        <div th:if="${successProject != null}" >Project is created</div>
-        <div th:if="${failProject != null}" >Project title is already exist</div>
-        <table>
-            <form action="#" th:action="@{/administration/}" th:object="${projectForm}" method="POST">
-                <tr>
-                    <td>Enter title:</td>
-                    <td><input type="text" th:field="*{titre}"/></td>
-                    <td th:if="${#fields.hasErrors('titre')}" class="errors" th:errors="*{titre}" ></td>
-                </tr>
-                <tr>
-                    <td>Enter description:</td>
-                    <td><input type="text" th:field="*{description}"/></td>
-                    <td th:if="${#fields.hasErrors('description')}" class="errors" th:errors="*{description}" ></td>
-                </tr>
-                <tr>
-                    <td>Give access at anonymous user:</td>
-                    <td><input type="checkbox" th:field="*{invite}"/></td>
-                    <td th:if="${#fields.hasErrors('invite')}" class="errors" th:errors="*{invite}"></td>
-                </tr>
-                <tr>
-                    <td>Parent project:</td>
-                    <td>
-                        <select th:field="*{projetParent}">
-                            <option value="">---------</option>
-                            <option th:each="p,iterationStatus : ${projects}"
-                                    th:value="${p.titre}"
-                                    th:text="${p.titre}"
-                            ></option>
-                        </select>
-                    </td>
-                    <td th:if="${#fields.hasErrors('projetParent')}" class="errors" th:errors="*{projetParent}"></td>
-                </tr>
-                <tr>
-                    <td><button type="submit">Submit</button></td>
-                </tr>
-            </form>
-        </table>
-
-        <h2>List of projects</h2>
-        <table border="1">
-            <tr>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Date of creation</th>
-                <th>Creator</th>
-                <th>Access of anonymous user</th>
-                <th>NB user has access</th>
-                <th>NB topic</th>
-                <th>Nb child projectc</th>
-                <th>Update</th>
-            </tr>
-            <tr th:each="p,iterationStatus : ${projects}">
-                <td th:text="${p.titre}"></td>
-                <td th:text="${p.description}"></td>
-                <td th:text="${#dates.format(p.dateCreation,'dd-MM-yyyy')}"></td>
-                <td th:text="${p.creators.pseudo}"></td>
-                <td th:text="${p.invite}"></td>
-                <td th:text="${#lists.size(p.acces)}"></td>
-                <td th:text="${#lists.size(p.topics)}"></td>
-                <td th:text="${#lists.size(p.sousProjet)}"></td>
-                <td><a th:href="@{'/administration/project/' + ${p.titre}}">update</a></td>
-            </tr>
-        </table>
-
+                    <h3>Create project</h3>
+                    <div th:if="${successProject != null}" >Project is created</div>
+                    <div th:if="${failProject != null}" >Project title is already exist</div>
+                    <table>
+                        <form action="#" th:action="@{/administration/}" th:object="${projectForm}" method="POST">
+                            <tr>
+                                <td>Enter title:</td>
+                                <td><input type="text" th:field="*{titre}"/></td>
+                                <td th:if="${#fields.hasErrors('titre')}" class="errors" th:errors="*{titre}" ></td>
+                            </tr>
+                            <tr>
+                                <td>Enter description:</td>
+                                <td><input type="text" th:field="*{description}"/></td>
+                                <td th:if="${#fields.hasErrors('description')}" class="errors" th:errors="*{description}" ></td>
+                            </tr>
+                            <tr>
+                                <td>Give access at anonymous user:</td>
+                                <td><input type="checkbox" th:field="*{invite}"/></td>
+                                <td th:if="${#fields.hasErrors('invite')}" class="errors" th:errors="*{invite}"></td>
+                            </tr>
+                            <tr>
+                                <td>Parent project:</td>
+                                <td>
+                                    <select th:field="*{projetParent}">
+                                        <option value="">---------</option>
+                                        <option th:each="p,iterationStatus : ${projects}"
+                                                th:value="${p.titre}"
+                                                th:text="${p.titre}"
+                                        ></option>
+                                    </select>
+                                </td>
+                                <td th:if="${#fields.hasErrors('projetParent')}" class="errors" th:errors="*{projetParent}"></td>
+                            </tr>
+                            <tr>
+                                <td><button class="btn btn-primary btn-lg" type="submit">Submit</button></td>
+                            </tr>
+                        </form>
+                    </table>
+                </div>
+                <div class="col-lg-2"></div>
+            </div>
+            <div class="row">
+                <div></div><div class="col-lg-2"></div>
+                <div class="col-lg-8">
+                    <h2>List of projects</h2>
+                    <table class="table  table-striped">
+                        <tr>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Date of creation</th>
+                            <th>Creator</th>
+                            <th>Access of anonymous user</th>
+                            <th>NB user has access</th>
+                            <th>NB topic</th>
+                            <th>Nb child projectc</th>
+                            <th>Update</th>
+                        </tr>
+                        <tr th:each="p,iterationStatus : ${projects}">
+                            <td th:text="${p.titre}"></td>
+                            <td th:text="${p.description}"></td>
+                            <td th:text="${#dates.format(p.dateCreation,'dd-MM-yyyy')}"></td>
+                            <td th:text="${p.creators.pseudo}"></td>
+                            <td th:text="${p.invite}"></td>
+                            <td th:text="${#lists.size(p.acces)}"></td>
+                            <td th:text="${#lists.size(p.topics)}"></td>
+                            <td th:text="${#lists.size(p.sousProjet)}"></td>
+                            <td><a class="btn btn-primary" th:href="@{'/administration/project/' + ${p.titre}}">update</a></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-lg-2"></div>
+            </div>
+        </div>
     </body>
 </html>

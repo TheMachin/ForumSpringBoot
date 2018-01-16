@@ -77,6 +77,7 @@ public class AdministrationController {
         accessProject.setTitle(projet.getTitre());
         model.addAttribute("accessProject", accessProject);
         model.addAttribute("title", projet.getTitre());
+        model.addAttribute("access", projet.getAcces());
         return "administration/access";
     }
 
