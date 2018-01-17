@@ -171,7 +171,7 @@ public class AdministrationController {
         administrationService.setProjetRepository(projetRepository);
         Projet projet = administrationService.findOne(accessProject.getTitle());
         model.addAttribute("title", projet.getTitre());
-        model.addAttribute("access", projet.getAcces());
+
         //if error on form
         if(bindingResult.hasErrors()){
             return "administration/access";
