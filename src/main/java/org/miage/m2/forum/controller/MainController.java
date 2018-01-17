@@ -1,6 +1,5 @@
 package org.miage.m2.forum.controller;
 
-import org.miage.m2.forum.formValidation.LoginForm;
 import org.miage.m2.forum.formValidation.SignUpForm;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

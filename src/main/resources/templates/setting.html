@@ -3,44 +3,51 @@
 <head>
     <title>Sign up</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/main.css}" type="text/css"/>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-<h2>Sign up on ForumSpringBoot</h2>
-<div th:if="${success != null}" >Your account is updated</div>
-<div th:if="${fail != null}" >Email or username already exist</div>
-<table>
-    <form action="#" th:action="@{/account/setting}" th:object="${settingForm}" method="POST">
-        <tr th:if="${userOAuth == false}">
-            <td>Enter email:</td>
-            <td><input type="text" th:field="*{email}"/></td>
-            <td th:if="${#fields.hasErrors('email')}" class="errors" th:errors="*{email}"  th:value="${settingForm.email}"></td>
-        </tr>
-        <tr th:if="${userOAuth == true}">
-            <td></td>
-            <td><input type="hidden" th:field="*{email}"/></td>
-            <td th:value="${settingForm.email}"></td>
-        </tr>
-        <tr>
-            <td>Enter username:</td>
-            <td><input type="text" th:field="*{username}"/></td>
-            <td th:if="${#fields.hasErrors('username')}" class="errors" th:errors="*{username}" th:value="${settingForm.username}" ></td>
-        </tr>
-        <tr th:if="${userOAuth == false}">
-            <td>Enter password:</td>
-            <td><input type="password" th:field="*{password}"/></td>
-            <td th:if="${#fields.hasErrors('password')}" class="errors" th:errors="*{password}"></td>
-        </tr>
-        <tr th:if="${userOAuth == false}">
-            <td>Confirm password:</td>
-            <td><input type="password" th:field="*{confirmPassword}"/></td>
-            <td th:if="${#fields.hasErrors('confirmPassword')}" class="errors" th:errors="*{confirmPassword}"></td>
-        </tr>
-        <tr>
-            <td><button type="submit">Submit</button></td>
-        </tr>
-    </form>
-</table>
-<div><a th:href="@{/logout}">Logout</a></div>
-<div><a th:href="@{/}">Welcome page</a></div>
-</body>
+    <div class="container">
+        <div th:replace="fragments/header :: header"></div>
+        <div class="row">
+        <h2>Sign up on ForumSpringBoot</h2>
+        <div class="alert alert-success" th:if="${success != null}" >Your account is updated</div>
+        <div class="alert alert-danger" th:if="${fail != null}" >Email or username already exist</div>
+        <table>
+            <form action="#" th:action="@{/account/setting}" th:object="${settingForm}" method="POST">
+                <tr th:if="${userOAuth == false}">
+                    <td>Enter email:</td>
+                    <td><input type="text" th:field="*{email}"/></td>
+                    <td th:if="${#fields.hasErrors('email')}" class="errors" th:errors="*{email}"  th:value="${settingForm.email}"></td>
+                </tr>
+                <tr th:if="${userOAuth == true}">
+                    <td></td>
+                    <td><input type="hidden" th:field="*{email}"/></td>
+                    <td th:value="${settingForm.email}"></td>
+                </tr>
+                <tr>
+                    <td>Enter username:</td>
+                    <td><input type="text" th:field="*{username}"/></td>
+                    <td th:if="${#fields.hasErrors('username')}" class="errors" th:errors="*{username}" th:value="${settingForm.username}" ></td>
+                </tr>
+                <tr th:if="${userOAuth == false}">
+                    <td>Enter password:</td>
+                    <td><input type="password" th:field="*{password}"/></td>
+                    <td th:if="${#fields.hasErrors('password')}" class="errors" th:errors="*{password}"></td>
+                </tr>
+                <tr th:if="${userOAuth == false}">
+                    <td>Confirm password:</td>
+                    <td><input type="password" th:field="*{confirmPassword}"/></td>
+                    <td th:if="${#fields.hasErrors('confirmPassword')}" class="errors" th:errors="*{confirmPassword}"></td>
+                </tr>
+                <tr>
+                    <td><button type="submit">Submit</button></td>
+                </tr>
+            </form>
+        </table>
+        </div>
+    </div>
+    </body>
 </html>
