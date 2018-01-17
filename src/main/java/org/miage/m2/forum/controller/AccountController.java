@@ -23,7 +23,7 @@ import javax.validation.Valid;
 import java.security.Principal;
 
 @Controller
-@RequestMapping("/account/")
+@RequestMapping("/")
 public class AccountController {
 
     @Autowired
@@ -33,19 +33,37 @@ public class AccountController {
 
     AccountService accountService = new AccountServiceImpl();
 
-    @GetMapping(value = "/login")
+    /**
+     * Page d'authentification
+     * @param model
+     * @return
+     */
+    @GetMapping(value = "signin")
     public String login(Model model){
         model.addAttribute("loginForm", new LoginForm());
-        return "login";
+        return "signin";
     }
 
-    @GetMapping(value = "/signup")
+    /**
+     * Page de création de compte
+     * @param model
+     * @return
+     */
+    @GetMapping(value = "signup")
     public String signUp(Model model){
         model.addAttribute("signUpForm", new SignUpForm());
         return "signup";
     }
 
-    @GetMapping(value = "/setting")
+    /**
+     * page pour modifier les infos de l'utilisateur
+     *
+     * on récuperer l'user depuis sa session
+     * on utilise l'objet settingForm pour le formulaire dans laquelle on met des informations (email, pseudo)
+     * @param model
+     * @return
+     */
+    @GetMapping(value = "account/setting")
     public String setting(Model model){
 
         accountService.setUtilisateurRepository(utilisateurRepository);
@@ -55,6 +73,10 @@ public class AccountController {
         SettingForm settingForm = new SettingForm();
         settingForm.setEmail(utilisateur.getEmail());
         settingForm.setUsername(utilisateur.getPseudo());
+
+        /**
+         * si l'utilisateur n'est pas activé --> connexion oauth et pas de modification de l'email et mdp
+         */
         model.addAttribute("settingForm",settingForm);
         if(utilisateur.isEnable()==false){
             model.addAttribute("userOAuth",true);
@@ -71,7 +93,7 @@ public class AccountController {
      * @param model
      * @return
      */
-    @RequestMapping(value = "/signup", method = RequestMethod.POST)
+    @RequestMapping(value = "signup", method = RequestMethod.POST)
     public String formSignUp(
             @Valid SignUpForm signUpForm
             ,BindingResult bindingResult
@@ -83,6 +105,10 @@ public class AccountController {
 
         accountService.setUtilisateurRepository(utilisateurRepository);
 
+        /**
+         * creation de l'objet utilisateur avec des informations du formulaire
+         * insertion dans la bdd
+         */
         Utilisateur utilisateur = new Utilisateur();
         utilisateur.setAdmin(false);
         utilisateur.setEmail(signUpForm.getEmail());
@@ -90,7 +116,13 @@ public class AccountController {
         utilisateur.setMdp(signUpForm.getPassword());
         Utilisateur userCreate = accountService.createUser(utilisateur);
 
+        /**
+         * vérification si il a bien été enregistré
+         */
         if(userCreate!=null) {
+            /**
+             * on le dirige vers la page d'authentification
+             */
             model.addAttribute("accountCreate",true);
             return login(model);
         }
@@ -106,7 +138,7 @@ public class AccountController {
      * @param model
      * @return
      */
-    @PostMapping(value = "/setting")
+    @PostMapping(value = "account/setting")
     public String settingForm(
             @Valid SettingForm settingForm,
             BindingResult bindingResult,
@@ -116,10 +148,17 @@ public class AccountController {
 
         accountService.setUtilisateurRepository(utilisateurRepository);
 
+
+        /**
+         * recuperation des infos de l; utilisateur depuis la session
+         */
         String user = getCurrentNameUser();
         logger.info(user);
         Utilisateur utilisateur = utilisateurRepository.findOne(user);
 
+        /**
+         * si il a des erreurs dans le formulaire on le notifie
+         */
         if(utilisateur.isEnable()==false){
             model.addAttribute("userOAuth",true);
         }else{
@@ -130,17 +169,26 @@ public class AccountController {
             return "setting";
         }
 
+        /**
+         * on met à jour l'utilisateur
+         */
         logger.info("start update");
         Utilisateur userUpdating = accountService.modifyUser(utilisateur,settingForm.getEmail(),settingForm.getUsername(),settingForm.getPassword(),utilisateur.isAdmin());
         if(userUpdating!=null) {
             logger.info("succes of update");
             //update information of authentification
             Authentication authentication = new UsernamePasswordAuthenticationToken(userUpdating.getEmail(), userUpdating.getMdp());
-
             SecurityContextHolder.getContext().setAuthentication(authentication);
+
+            /**
+             * on notifie qu'il a bien ete mis a jour
+             */
             model.addAttribute("success",true);
             return "setting";
         }
+        /**
+         * en cas d'echec on redirige vers le formulaire avec des infos de l'utilisateur
+         */
         logger.error("fail to update");
         utilisateur = utilisateurRepository.findOne(getCurrentNameUser());
         settingForm = new SettingForm();

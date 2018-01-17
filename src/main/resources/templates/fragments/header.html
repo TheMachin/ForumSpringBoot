@@ -27,7 +27,7 @@
                         </a>
                     </li>
                     <li th:if="${#authorization.expression('!isAuthenticated()')}">
-                        <a href="/signin" th:href="@{/account/login}">
+                        <a href="/signin" th:href="@{/signin}">
                             <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>&nbsp;Sign in
                         </a>
                     </li>
