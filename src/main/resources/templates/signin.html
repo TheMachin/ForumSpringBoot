@@ -56,7 +56,7 @@
                 <div class="col-lg-12">
                     <div th:if="${not #authorization.expression('hasRole(''ROLE_USER'')')}">
                         <p><a th:href="@{/account/signup}">Not registered? Create an account</a></p>
-                        <p><a class="btn btn-primary"  th:href="@{/oauth/google}">Login with google</a></p>
+                        <p><a class="btn btn-primary"  th:href="@{/login}">Login with google</a></p>
                     </div>
                     <p><a href="/" th:href="@{/}">Back to home page</a></p>
                 </div>

@@ -57,9 +57,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable();
+        //force redirect to login page if the authentication is needed
+        http.csrf().disable() .exceptionHandling().authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/signin"));
         http.anonymous().and().authorizeRequests()
-                .antMatchers("/","/signin**","/signup**").permitAll()
+                .antMatchers("/","/signin**","/signup**","/projects/**/", "/403").permitAll()
                 .antMatchers("/administration/**").access("hasRole('ADMIN')")
                 .antMatchers("/oauth/**").authenticated()
                 .anyRequest().authenticated()
@@ -68,7 +69,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                     .formLogin()
                         .loginPage("/signin")
-                        .successForwardUrl("/oauth/google")
                         .permitAll()
                         .usernameParameter("email").passwordParameter("password")
                 .and()

@@ -33,6 +33,8 @@ public class AccountController {
 
     AccountService accountService = new AccountServiceImpl();
 
+    private CurrentUserService currentUserService = new CurrentUserService();
+
     /**
      * Page d'authentification
      * @param model
@@ -64,11 +66,12 @@ public class AccountController {
      * @return
      */
     @GetMapping(value = "account/setting")
-    public String setting(Model model){
+    public String setting(Principal principal, Model model){
 
         accountService.setUtilisateurRepository(utilisateurRepository);
+        currentUserService.setAccountService(accountService);
 
-        String user = getCurrentNameUser();
+        String user = currentUserService.getCurrentNameUser(principal);
         Utilisateur utilisateur = utilisateurRepository.findOne(user);
         SettingForm settingForm = new SettingForm();
         settingForm.setEmail(utilisateur.getEmail());
@@ -141,18 +144,20 @@ public class AccountController {
     @PostMapping(value = "account/setting")
     public String settingForm(
             @Valid SettingForm settingForm,
+            Principal principal,
             BindingResult bindingResult,
             Model model
     ){
         logger.info("POST setting");
 
         accountService.setUtilisateurRepository(utilisateurRepository);
-
+        currentUserService.setAccountService(accountService);
 
         /**
          * recuperation des infos de l; utilisateur depuis la session
          */
-        String user = getCurrentNameUser();
+
+        String user = currentUserService.getCurrentNameUser(principal);
         logger.info(user);
         Utilisateur utilisateur = utilisateurRepository.findOne(user);
 
@@ -190,7 +195,7 @@ public class AccountController {
          * en cas d'echec on redirige vers le formulaire avec des infos de l'utilisateur
          */
         logger.error("fail to update");
-        utilisateur = utilisateurRepository.findOne(getCurrentNameUser());
+        utilisateur = utilisateurRepository.findOne(currentUserService.getCurrentNameUser(principal));
         settingForm = new SettingForm();
         settingForm.setEmail(utilisateur.getEmail());
         settingForm.setUsername(utilisateur.getPseudo());
@@ -198,23 +203,6 @@ public class AccountController {
         model.addAttribute("fail",true);
         return "setting";
 
-    }
-
-    /**
-     * Obtenir la session de l'utilisateur si il est connecté
-     * @return email de l'utilisateur connecté
-     */
-    private String getCurrentNameUser(){
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Object principal = auth.getPrincipal();
-        logger.info(principal.toString());
-        if(principal instanceof String){
-            logger.info(principal.toString());
-            return principal.toString();
-        }
-        User user = (User) principal;
-        logger.info("146 "+principal.toString());
-        return user.getUsername();
     }
 
     public void setUtilisateurRepository(UtilisateurRepository utilisateurRepository){

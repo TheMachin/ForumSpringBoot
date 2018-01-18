@@ -13,9 +13,9 @@
     <div th:replace="fragments/header :: header"></div>
     <div class="row">
             <h2>Give access user to project <span th:text="${title}"></span></h2>
-            <div th:if="${errorInvite != null}" >Access has already been assigned for all</div>
-            <div th:if="${error != null}" >The changes could not be saved </div>
-            <div th:if="${success != null}" >The changes have been saved </div>
+            <div class="alert alert-danger" th:if="${errorInvite != null}" >Access has already been assigned for all</div>
+            <div class="alert alert-danger" th:if="${error != null}" >The changes could not be saved </div>
+            <div class="alert alert-success" th:if="${success != null}" >The changes have been saved </div>
             <table>
                 <form action="#" th:action="@{/administration/access}" th:object="${accessProject}" method="POST">
                     <tr>

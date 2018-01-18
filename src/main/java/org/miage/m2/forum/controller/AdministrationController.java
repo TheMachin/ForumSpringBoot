@@ -7,6 +7,8 @@ import org.miage.m2.forum.modele.Topic;
 import org.miage.m2.forum.modele.Utilisateur;
 import org.miage.m2.forum.query.ProjetRepository;
 import org.miage.m2.forum.query.UtilisateurRepository;
+import org.miage.m2.forum.service.AccountService;
+import org.miage.m2.forum.service.AccountServiceImpl;
 import org.miage.m2.forum.service.AdministrationService;
 import org.miage.m2.forum.service.AdministrationServiceImpl;
 import org.slf4j.Logger;
@@ -21,6 +23,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -39,14 +42,22 @@ public class AdministrationController {
 
     AdministrationService administrationService = new AdministrationServiceImpl();
 
+    AccountService accountService = new AccountServiceImpl();
+
+    private CurrentUserService currentUserService = new CurrentUserService();
+
     /**
      * send a list of all projects
      * @param model
      * @return page principale d'administration
      */
     @GetMapping(value = "")
-    public String index(Model model){
+    public String index(Principal principal, Model model){
         administrationService.setProjetRepository(projetRepository);
+        accountService.setUtilisateurRepository(utilisateurRepository);
+        currentUserService.setAccountService(accountService);
+
+        currentUserService.getCurrentNameUser(principal);
         Iterable<Projet> projets = administrationService.findAll();
         ProjectForm projectForm = new ProjectForm();
         model.addAttribute("projects",projets);
@@ -64,9 +75,12 @@ public class AdministrationController {
      * @return page pour modifier le projet (titre, acces invité, description)
      */
     @RequestMapping(value = "/project/{title}", method = RequestMethod.GET)
-    public String getProjectForUpdate(@PathVariable String title, Model model){
+    public String getProjectForUpdate(@PathVariable String title, Principal principal, Model model){
         administrationService.setProjetRepository(projetRepository);
+        accountService.setUtilisateurRepository(utilisateurRepository);
+        currentUserService.setAccountService(accountService);
 
+        currentUserService.getCurrentNameUser(principal);
 
         Projet projet = administrationService.findOne(title);
         ProjectForm projectForm = new ProjectForm();
@@ -86,9 +100,12 @@ public class AdministrationController {
      * @return page pour gérer qui a accès au projet
      */
     @GetMapping(value = "/access/{title}")
-    public String getAccessPage(@PathVariable String title, Model model){
+    public String getAccessPage(@PathVariable String title, Principal principal, Model model){
         administrationService.setProjetRepository(projetRepository);
+        accountService.setUtilisateurRepository(utilisateurRepository);
+        currentUserService.setAccountService(accountService);
 
+        currentUserService.getCurrentNameUser(principal);
 
         Projet projet = administrationService.findOne(title);
         AccessProject accessProject = new AccessProject();
@@ -110,6 +127,7 @@ public class AdministrationController {
     @PostMapping(value = "/")
     public String createProject(
              @Valid ProjectForm projectForm
+            ,Principal principal
             ,BindingResult bindingResult
             ,Model model
     ){
@@ -122,11 +140,13 @@ public class AdministrationController {
             return "administration/index";
         }
         administrationService.setProjetRepository(projetRepository);
+        accountService.setUtilisateurRepository(utilisateurRepository);
+        currentUserService.setAccountService(accountService);
 
         /**
          * récupere les infos de l'utilisateur qui va etre le createur du projet
          */
-        Utilisateur creator = utilisateurRepository.findOne(getCurrentNameUser());
+        Utilisateur creator = utilisateurRepository.findOne(currentUserService.getCurrentNameUser(principal));
 
         /**
          * créer l'objet projet
@@ -142,7 +162,7 @@ public class AdministrationController {
         if(projetCreated==null){
             logger.error("unable to create a project");
             model.addAttribute("failProject",true);
-            return index(model);
+            return index(principal, model);
         }else{
             logger.info(projectForm.getProjetParent());
             /**
@@ -151,7 +171,7 @@ public class AdministrationController {
             Projet projetParent = administrationService.findOne(projectForm.getProjetParent());
             projetParent = administrationService.addProjectToProject(projetParent,projet);
             model.addAttribute("successProject",true);
-            return index(model);
+            return index(principal, model);
         }
     }
 
@@ -166,8 +186,13 @@ public class AdministrationController {
     public String updateProject(
             @Valid ProjectForm projectForm
             ,BindingResult bindingResult
+            , Principal principal
             ,Model model
     ){
+        accountService.setUtilisateurRepository(utilisateurRepository);
+        currentUserService.setAccountService(accountService);
+
+        currentUserService.getCurrentNameUser(principal);
         /**
          * si ya des erreurs dans le formulaire, on notifue à l'utilisateur
          */
@@ -198,12 +223,12 @@ public class AdministrationController {
             projectForm.setInvite(projetUpdated.isInvite());
             model.addAttribute("successProject",true);
             model.addAttribute("projectForm",projectForm);
-            return getProjectForUpdate(projetUpdated.getTitre(),model);
+            return getProjectForUpdate(projetUpdated.getTitre(), principal ,model);
         }else{
 
             model.addAttribute("failProject",true);
             System.out.println("fail updated");
-            return getProjectForUpdate(projetUpdated.getTitre(),model);
+            return getProjectForUpdate(projetUpdated.getTitre(), principal, model);
         }
     }
 
@@ -279,20 +304,6 @@ public class AdministrationController {
         model.addAttribute("success",true);
 
         return "administration/access";
-    }
-
-    /**
-     * Obtenir la session de l'utilisateur si il est connecté
-     * @return email de l'utilisateur connecté
-     */
-    private String getCurrentNameUser(){
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Object principal = auth.getPrincipal();
-        if(principal instanceof String){
-            return principal.toString();
-        }
-        User user = (User) principal;
-        return user.getUsername();
     }
 
     public void setUtilisateurRepository(UtilisateurRepository utilisateurRepository) {

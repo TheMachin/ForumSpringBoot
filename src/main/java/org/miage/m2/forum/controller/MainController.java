@@ -13,10 +13,7 @@ import java.util.Map;
 @RequestMapping("/")
 public class MainController {
 
-    @GetMapping(value="/")
-    public String index(Map<String, Object> model){
-        return "index";
-    }
+
 
     @GetMapping(value = "/formProject")
     public String formProject(Model model){
