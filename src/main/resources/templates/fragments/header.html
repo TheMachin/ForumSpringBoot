@@ -27,22 +27,22 @@
                         </a>
                     </li>
                     <li th:if="${#authorization.expression('!isAuthenticated()')}">
-                        <a href="/signin" th:href="@{/signin}">
+                        <a th:href="@{/signin}">
                             <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>&nbsp;Sign in
                         </a>
                     </li>
                     <li th:if="${#authorization.expression('isAuthenticated()')}">
-                        <a  href="/signin" th:href="@{/account/setting}">
+                        <a  th:href="@{/account/setting}">
                             <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>&nbsp;Setting
                         </a>
                     </li>
                     <li th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
-                        <a  href="/signin" th:href="@{/administration}">
+                        <a  th:href="@{/administration}">
                             <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>&nbsp;Administration
                         </a>
                     </li>
                     <li th:if="${#authorization.expression('isAuthenticated()')}">
-                        <a href="/logout" th:href="@{#}" onclick="$('#form').submit();">
+                        <a th:href="@{#}" onclick="$('#form').submit();">
                             <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;Logout
                         </a>
                         <form style="visibility: hidden" id="form" method="post" action="#" th:action="@{/logout}"></form>
