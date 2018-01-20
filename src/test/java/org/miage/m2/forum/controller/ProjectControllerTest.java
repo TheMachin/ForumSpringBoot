@@ -124,6 +124,10 @@ public class ProjectControllerTest {
 
     }
 
+    /**
+     * tester si l'invite peut consulter un seul projet
+     * @throws Exception
+     */
     @Test
     public void testInviteProject() throws Exception{
 
@@ -138,12 +142,12 @@ public class ProjectControllerTest {
                 .andExpect(view().name("index"));
     }
 
+    /**
+     * test si on va dans la page du projet invite et qu'il n'y a pas de sous projets
+     * @throws Exception
+     */
     @Test
     public void testInvitegGetProject() throws Exception{
-
-        List<Projet> list = new ArrayList<Projet>();
-        list.add(projetInvite);
-        Projet projet = projetRepository.findOne("invite");
 
         this.mockMvc.perform(get("/projects/"+projetInvite.getTitre()+"/").with(anonymous()))
                 .andExpect(status().isOk())
@@ -152,6 +156,10 @@ public class ProjectControllerTest {
                 .andExpect(view().name("projects"));
     }
 
+    /**
+     * test si un utilisateur peut consulter tous les projets qu'il a accès
+     * @throws Exception
+     */
     @Test
     public void testNotInviteProject() throws Exception{
 
@@ -167,6 +175,11 @@ public class ProjectControllerTest {
                 .andExpect(view().name("index"));
     }
 
+
+    /**
+     * test si on a bien 2 projets sur 3. L'utlisateur testuser n'a pas les acces pour un projet
+     * @throws Exception
+     */
     @Test
     public void testNotAccessTestUserProject() throws Exception{
 
@@ -181,6 +194,10 @@ public class ProjectControllerTest {
                 .andExpect(view().name("index"));
     }
 
+    /**
+     * test de redirection à la page index si le nom du projet n'existe pas
+     * @throws Exception
+     */
     @Test
     public void testRedirectIfNotProjectExist() throws Exception{
 
