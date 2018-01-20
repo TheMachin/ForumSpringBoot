@@ -18,7 +18,7 @@ public class Projet {
 	private String description;
 	private Date dateCreation;
 	private boolean invite;
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	private Set<Utilisateur> acces = new HashSet<Utilisateur>();
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="CREATOR_ID")
@@ -26,7 +26,7 @@ public class Projet {
 	private Utilisateur creators;
 	@OneToMany(mappedBy = "projet")
 	private Set<Topic> topics = new HashSet<Topic>();
-	@OneToMany
+	@OneToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "Sous_projet",
 			joinColumns = @JoinColumn(name = "Projet_titre"),
 			inverseJoinColumns = @JoinColumn(name = "Sous_projet_titre")

@@ -39,6 +39,13 @@ public class ProjectController {
 
     AccountService accountService = new AccountServiceImpl();
 
+    /**
+     * Recuperer la liste des projets pour les afficher sur la page d'accueil
+     * enleve dans cette liste, les projets dont l'utilisateur ou l'internate n'a pas les acces
+     * @param principal
+     * @param model
+     * @return
+     */
     @GetMapping(value="/")
     public String index(Principal principal, Model model){
 
@@ -57,23 +64,7 @@ public class ProjectController {
             utilisateur = utilisateurRepository.findOne(user);
         }
         logger.info(projets.toString());
-        for(Projet projet : projets){
-            logger.info(projet.toString());
-            if(user.equals(new String("anonymousUser"))){
-                if(projet.isInvite()){
-                    projetList.add(projet);
-                }
-            }else{
-                if(projet.isInvite()){
-                    projetList.add(projet);
-                }
-                if(utilisateur!=null){
-                    if(projet.getAcces().contains(utilisateur)){
-                        projetList.add(projet);
-                    }
-                }
-            }
-        }
+        projetList = projectsByRights(projets, user, utilisateur);
 
         model.addAttribute("projets",projetList);
 
@@ -104,6 +95,18 @@ public class ProjectController {
         }
 
         logger.info(projets.toString());
+        projetList = projectsByRights(projets, user, utilisateur);
+
+        model.addAttribute("projets",projetList);
+
+        return "projects";
+    }
+
+    private List<Projet> projectsByRights(Iterable<Projet> projets, String user, Utilisateur utilisateur){
+
+        List<Projet> projetList = new ArrayList<Projet>();
+
+
         for(Projet projet : projets){
             logger.info(projet.toString());
             if(user.equals(new String("anonymousUser"))){
@@ -115,16 +118,56 @@ public class ProjectController {
                     projetList.add(projet);
                 }
                 if(utilisateur!=null){
-                    if(projet.getAcces().contains(utilisateur)){
-                        projetList.add(projet);
+                    for(Utilisateur u : projet.getAcces()){
+                        if(u.getEmail().equals(utilisateur.getEmail())){
+                            projetList.add(projet);
+                            break;
+                        }
                     }
                 }
             }
         }
-
-        model.addAttribute("projets",projetList);
-
-        return "projects";
+        logger.info(projetList.toString());
+        return projetList;
     }
 
+    public UtilisateurRepository getUtilisateurRepository() {
+        return utilisateurRepository;
+    }
+
+    public void setUtilisateurRepository(UtilisateurRepository utilisateurRepository) {
+        this.utilisateurRepository = utilisateurRepository;
+    }
+
+    public ProjetRepository getProjetRepository() {
+        return projetRepository;
+    }
+
+    public void setProjetRepository(ProjetRepository projetRepository) {
+        this.projetRepository = projetRepository;
+    }
+
+    public ProjetService getProjetService() {
+        return projetService;
+    }
+
+    public void setProjetService(ProjetService projetService) {
+        this.projetService = projetService;
+    }
+
+    public CurrentUserService getCurrentUserService() {
+        return currentUserService;
+    }
+
+    public void setCurrentUserService(CurrentUserService currentUserService) {
+        this.currentUserService = currentUserService;
+    }
+
+    public AccountService getAccountService() {
+        return accountService;
+    }
+
+    public void setAccountService(AccountService accountService) {
+        this.accountService = accountService;
+    }
 }

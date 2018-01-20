@@ -70,7 +70,6 @@ public class AccountController {
 
         accountService.setUtilisateurRepository(utilisateurRepository);
         currentUserService.setAccountService(accountService);
-
         String user = currentUserService.getCurrentNameUser(principal);
         Utilisateur utilisateur = utilisateurRepository.findOne(user);
         SettingForm settingForm = new SettingForm();

@@ -174,4 +174,15 @@ public class Utilisateur {
     public void setEnable(boolean enable) {
         this.enable = enable;
     }
+
+	@Override
+	public String toString() {
+		return "Utilisateur{" +
+				"email='" + email + '\'' +
+				", pseudo='" + pseudo + '\'' +
+				", mdp='" + mdp + '\'' +
+				", enable=" + enable +
+				", admin=" + admin +
+				'}';
+	}
 }

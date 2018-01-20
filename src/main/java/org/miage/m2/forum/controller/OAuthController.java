@@ -46,20 +46,6 @@ public class OAuthController {
         accountService.setUtilisateurRepository(utilisateurRepository);
         currentUserService.setAccountService(accountService);
         String email = currentUserService.getEmail(principal);
-        /*Utilisateur utilisateur = utilisateurRepository.findOne(email);
-        /**
-         * user not found
-         * create user
-         */
-        /*if(utilisateur == null){
-            utilisateur = new Utilisateur();
-            utilisateur.setEmail(email);
-            utilisateur.setPseudo(name);
-            utilisateur.addUserRole();
-            //false pour empecher qu'il se connecte avec un login custom
-            utilisateur.setEnable(false);
-            utilisateurRepository.save(utilisateur);
-        }*/
 
         return "redirect:/";
     }

@@ -13,16 +13,25 @@ import org.miage.m2.forum.query.UtilisateurRepository;
 import org.miage.m2.forum.service.AccountService;
 import org.miage.m2.forum.service.AccountServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
+import org.springframework.security.authentication.TestingAuthenticationToken;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers;
+import org.springframework.security.web.FilterChainProxy;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
@@ -38,6 +47,9 @@ import static org.hamcrest.Matchers.is;
 public class AccountControllerTest {
 
     private MockMvc mockMvc;
+
+    @Autowired
+    private FilterChainProxy springSecurityFilterChain;
 
     AccountController accountController;
 
@@ -82,7 +94,9 @@ public class AccountControllerTest {
         accountController.setAccountService(accountService);
         this.mockMvc = MockMvcBuilders.standaloneSetup(accountController)
                                         .setViewResolvers(viewResolver)
+                                        .apply(SecurityMockMvcConfigurers.springSecurity(springSecurityFilterChain))
                                         .build();
+        user.setAdmin(true);
         accountService.createUser(user);
     }
 
@@ -92,7 +106,7 @@ public class AccountControllerTest {
      */
     @Test
     public void testSignUp() throws Exception{
-        this.mockMvc.perform(get("/account/signup"))
+        this.mockMvc.perform(get("/signup"))
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("signUpForm"))
                 .andExpect(view().name("signup"));
@@ -110,7 +124,7 @@ public class AccountControllerTest {
         signUpForm.setEmail(testUser.getEmail());
         signUpForm.setPassword(testUser.getMdp());
         signUpForm.setConfirmPassword(testUser.getMdp());
-        this.mockMvc.perform(post("/account/signup")
+        this.mockMvc.perform(post("/signup")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .param("email",testUser.getEmail())
                 .param("username",testUser.getPseudo())
@@ -123,7 +137,7 @@ public class AccountControllerTest {
                 .andExpect(model().attribute("signUpForm", hasProperty("password",is(signUpForm.getPassword()))))
                 .andExpect(model().attribute("signUpForm", hasProperty("confirmPassword",is(signUpForm.getConfirmPassword()))))
                 .andExpect(model().attributeExists("accountCreate"))
-                .andExpect(view().name("login"))
+                .andExpect(view().name("signin"))
         ;
     }
 
@@ -135,7 +149,7 @@ public class AccountControllerTest {
         signUpForm.setEmail(user.getEmail());
         signUpForm.setPassword(testUser.getMdp());
         signUpForm.setConfirmPassword(testUser.getMdp());
-        this.mockMvc.perform(post("/account/signup")
+        this.mockMvc.perform(post("/signup")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .param("email",user.getEmail())
                 .param("username",testUser.getPseudo())
@@ -160,7 +174,7 @@ public class AccountControllerTest {
         signUpForm.setEmail(testUser.getEmail());
         signUpForm.setPassword(testUser.getMdp());
         signUpForm.setConfirmPassword(testUser.getMdp());
-        this.mockMvc.perform(post("/account/signup")
+        this.mockMvc.perform(post("/signup")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .param("email","")
                 .param("username","")
@@ -177,9 +191,8 @@ public class AccountControllerTest {
 
     @Test
     //utilisation du mock pour simuler un utilisateur connecté
-    @WithMockUser(username = "user@test.com",roles = "USER_ROLE")
     public void testGoSettingView() throws Exception{
-        this.mockMvc.perform(get("/account/setting"))
+        this.mockMvc.perform(get("/account/setting").with(user("user@test.com").roles("USER")))
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("settingForm"))
                 .andExpect(model().attribute("settingForm", hasProperty("email",is(user.getEmail()))))

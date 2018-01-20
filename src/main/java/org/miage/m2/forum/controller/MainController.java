@@ -13,13 +13,6 @@ import java.util.Map;
 @RequestMapping("/")
 public class MainController {
 
-
-
-    @GetMapping(value = "/formProject")
-    public String formProject(Model model){
-        return "index";
-    }
-
     @GetMapping(value = "/403")
     public String accessDenied(Model model){
         return "403";
