@@ -22,9 +22,11 @@ public class TopicServiceImpl implements TopicService{
      */
     public Topic createTopic(Topic topic) {
 
-        if(!topic.getProjet().getAcces().contains(topic.getCreator())){
-            System.out.println("Vous n'avez pas accès au projet");
-            return null;
+        if(topic.getProjet().getAcces().size() != 0){
+            if(!topic.getProjet().getAcces().contains(topic.getCreator())){
+                System.out.println("Vous n'avez pas accès au projet");
+                return null;
+            }
         }
 
         if(findOne(topic.getTitre())!=null){
@@ -147,5 +149,9 @@ public class TopicServiceImpl implements TopicService{
             return false;
         }
         return true;
+    }
+
+    public void setTopicRepository(TopicRepository topicRepository) {
+        this.topicRepository = topicRepository;
     }
 }

@@ -3,6 +3,7 @@ package org.miage.m2.forum.service;
 import org.miage.m2.forum.modele.Message;
 import org.miage.m2.forum.modele.Topic;
 import org.miage.m2.forum.modele.Utilisateur;
+import org.miage.m2.forum.query.TopicRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
@@ -20,4 +21,5 @@ public interface TopicService {
     public Topic removeUserToEcriture(Topic topic, Set<Utilisateur> ecriture);
     public Topic removeUserToLecture(Topic topic, Set<Utilisateur> lecture);
     public Topic removeUserToSuiveurs(Topic topic, Set<Utilisateur> suiveurs);
+    public void setTopicRepository(TopicRepository topicRepository);
 }
