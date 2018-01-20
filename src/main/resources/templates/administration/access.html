@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 
-    <title>Access user</title>
+    <title th:text="#{accessUser.title}">Access user</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css"/>
     <link rel="stylesheet" th:href="@{/css/main.css}" type="text/css"/>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
@@ -12,38 +12,43 @@
 <div class="container">
     <div th:replace="fragments/header :: header"></div>
     <div class="row">
-            <h2>Give access user to project <span th:text="${title}"></span></h2>
-            <div class="alert alert-danger" th:if="${errorInvite != null}" >Access has already been assigned for all</div>
-            <div class="alert alert-danger" th:if="${error != null}" >The changes could not be saved </div>
-            <div class="alert alert-success" th:if="${success != null}" >The changes have been saved </div>
+            <h2 th:text="#{accessUser.title}">Give access user to project></h2>
+            <div class="alert alert-danger" th:if="${errorInvite != null}" th:text="#{accessUser.error.invite}">Access has already been assigned for all</div>
+            <div class="alert alert-danger" th:if="${error != null}" th:text="#{accessUser.error.fail}">The changes could not be saved </div>
+            <div class="alert alert-success" th:if="${success != null}" th:text="#{accessUser.success}">The changes have been saved </div>
             <table>
                 <form action="#" th:action="@{/administration/access}" th:object="${accessProject}" method="POST">
                     <tr>
                         <td><input th:type="hidden" th:field="*{title}"  th:value="${accessProject.title}" /></td>
                     </tr>
                     <tr>
-                        <td>Select username to give access at the project <span th:text="${title}"></span>:
+                        <td th:text="#{accessUser.addUser}">Select username to give access at the project:
+
+                        </td>
+                        <td>
                             <input th:type="text" th:field="*{userAccess}" />
                         </td>
                         <td th:if="${#fields.hasErrors('userAccess')}" class="errors" th:errors="*{userAccess}"></td>
                     </tr>
                     <tr>
-                        <td>Select username to remove access at the project <span th:text="${title}"></span>}:
+                        <td th:text="#{accessUser.removeUser}">Select username to remove access at the project:
+                        </td>
+                        <td>
                             <input th:type="text" th:field="*{userRemove}" />
                         </td>
                         <td th:if="${#fields.hasErrors('userRemove')}" class="errors" th:errors="*{userRemove}"></td>
                     </tr>
                     <tr>
-                        <td><button type="submit">Submit</button></td>
+                        <td><button type="submit" th:text="#{submit}">Submit</button></td>
                     </tr>
                 </form>
             </table>
-            <p><a th:href="@{|/administration/project/${title}|}">Update project</a></p>
-            <p><a th:href="@{/administration}">Administration main</a></p>
+            <p><a th:href="@{|/administration/project/${title}|}" th:text="#{page.update}">Update project</a></p>
+            <p><a th:href="@{/administration}" th:text="#{page.administration}">Administration main</a></p>
 
             <table>
                 <tr>
-                    <th>List user have access to project</th>
+                    <th th:text="#{list.user}">List user have access to project</th>
                 </tr>
                 <th:block th:each="user : ${access}">
                     <tr>

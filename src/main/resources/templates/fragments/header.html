@@ -28,22 +28,22 @@
                     </li>
                     <li th:if="${#authorization.expression('!isAuthenticated()')}">
                         <a th:href="@{/signin}">
-                            <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>&nbsp;Sign in
+                            <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>&nbsp;<label th:text="#{header.signin}">Sign in</label>
                         </a>
                     </li>
                     <li th:if="${#authorization.expression('isAuthenticated()')}">
-                        <a  th:href="@{/account/setting}">
-                            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>&nbsp;Setting
+                        <a  th:href="@{/account/setting}" >
+                            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>&nbsp;<label th:text="#{header.setting}">Setting</label>
                         </a>
                     </li>
                     <li th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
                         <a  th:href="@{/administration}">
-                            <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>&nbsp;Administration
+                            <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>&nbsp;<label th:text="#{header.administration}">Administration</label>
                         </a>
                     </li>
                     <li th:if="${#authorization.expression('isAuthenticated()')}">
                         <a th:href="@{#}" onclick="$('#form').submit();">
-                            <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;Logout
+                            <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;<label th:text="#{header.logout}">Logout</label>
                         </a>
                         <form style="visibility: hidden" id="form" method="post" action="#" th:action="@{/logout}"></form>
                     </li>

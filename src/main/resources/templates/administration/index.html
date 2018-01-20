@@ -16,28 +16,28 @@
                 <div class="col-lg-8">
                     <h2>Administration</h2>
 
-                    <h3>Create project</h3>
-                    <div class="alert alert-success" th:if="${successProject != null}" >Project is created</div>
-                    <div class="alert alert-danger" th:if="${failProject != null}" >Project title is already exist</div>
+                    <h3 th:text="#{admin.createProject}">Create project</h3>
+                    <div class="alert alert-success" th:if="${successProject != null}" th:text="#{admin.update.success}">Project is created</div>
+                    <div class="alert alert-danger" th:if="${failProject != null}" th:text="#{admin.error}">Project title is already exist</div>
                     <table>
                         <form action="#" th:action="@{/administration/}" th:object="${projectForm}" method="POST">
                             <tr>
-                                <td>Enter title:</td>
+                                <td th:text="#{enter.project.title}">Enter title:</td>
                                 <td><input type="text" th:field="*{titre}"/></td>
                                 <td th:if="${#fields.hasErrors('titre')}" class="errors" th:errors="*{titre}" ></td>
                             </tr>
                             <tr>
-                                <td>Enter description:</td>
+                                <td th:text="#{enter.project.description}">Enter description:</td>
                                 <td><input type="text" th:field="*{description}"/></td>
                                 <td th:if="${#fields.hasErrors('description')}" class="errors" th:errors="*{description}" ></td>
                             </tr>
                             <tr>
-                                <td>Give access at anonymous user:</td>
+                                <td th:text="#{enter.project.guest}">Give access at anonymous user:</td>
                                 <td><input type="checkbox" th:field="*{invite}"/></td>
                                 <td th:if="${#fields.hasErrors('invite')}" class="errors" th:errors="*{invite}"></td>
                             </tr>
                             <tr>
-                                <td>Parent project:</td>
+                                <td th:text="#{enter.project.parent}">Parent project:</td>
                                 <td>
                                     <select th:field="*{projetParent}">
                                         <option value="">---------</option>
@@ -50,7 +50,7 @@
                                 <td th:if="${#fields.hasErrors('projetParent')}" class="errors" th:errors="*{projetParent}"></td>
                             </tr>
                             <tr>
-                                <td><button class="btn btn-primary btn-lg" type="submit">Submit</button></td>
+                                <td><button class="btn btn-primary btn-lg" type="submit" th:text="#{submit}">Submit</button></td>
                             </tr>
                         </form>
                     </table>
@@ -60,18 +60,18 @@
             <div class="row">
                 <div></div><div class="col-lg-2"></div>
                 <div class="col-lg-8">
-                    <h2>List of projects</h2>
+                    <h2 th:text="#{home.txtListProject}">List of projects</h2>
                     <table class="table  table-striped">
                         <tr>
-                            <th>Title</th>
-                            <th>Description</th>
-                            <th>Date of creation</th>
-                            <th>Creator</th>
-                            <th>Access of anonymous user</th>
-                            <th>NB user has access</th>
-                            <th>NB topic</th>
-                            <th>Nb child projectc</th>
-                            <th>Update</th>
+                            <th th:text="#{home.title}">Title</th>
+                            <th th:text="#{home.description}">Description</th>
+                            <th th:text="#{home.dateCreation}">Date of creation</th>
+                            <th th:text="#{home.creator}">Creator</th>
+                            <th th:text="#{home.guest}">Access of anonymous user</th>
+                            <th th:text="#{home.nbAccess}">NB user has access</th>
+                            <th th:text="#{home.nbtopic}">NB topic</th>
+                            <th th:text="#{home.nbChildProject}">Nb child projectc</th>
+                            <th th:text="#{home.update}">Update</th>
                         </tr>
                         <tr th:each="p,iterationStatus : ${projects}">
                             <td th:text="${p.titre}"></td>
@@ -82,7 +82,7 @@
                             <td th:text="${#lists.size(p.acces)}"></td>
                             <td th:text="${#lists.size(p.topics)}"></td>
                             <td th:text="${#lists.size(p.sousProjet)}"></td>
-                            <td><a class="btn btn-primary" th:href="@{'/administration/project/' + ${p.titre}}">update</a></td>
+                            <td><a class="btn btn-primary" th:href="@{'/administration/project/' + ${p.titre}}" th:text="#{home.update}">update</a></td>
                         </tr>
                     </table>
                 </div>

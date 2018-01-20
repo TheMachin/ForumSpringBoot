@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Login</title>
+    <title th:text="#{login.title}">Login</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css"/>
     <link rel="stylesheet" th:href="@{/css/main.css}" type="text/css"/>
@@ -15,21 +15,21 @@
             <div th:replace="fragments/header :: header"></div>
         <div class="row">
             <div class="col-lg-12">
-                <h2>Login page</h2>
-                <div class="alert alert-success" th:if="${accountCreate != null}" >Welcome, your account is created. Login you now!</div>
+                <h2 th:text="#{header.signin}">Login page</h2>
+                <div class="alert alert-success" th:if="${accountCreate != null}" th:text="#{login.create.success}" >Welcome, your account is created. Login you now!</div>
                 <div th:if="${param.error}">
-                    <div class="alert alert-danger">
-                        Invalid username and password.
+                    <div class="alert alert-danger" th:text="#{email.username.error}">
+                        Invalid email or password.
                     </div>
                 </div>
                 <div th:if="${param.logout}">
-                    <div class="alert alert-info">
+                    <div class="alert alert-info" th:text="#{logout.success}">
                         You have been logged out.
                     </div>
                 </div>
                 <div th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">
                     <div class="alert alert-info">
-                        <p><a href="/" th:href="@{/}">You are connected go to home page</a></p>
+                        <p><a href="/" th:href="@{/}" th:text="#{already.connected}">You are connected go to home page</a></p>
                     </div>
                 </div>
             </div>
@@ -38,27 +38,27 @@
             <div class="col-lg-12">
                 <form action="#" th:action="@{/signin}" th:object="${loginForm}" method="POST">
                     <div class="form-group">
-                        <label>Enter email:</label>
+                        <label th:text="#{enter.email}">Enter email:</label>
                         <input type="text" th:field="*{email}"/>
                         <label th:if="${#fields.hasErrors('email')}" class="errors" th:errors="*{email}"></label>
                     </div>
                     <div class="form-group">
-                        <label>Enter password:</label>
+                        <label th:text="#{enter.password}">Enter password:</label>
                         <input type="password" th:field="*{password}"/>
                         <label th:if="${#fields.hasErrors('password')}" class="errors" th:errors="*{password}"></label>
                     </div>
                     <tr>
-                        <td><button class="btn btn-primary" type="submit">Submit</button></td>
+                        <td><button class="btn btn-primary" type="submit" th:text="#{submit}">Submit</button></td>
                     </tr>
                 </form>
             </div>
             <div class="row">
                 <div class="col-lg-12">
                     <div th:if="${not #authorization.expression('hasRole(''ROLE_USER'')')}">
-                        <p><a th:href="@{/signup}">Not registered? Create an account</a></p>
-                        <p><a class="btn btn-primary"  th:href="@{/login}">Login with google</a></p>
+                        <p><a th:href="@{/signup}" th:text="#{create.account}">Not registered? Create an account</a></p>
+                        <p><a class="btn btn-primary"  th:href="@{/login}" th:text="#{google}">Login with google</a></p>
                     </div>
-                    <p><a href="/" th:href="@{/}">Back to home page</a></p>
+                    <p><a href="/" th:href="@{/}" th:text="#{go.home}">Back to home page</a></p>
                 </div>
             </div>
         </div>

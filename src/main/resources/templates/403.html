@@ -12,7 +12,7 @@
     <div class="container">
         <div th:replace="fragments/header :: header"></div>
         <div class="row">
-            <h3>You have not permission to access this page</h3>
+            <h3 th:text="#{notpermission}">You have not permission to access this page</h3>
         </div>
     </div>
 </body>

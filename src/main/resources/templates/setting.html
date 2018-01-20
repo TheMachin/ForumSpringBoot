@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Sign up</title>
+    <title th:text="#{setting.title}">Sign up</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css"/>
     <link rel="stylesheet" th:href="@{/css/main.css}" type="text/css"/>
@@ -12,13 +12,13 @@
     <div class="container">
         <div th:replace="fragments/header :: header"></div>
         <div class="row">
-        <h2>Setting ForumSpringBoot</h2>
-        <div class="alert alert-success" th:if="${success != null}" >Your account is updated</div>
-        <div class="alert alert-danger" th:if="${fail != null}" >Email or username already exist</div>
+        <h2 th:text="#{setting.title}">Setting account</h2>
+        <div th:text="#{setting.success}" class="alert alert-success" th:if="${success != null}" >Your account is updated</div>
+        <div class="alert alert-danger" th:if="${fail != null}" th:text="#{email.username.error}" >Email or username already exist</div>
         <table>
             <form action="#" th:action="@{/account/setting}" th:object="${settingForm}" method="POST">
                 <tr th:if="${userOAuth == false}">
-                    <td>Enter email:</td>
+                    <td th:text="#{enter.email}">Enter email:</td>
                     <td><input type="text" th:field="*{email}"/></td>
                     <td th:if="${#fields.hasErrors('email')}" class="errors" th:errors="*{email}"  th:value="${settingForm.email}"></td>
                 </tr>
@@ -28,22 +28,22 @@
                     <td th:value="${settingForm.email}"></td>
                 </tr>
                 <tr>
-                    <td>Enter username:</td>
+                    <td th:text="#{enter.username}">Enter username:</td>
                     <td><input type="text" th:field="*{username}"/></td>
                     <td th:if="${#fields.hasErrors('username')}" class="errors" th:errors="*{username}" th:value="${settingForm.username}" ></td>
                 </tr>
                 <tr th:if="${userOAuth == false}">
-                    <td>Enter password:</td>
+                    <td th:text="#{enter.password}">Enter password:</td>
                     <td><input type="password" th:field="*{password}"/></td>
                     <td th:if="${#fields.hasErrors('password')}" class="errors" th:errors="*{password}"></td>
                 </tr>
                 <tr th:if="${userOAuth == false}">
-                    <td>Confirm password:</td>
+                    <td th:text="#{confirm.password}">Confirm password:</td>
                     <td><input type="password" th:field="*{confirmPassword}"/></td>
                     <td th:if="${#fields.hasErrors('confirmPassword')}" class="errors" th:errors="*{confirmPassword}"></td>
                 </tr>
                 <tr>
-                    <td><button type="submit">Submit</button></td>
+                    <td><button type="submit" th:text="#{submit}">Submit</button></td>
                 </tr>
             </form>
         </table>
