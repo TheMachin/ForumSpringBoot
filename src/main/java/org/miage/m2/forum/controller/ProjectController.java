@@ -16,7 +16,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -84,53 +87,61 @@ public class ProjectController {
         return "index";
     }
 
+    /**
+     * A partir du titre du projet
+     * On recupere ce projet puis on affiche ses topics et ses sous projets
+     * @param title
+     * @param principal
+     * @param model
+     * @return
+     */
     @GetMapping("/projects/{title}/")
     public String getProjectChildAndTopics(@PathVariable String title, Principal principal, Model model) {
 
-        projetService.setProjetRepository(projetRepository);
-        accountService.setUtilisateurRepository(utilisateurRepository);
-        currentUserService.setAccountService(accountService);
+        model = getModelToProjectWithTopics(title, principal, model);
 
-        Projet p = projetService.getOne(title);
-
-        if (p == null) {
+        if(model == null){
             return "redirect:/";
         }
-
-        Iterable<Projet> projets = p.getSousProjet();
-        Iterable<Topic> topics = p.getTopics();
-
-        List<Projet> projetList = new ArrayList<Projet>();
-        List<Topic> topicList = new ArrayList<Topic>();
-        Utilisateur utilisateur = null;
-        String user = "anonymousUser";
-        user = currentUserService.getCurrentNameUser(principal);
-        if (!user.equals(new String("anonymousUser"))) {
-            utilisateur = utilisateurRepository.findOne(user);
-        }
-
-        logger.info(projets.toString());
-        projetList = projectsByRights(projets, user, utilisateur);
-        topicList = topicsByRights(topics, user, utilisateur);
-
-        TopicForm topicForm = new TopicForm();
-        topicForm.setProjet(title);
-
-        model.addAttribute("projets", projetList);
-        model.addAttribute("topics", topicList);
-        model.addAttribute("nomProjet", title);
-        model.addAttribute("topicForm", new TopicForm());
 
         return "projects";
     }
 
+
+
+    /**
+     * Create a new topic
+     * @param topicForm formulaire du topic pour la validation
+     * @param title titre du projet
+     * @param principal
+     * @param bindingResult
+     * @param model
+     * @return
+     */
     @PostMapping(value = "/projects/{title}/")
-    public String createTopic(@Valid TopicForm topicForm, @PathVariable String title, Principal principal, BindingResult bindingResult, Model model) {
+    public String createTopic(@Valid TopicForm topicForm,
+                              BindingResult bindingResult,
+                              @PathVariable String title,
+                              Principal principal ,
+                              Model model) {
         /**
          * si ya des erreurs dans le formulaire, on notifue à l'utilisateur
          */
         if (bindingResult.hasErrors()) {
+            model = getModelToProjectWithTopics(title, principal, model);
+            /**
+             * Copie les erreurs du formulaires dans un BeanPorpertyBindingResult
+             */
+            BeanPropertyBindingResult result2 = new BeanPropertyBindingResult(topicForm, bindingResult.getObjectName());
+            for(ObjectError error: bindingResult.getGlobalErrors()) {
+                result2.addError(error);
+            }
+            for (FieldError error: bindingResult.getFieldErrors()) {
+                result2.addError(new FieldError(error.getObjectName(), error.getField(), null, error.isBindingFailure(), error.getCodes(), error.getArguments(), error.getDefaultMessage()));
+            }
+            model.addAllAttributes(result2.getModel());
 
+            return "projects";
         }
         topicService.setTopicRepository(topicRepository);
         messageService.setMessageRepository(messageRepository);
@@ -198,6 +209,56 @@ public class ProjectController {
         return getProjectChildAndTopics(title, principal, model);
     }
 
+
+    private Model getModelToProjectWithTopics(String title, Principal principal, Model model){
+
+        projetService.setProjetRepository(projetRepository);
+        accountService.setUtilisateurRepository(utilisateurRepository);
+        currentUserService.setAccountService(accountService);
+
+        Projet p = projetService.getOne(title);
+
+        /**
+         * si le projet est null on retourne à la page d'accueil
+         */
+        if (p == null) {
+            return null;
+        }
+
+        Iterable<Projet> projets = p.getSousProjet();
+        Iterable<Topic> topics = p.getTopics();
+
+        List<Projet> projetList = new ArrayList<Projet>();
+        List<Topic> topicList = new ArrayList<Topic>();
+        Utilisateur utilisateur = null;
+        String user = "anonymousUser";
+        user = currentUserService.getCurrentNameUser(principal);
+        if (!user.equals(new String("anonymousUser"))) {
+            utilisateur = utilisateurRepository.findOne(user);
+        }
+
+        projetList = projectsByRights(projets, user, utilisateur);
+        topicList = topicsByRights(topics, user, utilisateur);
+
+        TopicForm topicForm = new TopicForm();
+        topicForm.setProjet(title);
+
+        model.addAttribute("projets", projetList);
+        model.addAttribute("topics", topicList);
+        model.addAttribute("nomProjet", title);
+        model.addAttribute("topicForm", new TopicForm());
+
+
+        return model;
+    }
+
+    /**
+     * Permet de récuperer une liste projet en fonction des droits d'acces (internaute ou utilisateur)
+     * @param projets
+     * @param user
+     * @param utilisateur
+     * @return liste de projet
+     */
     private List<Projet> projectsByRights(Iterable<Projet> projets, String user, Utilisateur utilisateur) {
 
         List<Projet> projetList = new ArrayList<Projet>();
@@ -227,6 +288,13 @@ public class ProjectController {
         return projetList;
     }
 
+    /**
+     * Permet de récuperer une liste de topic en fonction des droits d'acces (internaute, utilisateur)
+     * @param topics
+     * @param user
+     * @param utilisateur
+     * @return liste de topic
+     */
     private List<Topic> topicsByRights(Iterable<Topic> topics, String user, Utilisateur utilisateur) {
 
         List<Topic> topicList = new ArrayList<Topic>();
@@ -268,32 +336,12 @@ public class ProjectController {
         this.utilisateurRepository = utilisateurRepository;
     }
 
-    public ProjetRepository getProjetRepository() {
-        return projetRepository;
-    }
-
     public void setProjetRepository(ProjetRepository projetRepository) {
         this.projetRepository = projetRepository;
     }
 
-    public ProjetService getProjetService() {
-        return projetService;
-    }
-
     public void setProjetService(ProjetService projetService) {
         this.projetService = projetService;
-    }
-
-    public CurrentUserService getCurrentUserService() {
-        return currentUserService;
-    }
-
-    public void setCurrentUserService(CurrentUserService currentUserService) {
-        this.currentUserService = currentUserService;
-    }
-
-    public AccountService getAccountService() {
-        return accountService;
     }
 
     public void setAccountService(AccountService accountService) {
