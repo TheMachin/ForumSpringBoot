@@ -2,6 +2,7 @@ package org.miage.m2.forum.controller;
 
 import org.miage.m2.forum.formValidation.FollowForm;
 import org.miage.m2.forum.formValidation.MessageForm;
+import org.miage.m2.forum.formValidation.ReadWriteForm;
 import org.miage.m2.forum.formValidation.TopicForm;
 import org.miage.m2.forum.modele.Message;
 import org.miage.m2.forum.modele.Projet;
@@ -102,6 +103,7 @@ public class TopicController {
         model.addAttribute("readWrite", readWrite);
         model.addAttribute("follow", follow);
         model.addAttribute("followForm", new FollowForm());
+        model.addAttribute("readWriteForm", new ReadWriteForm());
 
         return "topics";
     }
@@ -209,5 +211,189 @@ public class TopicController {
         }
 
         return "unfollow";
+    }
+
+    @PostMapping(value = "/projects/{title}/topics/{subject}/access")
+    public String modifyAccess(@Valid ReadWriteForm readWriteForm, @PathVariable String title, @PathVariable String subject, Principal principal, BindingResult bindingResult, Model model) {
+
+        accountService.setUtilisateurRepository(utilisateurRepository);
+        currentUserService.setAccountService(accountService);
+
+        /**
+         * on récupère les infos de l'utilisateur admin ou créateur du topic
+         */
+        Utilisateur userConnected = utilisateurRepository.findOne(currentUserService.getCurrentNameUser(principal));
+
+        Topic topic = topicRepository.findOne(readWriteForm.getTopic());
+
+        List<Utilisateur> listReadUser = new ArrayList<Utilisateur>();
+        listReadUser.addAll(topic.getLecture());
+
+        List<Utilisateur> listWriteUser = new ArrayList<Utilisateur>();
+        listWriteUser.addAll(topic.getEcriture());
+
+        Set<Utilisateur> setAddReadUser = new HashSet<>();
+        Set<Utilisateur> setAddWriteUser = new HashSet<>();
+        Set<Utilisateur> setRemoveReadUser = new HashSet<>();
+        Set<Utilisateur> setRemoveWriteUser = new HashSet<>();
+
+        Utilisateur userExisted;
+
+        if(!readWriteForm.getAddReadUser().equals("")){
+            if(topic.getCreator().getPseudo().equals(readWriteForm.getAddReadUser())){
+                System.out.println("Le créateur ne peut pas s'ajouter en lecture.");
+                return getMessage(title, subject, principal, model);
+            }
+            for(int i=0;i<listReadUser.size();i++){
+                if(readWriteForm.getAddReadUser().equals(listReadUser.get(i).getPseudo())){
+                    System.out.println("Utilisateur déjà accès en lecture.");
+                    return getMessage(title, subject, principal, model);
+                }
+            }
+            userExisted = accountService.getUtilisateurByPseudo(readWriteForm.getAddReadUser());
+            if(userExisted == null){
+                System.out.println("L'utilisateur n'existe pas.");
+                return getMessage(title, subject, principal, model);
+            }
+            if(listReadUser.size() == 0){
+                setAddReadUser.add(topic.getCreator());
+            }
+            setAddReadUser.add(userExisted);
+        }
+
+
+
+
+        if(!readWriteForm.getAddWriteUser().equals("")){
+            if(topic.getCreator().getPseudo().equals(readWriteForm.getAddWriteUser())){
+                System.out.println("Le créateur ne peut pas s'ajouter en écriture.");
+                return getMessage(title, subject, principal, model);
+            }
+            for(int i=0;i<listWriteUser.size();i++){
+                if(readWriteForm.getAddWriteUser().equals(listWriteUser.get(i).getPseudo())){
+                    System.out.println("Utilisateur déjà accès en écriture.");
+                    return getMessage(title, subject, principal, model);
+                }
+            }
+            userExisted = accountService.getUtilisateurByPseudo(readWriteForm.getAddWriteUser());
+            if(userExisted == null){
+                System.out.println("L'utilisateur n'existe pas.");
+                return getMessage(title, subject, principal, model);
+            }
+            if(listWriteUser.size() == 0){
+                setAddWriteUser.add(topic.getCreator());
+            }
+            setAddWriteUser.add(userExisted);
+            if (!readWriteForm.getAddReadUser().equals(readWriteForm.getAddWriteUser())) {
+                boolean read = true;
+                for(int i=0;i<listReadUser.size();i++){
+                    if(userExisted.getPseudo().equals(listReadUser.get(i).getPseudo())){
+                        read = false;
+                    }
+                }
+                if(read){
+                    setAddReadUser.add(userExisted);
+                    if(listReadUser.size() == 0){
+                        setAddReadUser.add(topic.getCreator());
+                    }
+                }
+            }
+        }
+
+
+        if(!readWriteForm.getDeleteReadUser().equals("")){
+            if(topic.getCreator().getPseudo().equals(readWriteForm.getDeleteReadUser())){
+                System.out.println("Le créateur ne peut pas s'effacer en lecture.");
+                return getMessage(title, subject, principal, model);
+            }
+            boolean find = false;
+            for(int i=0;i<listReadUser.size();i++){
+                if(readWriteForm.getDeleteReadUser().equals(listReadUser.get(i).getPseudo())){
+                    find = true;
+                }
+            }
+            if(!find) {
+                System.out.println("Utilisateur non trouvé");
+                return getMessage(title, subject, principal, model);
+            }
+            userExisted = accountService.getUtilisateurByPseudo(readWriteForm.getDeleteReadUser());
+            if(userExisted == null){
+                System.out.println("L'utilisateur n'existe pas.");
+                return getMessage(title, subject, principal, model);
+            }
+            setRemoveReadUser.add(userExisted);
+            if(setRemoveReadUser.size() == listReadUser.size()-1){
+                setRemoveReadUser.add(topic.getCreator());
+            }
+            if (!readWriteForm.getDeleteReadUser().equals(readWriteForm.getDeleteWriteUser())) {
+                boolean read = false;
+                for(int i=0;i<listWriteUser.size();i++){
+                    if(userExisted.getPseudo().equals(listWriteUser.get(i).getPseudo())){
+                        read = true;
+                    }
+                }
+                if(read){
+                    setRemoveWriteUser.add(userExisted);
+                    if(setRemoveWriteUser.size() == listWriteUser.size()-1){
+                        setRemoveWriteUser.add(topic.getCreator());
+                    }
+                }
+            }
+        }
+
+
+        if(!readWriteForm.getDeleteWriteUser().equals("")){
+            if(topic.getCreator().getPseudo().equals(readWriteForm.getDeleteWriteUser())){
+                System.out.println("Le créateur ne peut pas s'effacer en écriture.");
+                return getMessage(title, subject, principal, model);
+            }
+            boolean find = false;
+            for(int i=0;i<listWriteUser.size();i++){
+                if(readWriteForm.getDeleteWriteUser().equals(listWriteUser.get(i).getPseudo())){
+                    find = true;
+                }
+            }
+            if(!find) {
+                System.out.println("Utilisateur non trouvé");
+                return getMessage(title, subject, principal, model);
+            }
+            userExisted = accountService.getUtilisateurByPseudo(readWriteForm.getDeleteWriteUser());
+            if(userExisted == null){
+                System.out.println("L'utilisateur n'existe pas.");
+                return getMessage(title, subject, principal, model);
+            }
+            setRemoveWriteUser.add(userExisted);
+            if(setRemoveWriteUser.size() == listWriteUser.size()-1){
+                setRemoveWriteUser.add(topic.getCreator());
+            }
+        }
+
+        /**
+         * insertion dans la bdd
+         */
+        Topic topicAddReadUpdate = topicService.addUserToLecture(topic, setAddReadUser);
+        if (topicAddReadUpdate == null) {
+            logger.error("unable to update a topic");
+            model.addAttribute("failTopic", true);
+        }
+
+        Topic topicAddWriteUpdate = topicService.addUserToEcriture(topic, setAddWriteUser);
+        if (topicAddWriteUpdate == null) {
+            logger.error("unable to update a topic");
+            model.addAttribute("failTopic", true);
+        }
+
+        Topic topicDeleteReadUpdate = topicService.removeUserToLecture(topic, setRemoveReadUser);
+        if (topicDeleteReadUpdate == null) {
+            logger.error("unable to update a topic");
+            model.addAttribute("failTopic", true);
+        }
+
+        Topic topicDeleteWriteUpdate = topicService.removeUserToEcriture(topic, setRemoveWriteUser);
+        if (topicDeleteWriteUpdate == null) {
+            logger.error("unable to update a topic");
+            model.addAttribute("failTopic", true);
+        }
+        return "access";
     }
 }

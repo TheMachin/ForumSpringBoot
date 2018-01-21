@@ -94,7 +94,7 @@ public class TopicServiceImpl implements TopicService{
             return null;
         }
 
-        topic.addEcriture(lecture);
+        topic.addLecture(lecture);
 
         return topicRepository.save(topic);
     }
