@@ -49,12 +49,14 @@
                     <th>Subject</th>
                     <th>Author</th>
                     <th>Nb</th>
+                    <th>Date creation</th>
                     <th>Go to topic</th>
                 </tr>
                 <tr th:each="t,iterationStatus : ${topics}">
                     <td th:text="${t.titre}"></td>
                     <td th:text="${t.creator.pseudo}"></td>
                     <td th:text="${#lists.size(t.message)}"></td>
+                    <td th:text="${#dates.format(t.dateCreation,'dd-MM-yyyy HH:mm:ss')}"></td>
                     <td><a class="btn btn-primary" th:href="@{'/projects/' + ${nomProjet} + '/topics/' + ${t.titre} + '/'}">Go to topic</a></td>
                 </tr>
             </table>

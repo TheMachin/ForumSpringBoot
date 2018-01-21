@@ -1,9 +1,6 @@
 package org.miage.m2.forum.controller;
 
-import org.miage.m2.forum.formValidation.FollowForm;
-import org.miage.m2.forum.formValidation.MessageForm;
-import org.miage.m2.forum.formValidation.ReadWriteForm;
-import org.miage.m2.forum.formValidation.TopicForm;
+import org.miage.m2.forum.formValidation.*;
 import org.miage.m2.forum.modele.Message;
 import org.miage.m2.forum.modele.Projet;
 import org.miage.m2.forum.modele.Topic;
@@ -66,12 +63,18 @@ public class TopicController {
 
         boolean readWrite = false;
         boolean follow = false;
+        boolean writeMessage = false;
+        boolean modifyTopic = false;
+        boolean invite = false;
 
         Projet p = projetService.getOne(title);
         Topic t = topicService.findOne(subject);
         if (p == null || t == null) {
             return "redirect:/";
         }
+
+        List<Utilisateur> userWrite = new ArrayList<Utilisateur>();
+        userWrite.addAll(t.getEcriture());
 
         List<Message> messages = new ArrayList<Message>();
         messages.addAll(t.getMessage());
@@ -82,14 +85,29 @@ public class TopicController {
         Utilisateur userConnected = utilisateurRepository.findOne(currentUserService.getCurrentNameUser(principal));
 
         if (userConnected != null) {
-            if (t.getCreator().equals(userConnected)) {
+            if (t.getCreator().equals(userConnected) || userConnected.isAdmin()) {
                 readWrite = true;
+                modifyTopic = true;
+                if (t.isInvite()){
+                    invite = true;
+                }
             }
+            if (userWrite.size() == 0) {
+                writeMessage = true;
+            } else {
+                for (int i = 0; i < userWrite.size(); i++) {
+                    if (userWrite.get(i).getPseudo().equals(userConnected.getPseudo())) {
+                        writeMessage = true;
+                    }
+                }
+
+            }
+
 
             List<Topic> followUser = new ArrayList<Topic>();
             followUser.addAll(userConnected.getSuivi());
             for (int i = 0; i < followUser.size(); i++) {
-                if(followUser.get(i).equals(t)){
+                if (followUser.get(i).equals(t)) {
                     follow = true;
                 }
             }
@@ -101,9 +119,13 @@ public class TopicController {
         model.addAttribute("subject", subject);
         model.addAttribute("messageForm", new MessageForm());
         model.addAttribute("readWrite", readWrite);
+        model.addAttribute("writeMessage", writeMessage);
+        model.addAttribute("modifyTopic", modifyTopic);
+        model.addAttribute("invite", invite);
         model.addAttribute("follow", follow);
         model.addAttribute("followForm", new FollowForm());
         model.addAttribute("readWriteForm", new ReadWriteForm());
+        model.addAttribute("modifyTopicForm", new ModifyTopicForm());
 
         return "topics";
     }
@@ -193,7 +215,7 @@ public class TopicController {
         followUser.addAll(userConnected.getSuivi());
 
         for (int i = 0; i < followUser.size(); i++) {
-            if(followUser.get(i).equals(topic)){
+            if (followUser.get(i).equals(topic)) {
                 followUser.remove(i);
             }
         }
@@ -239,134 +261,172 @@ public class TopicController {
 
         Utilisateur userExisted;
 
-        if(!readWriteForm.getAddReadUser().equals("")){
-            if(topic.getCreator().getPseudo().equals(readWriteForm.getAddReadUser())){
-                System.out.println("Le créateur ne peut pas s'ajouter en lecture.");
-                return getMessage(title, subject, principal, model);
-            }
-            for(int i=0;i<listReadUser.size();i++){
-                if(readWriteForm.getAddReadUser().equals(listReadUser.get(i).getPseudo())){
-                    System.out.println("Utilisateur déjà accès en lecture.");
-                    return getMessage(title, subject, principal, model);
+        /**
+         * Ajout acces lecture
+         */
+        if (readWriteForm.getAddReadUser() != null) {
+            if (!readWriteForm.getAddReadUser().equals("")) {
+                if (topic.getCreator().getPseudo().equals(readWriteForm.getAddReadUser())) {
+                    model.addAttribute("message", "Creator can't be in read");
+                    return "access";
                 }
-            }
-            userExisted = accountService.getUtilisateurByPseudo(readWriteForm.getAddReadUser());
-            if(userExisted == null){
-                System.out.println("L'utilisateur n'existe pas.");
-                return getMessage(title, subject, principal, model);
-            }
-            if(listReadUser.size() == 0){
-                setAddReadUser.add(topic.getCreator());
-            }
-            setAddReadUser.add(userExisted);
-        }
-
-
-
-
-        if(!readWriteForm.getAddWriteUser().equals("")){
-            if(topic.getCreator().getPseudo().equals(readWriteForm.getAddWriteUser())){
-                System.out.println("Le créateur ne peut pas s'ajouter en écriture.");
-                return getMessage(title, subject, principal, model);
-            }
-            for(int i=0;i<listWriteUser.size();i++){
-                if(readWriteForm.getAddWriteUser().equals(listWriteUser.get(i).getPseudo())){
-                    System.out.println("Utilisateur déjà accès en écriture.");
-                    return getMessage(title, subject, principal, model);
-                }
-            }
-            userExisted = accountService.getUtilisateurByPseudo(readWriteForm.getAddWriteUser());
-            if(userExisted == null){
-                System.out.println("L'utilisateur n'existe pas.");
-                return getMessage(title, subject, principal, model);
-            }
-            if(listWriteUser.size() == 0){
-                setAddWriteUser.add(topic.getCreator());
-            }
-            setAddWriteUser.add(userExisted);
-            if (!readWriteForm.getAddReadUser().equals(readWriteForm.getAddWriteUser())) {
-                boolean read = true;
-                for(int i=0;i<listReadUser.size();i++){
-                    if(userExisted.getPseudo().equals(listReadUser.get(i).getPseudo())){
-                        read = false;
+                for (int i = 0; i < listReadUser.size(); i++) {
+                    if (readWriteForm.getAddReadUser().equals(listReadUser.get(i).getPseudo())) {
+                        model.addAttribute("message", "User already in read");
+                        return "access";
                     }
                 }
-                if(read){
-                    setAddReadUser.add(userExisted);
-                    if(listReadUser.size() == 0){
-                        setAddReadUser.add(topic.getCreator());
-                    }
+                userExisted = accountService.getUtilisateurByPseudo(readWriteForm.getAddReadUser());
+                if (userExisted == null) {
+                    model.addAttribute("message", "User doesn't exist");
+                    return "access";
                 }
+                if (userExisted.isAdmin()) {
+                    model.addAttribute("message", "This user is admin");
+                    return "access";
+                }
+                if (listReadUser.size() == 0) {
+                    setAddReadUser.add(topic.getCreator());
+                }
+                setAddReadUser.add(userExisted);
             }
         }
 
 
-        if(!readWriteForm.getDeleteReadUser().equals("")){
-            if(topic.getCreator().getPseudo().equals(readWriteForm.getDeleteReadUser())){
-                System.out.println("Le créateur ne peut pas s'effacer en lecture.");
-                return getMessage(title, subject, principal, model);
-            }
-            boolean find = false;
-            for(int i=0;i<listReadUser.size();i++){
-                if(readWriteForm.getDeleteReadUser().equals(listReadUser.get(i).getPseudo())){
-                    find = true;
+        /**
+         * Ajout accès écriture
+         */
+
+        if (readWriteForm.getAddWriteUser() != null) {
+            if (!readWriteForm.getAddWriteUser().equals("")) {
+                if (topic.getCreator().getPseudo().equals(readWriteForm.getAddWriteUser())) {
+                    model.addAttribute("message", "Creator can't be in write");
+                    return "access";
                 }
-            }
-            if(!find) {
-                System.out.println("Utilisateur non trouvé");
-                return getMessage(title, subject, principal, model);
-            }
-            userExisted = accountService.getUtilisateurByPseudo(readWriteForm.getDeleteReadUser());
-            if(userExisted == null){
-                System.out.println("L'utilisateur n'existe pas.");
-                return getMessage(title, subject, principal, model);
-            }
-            setRemoveReadUser.add(userExisted);
-            if(setRemoveReadUser.size() == listReadUser.size()-1){
-                setRemoveReadUser.add(topic.getCreator());
-            }
-            if (!readWriteForm.getDeleteReadUser().equals(readWriteForm.getDeleteWriteUser())) {
-                boolean read = false;
-                for(int i=0;i<listWriteUser.size();i++){
-                    if(userExisted.getPseudo().equals(listWriteUser.get(i).getPseudo())){
-                        read = true;
+                for (int i = 0; i < listWriteUser.size(); i++) {
+                    if (readWriteForm.getAddWriteUser().equals(listWriteUser.get(i).getPseudo())) {
+                        model.addAttribute("message", "User already in write");
+                        return "access";
                     }
                 }
-                if(read){
-                    setRemoveWriteUser.add(userExisted);
-                    if(setRemoveWriteUser.size() == listWriteUser.size()-1){
-                        setRemoveWriteUser.add(topic.getCreator());
+                userExisted = accountService.getUtilisateurByPseudo(readWriteForm.getAddWriteUser());
+                if (userExisted == null) {
+                    model.addAttribute("message", "User doesn't exist");
+                    return "access";
+                }
+                if (userExisted.isAdmin()) {
+                    model.addAttribute("message", "This user is admin");
+                    return "access";
+                }
+                if (listWriteUser.size() == 0) {
+                    setAddWriteUser.add(topic.getCreator());
+                }
+                setAddWriteUser.add(userExisted);
+                if (readWriteForm.getAddReadUser() != null) {
+                    if (!readWriteForm.getAddReadUser().equals(readWriteForm.getAddWriteUser())) {
+                        boolean read = true;
+                        for (int i = 0; i < listReadUser.size(); i++) {
+                            if (userExisted.getPseudo().equals(listReadUser.get(i).getPseudo())) {
+                                read = false;
+                            }
+                        }
+                        if (read) {
+                            setAddReadUser.add(userExisted);
+                            if (listReadUser.size() == 0) {
+                                setAddReadUser.add(topic.getCreator());
+                            }
+                        }
                     }
                 }
             }
         }
 
-
-        if(!readWriteForm.getDeleteWriteUser().equals("")){
-            if(topic.getCreator().getPseudo().equals(readWriteForm.getDeleteWriteUser())){
-                System.out.println("Le créateur ne peut pas s'effacer en écriture.");
-                return getMessage(title, subject, principal, model);
-            }
-            boolean find = false;
-            for(int i=0;i<listWriteUser.size();i++){
-                if(readWriteForm.getDeleteWriteUser().equals(listWriteUser.get(i).getPseudo())){
-                    find = true;
+        /**
+         * Supprimer accès lecture
+         */
+        if (readWriteForm.getDeleteReadUser() != null) {
+            if (!readWriteForm.getDeleteReadUser().equals("")) {
+                if (topic.getCreator().getPseudo().equals(readWriteForm.getDeleteReadUser())) {
+                    model.addAttribute("message", "Creator can't be delete in read");
+                    return "access";
+                }
+                boolean find = false;
+                for (int i = 0; i < listReadUser.size(); i++) {
+                    if (readWriteForm.getDeleteReadUser().equals(listReadUser.get(i).getPseudo())) {
+                        find = true;
+                    }
+                }
+                if (!find) {
+                    model.addAttribute("message", "User doesn't found");
+                    return "access";
+                }
+                userExisted = accountService.getUtilisateurByPseudo(readWriteForm.getDeleteReadUser());
+                if (userExisted == null) {
+                    model.addAttribute("message", "User doesn't exist");
+                    return "access";
+                }
+                if (userExisted.isAdmin()) {
+                    model.addAttribute("message", "This user is admin");
+                    return "access";
+                }
+                setRemoveReadUser.add(userExisted);
+                if (setRemoveReadUser.size() == listReadUser.size() - 1) {
+                    setRemoveReadUser.add(topic.getCreator());
+                }
+                if (!readWriteForm.getDeleteReadUser().equals(readWriteForm.getDeleteWriteUser())) {
+                    boolean read = false;
+                    for (int i = 0; i < listWriteUser.size(); i++) {
+                        if (userExisted.getPseudo().equals(listWriteUser.get(i).getPseudo())) {
+                            read = true;
+                        }
+                    }
+                    if (read) {
+                        setRemoveWriteUser.add(userExisted);
+                        if (setRemoveWriteUser.size() == listWriteUser.size() - 1) {
+                            setRemoveWriteUser.add(topic.getCreator());
+                        }
+                    }
                 }
             }
-            if(!find) {
-                System.out.println("Utilisateur non trouvé");
-                return getMessage(title, subject, principal, model);
-            }
-            userExisted = accountService.getUtilisateurByPseudo(readWriteForm.getDeleteWriteUser());
-            if(userExisted == null){
-                System.out.println("L'utilisateur n'existe pas.");
-                return getMessage(title, subject, principal, model);
-            }
-            setRemoveWriteUser.add(userExisted);
-            if(setRemoveWriteUser.size() == listWriteUser.size()-1){
-                setRemoveWriteUser.add(topic.getCreator());
+        }
+
+
+        /**
+         * Supprimer accès écriture
+         */
+
+        if(readWriteForm.getDeleteWriteUser() != null) {
+            if (!readWriteForm.getDeleteWriteUser().equals("")) {
+                if (topic.getCreator().getPseudo().equals(readWriteForm.getDeleteWriteUser())) {
+                    model.addAttribute("message", "Creator can't be delete in write");
+                    return "access";
+                }
+                boolean find = false;
+                for (int i = 0; i < listWriteUser.size(); i++) {
+                    if (readWriteForm.getDeleteWriteUser().equals(listWriteUser.get(i).getPseudo())) {
+                        find = true;
+                    }
+                }
+                if (!find) {
+                    model.addAttribute("message", "User doesn't found");
+                    return "access";
+                }
+                userExisted = accountService.getUtilisateurByPseudo(readWriteForm.getDeleteWriteUser());
+                if (userExisted.isAdmin()) {
+                    model.addAttribute("message", "This user is admin");
+                    return "access";
+                }
+                if (userExisted == null) {
+                    model.addAttribute("message", "User doesn't exist");
+                    return "access";
+                }
+                setRemoveWriteUser.add(userExisted);
+                if (setRemoveWriteUser.size() == listWriteUser.size() - 1) {
+                    setRemoveWriteUser.add(topic.getCreator());
+                }
             }
         }
+
 
         /**
          * insertion dans la bdd
@@ -394,6 +454,34 @@ public class TopicController {
             logger.error("unable to update a topic");
             model.addAttribute("failTopic", true);
         }
+        model.addAttribute("message", "Access modified");
         return "access";
+    }
+
+    @PostMapping(value = "/projects/{title}/topics/modifyTopic")
+    public String modifyTopic(@Valid ModifyTopicForm modifyTopicForm, @PathVariable String title, Principal principal, BindingResult bindingResult, Model model) {
+
+        accountService.setUtilisateurRepository(utilisateurRepository);
+        currentUserService.setAccountService(accountService);
+        topicService.setTopicRepository(topicRepository);
+
+        /**
+         * on récupère les infos de l'utilisateur qui va changer le topic
+         */
+        Utilisateur userConnected = utilisateurRepository.findOne(currentUserService.getCurrentNameUser(principal));
+
+        Topic topic = topicRepository.findOne(modifyTopicForm.getTopic());
+
+        topic.setInvite(modifyTopicForm.isInvite());
+        /**
+         * insertion dans la bdd
+         */
+        Topic topicUpdate = topicService.changeTitleTopic(topic);
+        if (topicUpdate == null) {
+            logger.error("unable to update a topic");
+            model.addAttribute("failTopic", true);
+        }
+
+        return "modifyTopic";
     }
 }

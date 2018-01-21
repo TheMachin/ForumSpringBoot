@@ -22,4 +22,5 @@ public interface TopicService {
     public Topic removeUserToLecture(Topic topic, Set<Utilisateur> lecture);
     public Topic removeUserToSuiveurs(Topic topic, Set<Utilisateur> suiveurs);
     public void setTopicRepository(TopicRepository topicRepository);
+    public Topic changeTitleTopic(Topic topic);
 }

@@ -45,60 +45,87 @@
     </div>
 </div>
 <div class="container" th:if="${#authorization.expression('isAuthenticated()')}">
-    <div></div><div class="col-lg-2"></div>
-    <div class="col-lg-8">
-        <h2>New message</h2>
-        <table>
-            <form action="#" th:action="@{'/projects/' + ${nomProjet} + '/topics/' + ${subject} + '/'}" th:object="${messageForm}" method="POST">
-                <tr>
-                    <td><input type="hidden" th:name="topic" th:id="topic" th:value="${subject}" /></td>
-                </tr>
-                <tr>
-                    <td>Enter message:</td>
-                    <td><input type="text" th:field="*{message}"/></td>
-                    <td th:if="${#fields.hasErrors('message')}" class="errors" th:errors="*{message}" ></td>
-                </tr>
-                <tr>
-                    <td><button class="btn btn-primary btn-lg" type="submit">Submit</button></td>
-                </tr>
-            </form>
-        </table>
+    <div th:if="${writeMessage} == true">
+        <div></div><div class="col-lg-2"></div>
+        <div class="col-lg-8">
+            <h2>New message</h2>
+            <table>
+                <form action="#" th:action="@{'/projects/' + ${nomProjet} + '/topics/' + ${subject} + '/'}" th:object="${messageForm}" method="POST">
+                    <tr>
+                        <td><input type="hidden" th:name="topic" th:id="topic" th:value="${subject}" /></td>
+                    </tr>
+                    <tr>
+                        <td>Enter message:</td>
+                        <td><input type="text" th:field="*{message}"/></td>
+                        <td th:if="${#fields.hasErrors('message')}" class="errors" th:errors="*{message}" ></td>
+                    </tr>
+                    <tr>
+                        <td><button class="btn btn-primary btn-lg" type="submit">Submit</button></td>
+                    </tr>
+                </form>
+            </table>
+        </div>
     </div>
 </div>
 <div class="container" th:if="${#authorization.expression('isAuthenticated()')}">
-    <div></div><div class="col-lg-2"></div>
-    <div class="col-lg-8">
-        <h2>Access</h2>
-        <table>
-            <form action="#" th:action="@{'/projects/' + ${nomProjet} + '/topics/' + ${subject} + '/access/'}" th:object="${readWriteForm}" method="POST">
-                <tr>
-                    <td><input type="hidden" th:name="topic" th:id="topic" th:value="${subject}" /></td>
-                </tr>
-                <tr>
-                    <td>Add read user:</td>
-                    <td><input type="text" th:field="*{addReadUser}"/></td>
-                    <td th:if="${#fields.hasErrors('addReadUser')}" class="errors" th:errors="*{addReadUser}" ></td>
-                </tr>
-                <tr>
-                    <td>Add write user:</td>
-                    <td><input type="text" th:field="*{addWriteUser}"/></td>
-                    <td th:if="${#fields.hasErrors('addWriteUser')}" class="errors" th:errors="*{addWriteUser}" ></td>
-                </tr>
-                <tr>
-                    <td>Delete read user:</td>
-                    <td><input type="text" th:field="*{deleteReadUser}"/></td>
-                    <td th:if="${#fields.hasErrors('deleteReadUser')}" class="errors" th:errors="*{deleteReadUser}" ></td>
-                </tr>
-                <tr>
-                    <td>Delete write user:</td>
-                    <td><input type="text" th:field="*{deleteWriteUser}"/></td>
-                    <td th:if="${#fields.hasErrors('deleteWriteUser')}" class="errors" th:errors="*{deleteWriteUser}" ></td>
-                </tr>
-                <tr>
-                    <td><button class="btn btn-primary btn-lg" type="submit">Submit</button></td>
-                </tr>
-            </form>
-        </table>
+    <div th:if="${readWrite} == true">
+        <div></div><div class="col-lg-2"></div>
+        <div class="col-lg-8">
+            <h2>Access</h2>
+            <table>
+                <form action="#" th:action="@{'/projects/' + ${nomProjet} + '/topics/' + ${subject} + '/access/'}" th:object="${readWriteForm}" method="POST">
+                    <tr>
+                        <td><input type="hidden" th:name="topic" th:id="topic" th:value="${subject}" /></td>
+                    </tr>
+                    <tr th:if="${invite} == false">
+                        <td>Add read user:</td>
+                        <td><input type="text" th:field="*{addReadUser}"/></td>
+                        <td th:if="${#fields.hasErrors('addReadUser')}" class="errors" th:errors="*{addReadUser}" ></td>
+                    </tr>
+                    <tr>
+                        <td>Add write user:</td>
+                        <td><input type="text" th:field="*{addWriteUser}"/></td>
+                        <td th:if="${#fields.hasErrors('addWriteUser')}" class="errors" th:errors="*{addWriteUser}" ></td>
+                    </tr>
+                    <tr th:if="${invite} == false">
+                        <td>Delete read user:</td>
+                        <td><input type="text" th:field="*{deleteReadUser}"/></td>
+                        <td th:if="${#fields.hasErrors('deleteReadUser')}" class="errors" th:errors="*{deleteReadUser}" ></td>
+                    </tr>
+                    <tr>
+                        <td>Delete write user:</td>
+                        <td><input type="text" th:field="*{deleteWriteUser}"/></td>
+                        <td th:if="${#fields.hasErrors('deleteWriteUser')}" class="errors" th:errors="*{deleteWriteUser}" ></td>
+                    </tr>
+                    <tr>
+                        <td><button class="btn btn-primary btn-lg" type="submit">Submit</button></td>
+                    </tr>
+                </form>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="container" th:if="${#authorization.expression('isAuthenticated()')}">
+    <div th:if="${modifyTopic} == true">
+        <div></div><div class="col-lg-2"></div>
+        <div class="col-lg-8">
+            <h2>Modify Topic</h2>
+            <table>
+                <form action="#" th:action="@{'/projects/' + ${nomProjet} + '/topics/modifyTopic'}" th:object="${modifyTopicForm}" method="POST">
+                    <tr>
+                        <td><input type="hidden" th:name="topic" th:id="topic" th:value="${subject}" /></td>
+                    </tr>
+                    <tr>
+                        <td>Give access at anonymous user:</td>
+                        <td><input type="checkbox" th:field="*{invite}"/></td>
+                        <td th:if="${#fields.hasErrors('invite')}" class="errors" th:errors="*{invite}"></td>
+                    </tr>
+                    <tr>
+                        <td><button class="btn btn-primary btn-lg" type="submit">Submit</button></td>
+                    </tr>
+                </form>
+            </table>
+        </div>
     </div>
 </div>
 </body>
