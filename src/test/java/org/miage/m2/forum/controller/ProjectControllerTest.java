@@ -7,17 +7,13 @@ import org.junit.runner.RunWith;
 import org.miage.m2.forum.MainSpringApplication;
 import org.miage.m2.forum.config.H2JpaConfig;
 import org.miage.m2.forum.config.SecurityConfig;
-import org.miage.m2.forum.modele.Projet;
-import org.miage.m2.forum.modele.Roles;
-import org.miage.m2.forum.modele.Topic;
-import org.miage.m2.forum.modele.Utilisateur;
-import org.miage.m2.forum.query.ProjetRepository;
-import org.miage.m2.forum.query.RolesRepository;
-import org.miage.m2.forum.query.UtilisateurRepository;
+import org.miage.m2.forum.modele.*;
+import org.miage.m2.forum.query.*;
 import org.miage.m2.forum.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
+import org.springframework.http.MediaType;
 import org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers;
 import org.springframework.security.web.FilterChainProxy;
 import org.springframework.test.context.ActiveProfiles;
@@ -33,6 +29,7 @@ import static org.hamcrest.Matchers.*;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.anonymous;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringRunner.class)
@@ -56,6 +53,16 @@ public class ProjectControllerTest {
 
     AccountService accountService = new AccountServiceImpl();
 
+    TopicService topicService = new TopicServiceImpl();
+
+    MessageService messageService = new MessageServiceImpl();
+
+    @Autowired
+    private TopicRepository topicRepository;
+
+    @Autowired
+    private MessageRepository messageRepository;
+
     Roles roleUser;
     Roles roleAdmin;
 
@@ -75,6 +82,13 @@ public class ProjectControllerTest {
     Projet projetInvite = new Projet("invite", "invite ok", new Date(), true, new HashSet<Utilisateur>(), user, new HashSet<Topic>());
     Projet projetNotInvite = new Projet("not invite", "invite none", new Date(), false, new HashSet<Utilisateur>(), user, new HashSet<Topic>());
     Projet projetNotAccessTestUser = new Projet("not testUser", "testUser forbidden", new Date(), false, new HashSet<Utilisateur>(), user, new HashSet<Topic>());
+
+    Topic topicInvite = new Topic("topic invite", new Date(), true, new HashSet<Message>(), projetInvite,
+    new HashSet<Utilisateur>(), new HashSet<Utilisateur>(), user, new HashSet<Utilisateur>());
+
+    Topic topicNotInvite = new Topic("topic with not invite", new Date(), false, new HashSet<Message>(), projetInvite,
+            new HashSet<Utilisateur>(Arrays.asList(user, testUser)), new HashSet<Utilisateur>(Arrays.asList(user, testUser)), user, new HashSet<Utilisateur>());
+
 
     @Before
     public void setup() {
@@ -98,6 +112,13 @@ public class ProjectControllerTest {
         projetService.setProjetRepository(projetRepository);
         projectController.setProjetService(projetService);
         administrationService.setProjetRepository(projetRepository);
+        topicService.setTopicRepository(topicRepository);
+        projectController.setTopicService(topicService);
+        messageService.setMessageRepository(messageRepository);
+        projectController.setProjetService(projetService);
+        projectController.setMessageService(messageService);
+        projectController.setTopicRepository(topicRepository);
+        projectController.setMessageRepository(messageRepository);
 
         user.addAdminRole();
         accountService.createUser(testUser);
@@ -107,6 +128,10 @@ public class ProjectControllerTest {
         administrationService.createProject(projetNotInvite);
         projetNotAccessTestUser.addUserAccess(new HashSet<Utilisateur>(Arrays.asList(user)));
         administrationService.createProject(projetNotAccessTestUser);
+
+        topicService.createTopic(topicInvite);
+        topicService.createTopic(topicNotInvite);
+
 
 
 
@@ -144,15 +169,35 @@ public class ProjectControllerTest {
 
     /**
      * test si on va dans la page du projet invite et qu'il n'y a pas de sous projets
+     * et qu'on a bien un topic
+     * sans authentification
      * @throws Exception
      */
     @Test
-    public void testInvitegGetProject() throws Exception{
+    public void testInviteGetProject() throws Exception{
 
         this.mockMvc.perform(get("/projects/"+projetInvite.getTitre()+"/").with(anonymous()))
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("projets"))
                 .andExpect(model().attribute("projets", Matchers.hasSize(0)))
+                .andExpect(model().attribute("topics", Matchers.hasSize(1)))
+                .andExpect(view().name("projects"));
+    }
+
+    /**
+     * test si on va dans la page du projet invite et qu'il n'y a pas de sous projets
+     * et qu'on a bien deux topic
+     * avec authentification
+     * @throws Exception
+     */
+    @Test
+    public void testNoInviteGetProject() throws Exception{
+
+        this.mockMvc.perform(get("/projects/"+projetInvite.getTitre()+"/").with(user(user.getEmail())))
+                .andExpect(status().isOk())
+                .andExpect(model().attributeExists("projets"))
+                .andExpect(model().attribute("projets", Matchers.hasSize(0)))
+                .andExpect(model().attribute("topics", Matchers.hasSize(2)))
                 .andExpect(view().name("projects"));
     }
 
@@ -207,6 +252,36 @@ public class ProjectControllerTest {
 
         this.mockMvc.perform(get("/projects/moemvemo/").with(anonymous()))
                 .andExpect(redirectedUrl("/"));
+    }
+
+
+    /**
+     * Test creation de topic
+     * on insere un topic, on verifie si on a bien un nouveau topic dans la liste
+     * A la fin du test on supprime le topic pour pas fausser les autres tests
+     * @throws Exception
+     */
+    @Test
+    public void testCreateTopic() throws Exception{
+
+        this.mockMvc.perform(post("/projects/"+projetInvite.getTitre()+"/").with(user(user.getEmail()))
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .param("projet",projetInvite.getTitre())
+                .param("titre","bonjour et tout")
+                .param("message","premier message du topic")
+                .param("invite", "true")
+        )
+                .andExpect(status().isOk())
+                .andExpect(model().attributeExists("projets"))
+                .andExpect(model().attribute("projets", Matchers.hasSize(0)))
+                .andExpect(model().attribute("topics", Matchers.hasSize(3)))
+                .andExpect(view().name("projects"));
+        //fin du test
+        Topic t = topicRepository.findOne("bonjour et tout");
+        for(Message m : t.getMessage()){
+            messageRepository.delete(m);
+        }
+        topicRepository.delete("bonjour et tout");
     }
 
 }

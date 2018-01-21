@@ -24,7 +24,7 @@ public class Projet {
 	@JoinColumn(name="CREATOR_ID")
 	@NotNull
 	private Utilisateur creators;
-	@OneToMany(mappedBy = "projet")
+	@OneToMany(mappedBy = "projet", fetch = FetchType.EAGER)
 	private Set<Topic> topics = new HashSet<Topic>();
 	@OneToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "Sous_projet",

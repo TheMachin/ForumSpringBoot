@@ -347,4 +347,36 @@ public class ProjectController {
     public void setAccountService(AccountService accountService) {
         this.accountService = accountService;
     }
+
+    public TopicRepository getTopicRepository() {
+        return topicRepository;
+    }
+
+    public void setTopicRepository(TopicRepository topicRepository) {
+        this.topicRepository = topicRepository;
+    }
+
+    public MessageRepository getMessageRepository() {
+        return messageRepository;
+    }
+
+    public void setMessageRepository(MessageRepository messageRepository) {
+        this.messageRepository = messageRepository;
+    }
+
+    public void setMessageService(MessageService messageService) {
+        this.messageService = messageService;
+    }
+
+    public ProjetService getProjetService() {
+        return projetService;
+    }
+
+    public TopicService getTopicService() {
+        return topicService;
+    }
+
+    public void setTopicService(TopicService topicService) {
+        this.topicService = topicService;
+    }
 }

@@ -12,18 +12,18 @@ public class Topic {
 	private String titre;
 	private Date dateCreation;
 	private boolean invite;
-	@OneToMany(mappedBy = "topic")
+	@OneToMany(mappedBy = "topic", fetch = FetchType.EAGER)
 	private Set<Message> message = new HashSet<Message>();
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="TOPIC_ID")
 	private Projet projet;
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "lecture_topic",
 			joinColumns = @JoinColumn(name = "topic_titre"),
 			inverseJoinColumns = @JoinColumn(name = "utilisateur_id")
 	)
 	private Set<Utilisateur> lecture = new HashSet<Utilisateur>();
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "ecriture_topic",
 			joinColumns = @JoinColumn(name = "topic_titre"),
 			inverseJoinColumns = @JoinColumn(name = "utilisateur_id")
@@ -32,7 +32,7 @@ public class Topic {
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="USER_CREATOR_ID")
 	private Utilisateur creator;
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "suiveurs_topic",
 			joinColumns = @JoinColumn(name = "topic_titre"),
 			inverseJoinColumns = @JoinColumn(name = "utilisateur_id")

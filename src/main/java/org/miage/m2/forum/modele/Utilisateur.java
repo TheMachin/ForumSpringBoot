@@ -22,7 +22,7 @@ public class Utilisateur {
 	private Set<Projet> creators = new HashSet<Projet>();
 	@OneToMany(mappedBy = "creator")
 	private Set<Topic> listTopicCreate = new HashSet<Topic>();
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "suiveurs_topic",
 			joinColumns = @JoinColumn(name = "utilisateur_id"),
 			inverseJoinColumns = @JoinColumn(name = "topic_titre")
