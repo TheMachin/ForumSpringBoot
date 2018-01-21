@@ -197,7 +197,7 @@ public class AdministrationController {
          * si ya des erreurs dans le formulaire, on notifue à l'utilisateur
          */
         if(bindingResult.hasErrors()){
-            return "administration/updated";
+            return "administration/update";
         }
         administrationService.setProjetRepository(projetRepository);
 

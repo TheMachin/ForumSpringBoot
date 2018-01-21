@@ -21,8 +21,8 @@
                 <table>
                     <form action="#" th:action="@{/administration/project/update}" th:object="${projectForm}" method="POST">
                         <tr>
-                            <td th:text="#{enter.project.title}">Enter title:</td>
-                            <td><input type="text" th:field="*{titre}"/></td>
+                            <td></td>
+                            <td><input type="hidden" th:field="*{titre}"  th:value="${projectForm.titre}"/></td>
                             <td th:if="${#fields.hasErrors('titre')}" class="errors" th:errors="*{titre}"  th:value="${projectForm.titre}"></td>
                         </tr>
                         <tr>
