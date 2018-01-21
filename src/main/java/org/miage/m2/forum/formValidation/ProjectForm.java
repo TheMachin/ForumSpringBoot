@@ -4,8 +4,11 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.miage.m2.forum.modele.Projet;
 import org.miage.m2.forum.modele.Utilisateur;
 
+import javax.validation.constraints.Pattern;
+
 public class ProjectForm {
 
+    @Pattern(regexp = "^[\\w -=@*+.:;<>()}{]*$")
     @NotEmpty
     private String titre;
     @NotEmpty

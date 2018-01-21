@@ -2,12 +2,15 @@ package org.miage.m2.forum.formValidation;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import javax.validation.constraints.Pattern;
 import java.util.List;
 
 public class TopicForm {
 
+
     @NotEmpty
     private String projet;
+    @Pattern(regexp = "^[\\w -=@*+.:;<>()}{]*$")
     @NotEmpty
     private String titre;
     @NotEmpty

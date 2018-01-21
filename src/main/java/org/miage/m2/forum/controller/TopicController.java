@@ -55,7 +55,7 @@ public class TopicController {
 
     AccountService accountService = new AccountServiceImpl();
 
-    @GetMapping("/projects/{title}/topics/{subject}")
+    @GetMapping("/projects/{title}/topics/{subject}/")
     public String getMessage(@PathVariable String title, @PathVariable String subject, Principal principal, Model model) {
 
         projetService.setProjetRepository(projetRepository);
@@ -106,7 +106,7 @@ public class TopicController {
         return "topics";
     }
 
-    @PostMapping(value = "/projects/{title}/topics/{subject}")
+    @PostMapping(value = "/projects/{title}/topics/{subject}/")
     public String createMessage(@Valid MessageForm messageForm, @PathVariable String title, @PathVariable String subject, Principal principal, BindingResult bindingResult, Model model) {
         /**
          * si ya des erreurs dans le formulaire, on notifue à l'utilisateur
