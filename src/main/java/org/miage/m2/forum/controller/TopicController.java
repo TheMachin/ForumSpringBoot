@@ -1,5 +1,6 @@
 package org.miage.m2.forum.controller;
 
+import org.miage.m2.forum.formValidation.FollowForm;
 import org.miage.m2.forum.formValidation.MessageForm;
 import org.miage.m2.forum.formValidation.TopicForm;
 import org.miage.m2.forum.modele.Message;
@@ -62,6 +63,9 @@ public class TopicController {
         accountService.setUtilisateurRepository(utilisateurRepository);
         currentUserService.setAccountService(accountService);
 
+        boolean readWrite = false;
+        boolean follow = false;
+
         Projet p = projetService.getOne(title);
         Topic t = topicService.findOne(subject);
         if (p == null || t == null) {
@@ -71,10 +75,33 @@ public class TopicController {
         List<Message> messages = new ArrayList<Message>();
         messages.addAll(t.getMessage());
 
+        /**
+         * on récupère les infos de l'utilisateur connecté
+         */
+        Utilisateur userConnected = utilisateurRepository.findOne(currentUserService.getCurrentNameUser(principal));
+
+        if (userConnected != null) {
+            if (t.getCreator().equals(userConnected)) {
+                readWrite = true;
+            }
+
+            List<Topic> followUser = new ArrayList<Topic>();
+            followUser.addAll(userConnected.getSuivi());
+            for (int i = 0; i < followUser.size(); i++) {
+                if(followUser.get(i).equals(t)){
+                    follow = true;
+                }
+            }
+        }
+
+
         model.addAttribute("messages", messages);
         model.addAttribute("nomProjet", title);
         model.addAttribute("subject", subject);
         model.addAttribute("messageForm", new MessageForm());
+        model.addAttribute("readWrite", readWrite);
+        model.addAttribute("follow", follow);
+        model.addAttribute("followForm", new FollowForm());
 
         return "topics";
     }
@@ -101,13 +128,8 @@ public class TopicController {
          * on crée l'objet message et on l'insère dans le topic
          */
         Topic topic = topicRepository.findOne(messageForm.getTopic());
-        /*List<Message> messagesTopic = new ArrayList<Message>();
-        messagesTopic.addAll(topic.getMessage());*/
 
         Message message = new Message(messageForm.getMessage(), new Date(), creator, topic);
-        /*messagesTopic.add(message);
-        Set<Message> setMessagesTopic = new HashSet<Message>(messagesTopic);
-        topic.setMessage(setMessagesTopic);*/
 
         /**
          * insertion dans la bdd
@@ -118,5 +140,74 @@ public class TopicController {
             model.addAttribute("failMessage", true);
         }
         return getMessage(title, subject, principal, model);
+    }
+
+    @PostMapping(value = "/projects/{title}/topics/{subject}/follow")
+    public String follow(@Valid FollowForm followForm, Principal principal, BindingResult bindingResult, Model model) {
+
+        accountService.setUtilisateurRepository(utilisateurRepository);
+        currentUserService.setAccountService(accountService);
+
+        /**
+         * on récupère les infos de l'utilisateur qui va follow
+         */
+        Utilisateur userConnected = utilisateurRepository.findOne(currentUserService.getCurrentNameUser(principal));
+
+        Topic topic = topicRepository.findOne(followForm.getTopic());
+
+        List<Topic> followUser = new ArrayList<Topic>();
+        followUser.addAll(userConnected.getSuivi());
+
+        followUser.add(topic);
+        Set<Topic> setFollow = new HashSet<Topic>(followUser);
+        userConnected.setSuivi(setFollow);
+
+        /**
+         * insertion dans la bdd
+         */
+        Utilisateur utilisateur = accountService.updateSuiveur(userConnected);
+        if (utilisateur == null) {
+            logger.error("unable to update a user");
+            model.addAttribute("failUser", true);
+        }
+
+        return "follow";
+    }
+
+    @PostMapping(value = "/projects/{title}/topics/{subject}/unfollow")
+    public String unfollow(@Valid FollowForm followForm, Principal principal, BindingResult bindingResult, Model model) {
+
+        accountService.setUtilisateurRepository(utilisateurRepository);
+        currentUserService.setAccountService(accountService);
+
+        /**
+         * on récupère les infos de l'utilisateur qui va unfollow
+         */
+        Utilisateur userConnected = utilisateurRepository.findOne(currentUserService.getCurrentNameUser(principal));
+
+        Topic topic = topicRepository.findOne(followForm.getTopic());
+
+        List<Topic> followUser = new ArrayList<Topic>();
+        followUser.addAll(userConnected.getSuivi());
+
+        for (int i = 0; i < followUser.size(); i++) {
+            if(followUser.get(i).equals(topic)){
+                followUser.remove(i);
+            }
+        }
+
+        Set<Topic> setFollow = new HashSet<Topic>(followUser);
+        userConnected.setSuivi(setFollow);
+
+        /**
+         * insertion dans la bdd
+         */
+        Utilisateur utilisateur = accountService.updateSuiveur(userConnected);
+        if (utilisateur == null) {
+            logger.error("unable to update a user");
+            model.addAttribute("failUser", true);
+        }
+
+        return "unfollow";
     }
 }

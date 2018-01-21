@@ -15,6 +15,18 @@
         <div class="col-lg-8">
             <h2 th:text="${nomProjet}"></h2>
             <h2 th:text="${subject}"></h2>
+            <div th:if="${follow} == false">
+                <form action="#" th:action="@{'/projects/' + ${nomProjet} + '/topics/' + ${subject} + '/follow/'}" th:object="${followForm}" th:if="${#authorization.expression('isAuthenticated()')}" method="POST">
+                    <input type="hidden" th:name="topic" th:id="topic" th:value="${subject}" />
+                    <td><button class="btn btn-primary btn-lg" type="submit">Follow</button></td>
+                </form>
+            </div>
+            <div th:if="${follow} == true">
+                <form action="#" th:action="@{'/projects/' + ${nomProjet} + '/topics/' + ${subject} + '/unfollow/'}" th:object="${followForm}" th:if="${#authorization.expression('isAuthenticated()')}" method="POST">
+                    <input type="hidden" th:name="topic" th:id="topic" th:value="${subject}" />
+                    <td><button class="btn btn-primary btn-lg" type="submit">Unfollow</button></td>
+                </form>
+            </div>
             <h2>Messages</h2>
             <table class="table  table-striped">
                 <tr>
@@ -32,7 +44,7 @@
         <div class="col-lg-2"></div>
     </div>
 </div>
-<div class="container">
+<div class="container" th:if="${#authorization.expression('isAuthenticated()')}">
     <div></div><div class="col-lg-2"></div>
     <div class="col-lg-8">
         <h2>New message</h2>

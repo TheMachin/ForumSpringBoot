@@ -2,13 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="773e058c-6fcf-4e9a-894c-7c729511e3f9" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/org/miage/m2/forum/controller/TopicController.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/org/miage/m2/forum/formValidation/MessageForm.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/templates/topics.html" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/org/miage/m2/forum/formValidation/FollowForm.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/templates/follow.html" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/templates/unfollow.html" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/miage/m2/forum/controller/ProjectController.java" afterPath="$PROJECT_DIR$/src/main/java/org/miage/m2/forum/controller/ProjectController.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/index.html" afterPath="$PROJECT_DIR$/src/main/resources/templates/index.html" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/miage/m2/forum/controller/TopicController.java" afterPath="$PROJECT_DIR$/src/main/java/org/miage/m2/forum/controller/TopicController.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/miage/m2/forum/service/AccountService.java" afterPath="$PROJECT_DIR$/src/main/java/org/miage/m2/forum/service/AccountService.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/miage/m2/forum/service/AccountServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/org/miage/m2/forum/service/AccountServiceImpl.java" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/projects.html" afterPath="$PROJECT_DIR$/src/main/resources/templates/projects.html" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/topics.html" afterPath="$PROJECT_DIR$/src/main/resources/templates/topics.html" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -31,85 +34,42 @@
     <select />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.49771988">
+    <splitter split-orientation="horizontal" split-proportion="0.49812734">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="600">
-          <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/resources/templates/index.html">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="891">
-                  <caret line="30" column="62" lean-forward="true" selection-start-line="30" selection-start-column="28" selection-end-line="30" selection-end-column="62" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="TopicController.java" pinned="false" current-in-tab="false">
+          <file leaf-file-name="TopicController.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/main/java/org/miage/m2/forum/controller/TopicController.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="889">
-                  <caret line="119" column="58" lean-forward="false" selection-start-line="119" selection-start-column="58" selection-end-line="119" selection-end-column="58" />
+                <state relative-caret-position="681">
+                  <caret line="164" column="8" lean-forward="true" selection-start-line="164" selection-start-column="8" selection-end-line="171" selection-end-column="9" />
                   <folding>
                     <element signature="imports" expanded="true" />
-                    <element signature="e#2548#2557#0" expanded="true" />
+                    <element signature="e#2669#2678#0" expanded="true" />
+                    <element signature="e#3117#3124#0" expanded="true" />
+                    <element signature="e#5905#5912#0" expanded="true" />
+                    <element signature="e#6043#6050#0" expanded="true" />
+                    <element signature="e#7080#7087#0" expanded="true" />
+                    <element signature="e#7353#7360#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="MessageForm.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/org/miage/m2/forum/formValidation/MessageForm.java">
+          <file leaf-file-name="follow.html" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/main/resources/templates/follow.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="363">
-                  <caret line="11" column="30" lean-forward="false" selection-start-line="11" selection-start-column="30" selection-end-line="11" selection-end-column="30" />
-                  <folding>
-                    <element signature="e#266#267#0" expanded="true" />
-                    <element signature="e#308#309#0" expanded="true" />
-                    <element signature="e#342#343#0" expanded="true" />
-                    <element signature="e#376#377#0" expanded="true" />
-                    <element signature="e#406#407#0" expanded="true" />
-                    <element signature="e#452#453#0" expanded="true" />
-                    <element signature="e#490#491#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="Message.java" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/main/java/org/miage/m2/forum/modele/Message.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="462">
-                  <caret line="16" column="23" lean-forward="false" selection-start-line="16" selection-start-column="12" selection-end-line="16" selection-end-column="23" />
+                <state relative-caret-position="495">
+                  <caret line="15" column="19" lean-forward="true" selection-start-line="15" selection-start-column="19" selection-end-line="15" selection-end-column="19" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="Utilisateur.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/org/miage/m2/forum/modele/Utilisateur.java">
+          <file leaf-file-name="ProjetServiceImpl.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/main/java/org/miage/m2/forum/service/ProjetServiceImpl.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-1617">
-                  <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="TopicRepository.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/org/miage/m2/forum/query/TopicRepository.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="165">
-                  <caret line="6" column="17" lean-forward="false" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="TopicService.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/org/miage/m2/forum/service/TopicService.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="66">
-                  <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+                <state relative-caret-position="495">
+                  <caret line="24" column="0" lean-forward="true" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -118,27 +78,63 @@
           <file leaf-file-name="TopicServiceImpl.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/main/java/org/miage/m2/forum/service/TopicServiceImpl.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="445">
+                <state relative-caret-position="535">
                   <caret line="102" column="27" lean-forward="false" selection-start-line="102" selection-start-column="27" selection-end-line="102" selection-end-column="27" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="Utilisateur.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/main/java/org/miage/m2/forum/modele/Utilisateur.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="-1452">
+                  <caret line="47" column="25" lean-forward="true" selection-start-line="47" selection-start-column="25" selection-end-line="47" selection-end-column="25" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="FollowForm.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/main/java/org/miage/m2/forum/formValidation/FollowForm.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="198">
+                  <caret line="6" column="30" lean-forward="false" selection-start-line="6" selection-start-column="30" selection-end-line="6" selection-end-column="30" />
                   <folding>
-                    <element signature="e#1161#1162#0" expanded="true" />
-                    <element signature="e#1214#1215#0" expanded="true" />
-                    <element signature="e#3619#3620#0" expanded="true" />
-                    <element signature="e#3673#3674#0" expanded="true" />
+                    <element signature="e#155#156#0" expanded="true" />
+                    <element signature="e#197#198#0" expanded="true" />
+                    <element signature="e#231#232#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="Projet.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/org/miage/m2/forum/modele/Projet.java">
+          <file leaf-file-name="Message.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/main/java/org/miage/m2/forum/modele/Message.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="800">
-                  <caret line="82" column="28" lean-forward="false" selection-start-line="82" selection-start-column="28" selection-end-line="82" selection-end-column="28" />
-                  <folding>
-                    <element signature="e#1897#1898#0" expanded="true" />
-                    <element signature="e#1916#1917#0" expanded="true" />
-                  </folding>
+                <state relative-caret-position="462">
+                  <caret line="16" column="22" lean-forward="false" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="22" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="header.html" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/main/resources/templates/fragments/header.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="594">
+                  <caret line="33" column="81" lean-forward="false" selection-start-line="33" selection-start-column="24" selection-end-line="33" selection-end-column="81" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="AccountController.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/main/java/org/miage/m2/forum/controller/AccountController.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="-3927">
+                  <caret line="45" column="22" lean-forward="false" selection-start-line="45" selection-start-column="16" selection-end-line="45" selection-end-column="22" />
+                  <folding />
                 </state>
               </provider>
             </entry>
@@ -146,8 +142,8 @@
           <file leaf-file-name="projects.html" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/main/resources/templates/projects.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="856">
-                  <caret line="51" column="0" lean-forward="false" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
+                <state relative-caret-position="427">
+                  <caret line="65" column="80" lean-forward="false" selection-start-line="65" selection-start-column="80" selection-end-line="65" selection-end-column="80" />
                   <folding />
                 </state>
               </provider>
@@ -157,59 +153,33 @@
       </split-first>
       <split-second>
         <leaf>
-          <file leaf-file-name="TopicForm.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/org/miage/m2/forum/formValidation/TopicForm.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="660">
-                  <caret line="22" column="5" lean-forward="true" selection-start-line="22" selection-start-column="5" selection-end-line="22" selection-end-column="5" />
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                    <element signature="e#330#331#0" expanded="true" />
-                    <element signature="e#359#360#0" expanded="true" />
-                    <element signature="e#403#404#0" expanded="true" />
-                    <element signature="e#439#440#0" expanded="true" />
-                    <element signature="e#471#472#0" expanded="true" />
-                    <element signature="e#499#500#0" expanded="true" />
-                    <element signature="e#541#542#0" expanded="true" />
-                    <element signature="e#575#576#0" expanded="true" />
-                    <element signature="e#609#610#0" expanded="true" />
-                    <element signature="e#639#640#0" expanded="true" />
-                    <element signature="e#685#686#0" expanded="true" />
-                    <element signature="e#723#724#0" expanded="true" />
-                    <element signature="e#756#757#0" expanded="true" />
-                    <element signature="e#785#786#0" expanded="true" />
-                    <element signature="e#830#831#0" expanded="true" />
-                    <element signature="e#866#867#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
           <file leaf-file-name="ProjectController.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/main/java/org/miage/m2/forum/controller/ProjectController.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="658">
-                  <caret line="224" column="21" lean-forward="false" selection-start-line="224" selection-start-column="21" selection-end-line="224" selection-end-column="21" />
+                <state relative-caret-position="922">
+                  <caret line="188" column="11" lean-forward="true" selection-start-line="188" selection-start-column="11" selection-end-line="188" selection-end-column="11" />
                   <folding>
                     <element signature="e#3466#3473#0" expanded="true" />
                     <element signature="e#5251#5260#0" expanded="true" />
-                    <element signature="e#7508#7515#0" expanded="true" />
-                    <element signature="e#8548#8549#0" expanded="true" />
-                    <element signature="e#8592#8593#0" expanded="true" />
-                    <element signature="e#8800#8801#0" expanded="true" />
-                    <element signature="e#8839#8840#0" expanded="true" />
-                    <element signature="e#8913#8914#0" expanded="true" />
-                    <element signature="e#8969#8970#0" expanded="true" />
-                    <element signature="e#9016#9017#0" expanded="true" />
-                    <element signature="e#9052#9053#0" expanded="true" />
-                    <element signature="e#9117#9118#0" expanded="true" />
-                    <element signature="e#9167#9168#0" expanded="true" />
-                    <element signature="e#9224#9225#0" expanded="true" />
-                    <element signature="e#9265#9266#0" expanded="true" />
-                    <element signature="e#9454#9455#0" expanded="true" />
-                    <element signature="e#9491#9492#0" expanded="true" />
-                    <element signature="e#9559#9560#0" expanded="true" />
-                    <element signature="e#9611#9612#0" expanded="true" />
+                    <element signature="e#6536#6543#0" expanded="true" />
+                    <element signature="e#6668#6675#0" expanded="true" />
+                    <element signature="e#8201#8208#0" expanded="true" />
+                    <element signature="e#9241#9242#0" expanded="true" />
+                    <element signature="e#9285#9286#0" expanded="true" />
+                    <element signature="e#9493#9494#0" expanded="true" />
+                    <element signature="e#9532#9533#0" expanded="true" />
+                    <element signature="e#9606#9607#0" expanded="true" />
+                    <element signature="e#9662#9663#0" expanded="true" />
+                    <element signature="e#9709#9710#0" expanded="true" />
+                    <element signature="e#9745#9746#0" expanded="true" />
+                    <element signature="e#9810#9811#0" expanded="true" />
+                    <element signature="e#9860#9861#0" expanded="true" />
+                    <element signature="e#9917#9918#0" expanded="true" />
+                    <element signature="e#9958#9959#0" expanded="true" />
+                    <element signature="e#10147#10148#0" expanded="true" />
+                    <element signature="e#10184#10185#0" expanded="true" />
+                    <element signature="e#10252#10253#0" expanded="true" />
+                    <element signature="e#10304#10305#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -225,23 +195,10 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="AdministrationServiceImpl.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/org/miage/m2/forum/service/AdministrationServiceImpl.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="459">
-                  <caret line="130" column="0" lean-forward="true" selection-start-line="130" selection-start-column="0" selection-end-line="130" selection-end-column="0" />
-                  <folding>
-                    <element signature="e#1595#1596#0" expanded="true" />
-                    <element signature="e#1649#1650#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
           <file leaf-file-name="AdministrationController.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/main/java/org/miage/m2/forum/controller/AdministrationController.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="371">
+                <state relative-caret-position="470">
                   <caret line="147" column="11" lean-forward="true" selection-start-line="147" selection-start-column="11" selection-end-line="147" selection-end-column="11" />
                   <folding>
                     <element signature="e#11648#11649#0" expanded="true" />
@@ -251,23 +208,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="MessageService.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/org/miage/m2/forum/service/MessageService.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="264">
-                  <caret line="8" column="19" lean-forward="false" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
           <file leaf-file-name="MessageServiceImpl.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/main/java/org/miage/m2/forum/service/MessageServiceImpl.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="495">
-                  <caret line="15" column="28" lean-forward="true" selection-start-line="15" selection-start-column="28" selection-end-line="15" selection-end-column="28" />
+                <state relative-caret-position="627">
+                  <caret line="19" column="50" lean-forward="false" selection-start-line="19" selection-start-column="50" selection-end-line="19" selection-end-column="50" />
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
@@ -275,14 +220,35 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="MessageRepository.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/org/miage/m2/forum/query/MessageRepository.java">
+          <file leaf-file-name="UtilisateurRepositoryImpl.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/main/java/org/miage/m2/forum/query/UtilisateurRepositoryImpl.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="198">
-                  <caret line="6" column="59" lean-forward="false" selection-start-line="6" selection-start-column="59" selection-end-line="6" selection-end-column="59" />
+                <state relative-caret-position="132">
+                  <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="AccountServiceImpl.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/main/java/org/miage/m2/forum/service/AccountServiceImpl.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="1091">
+                  <caret line="128" column="10" lean-forward="false" selection-start-line="128" selection-start-column="10" selection-end-line="128" selection-end-column="10" />
                   <folding>
-                    <element signature="imports" expanded="true" />
+                    <element signature="e#4629#4630#0" expanded="true" />
+                    <element signature="e#4684#4685#0" expanded="true" />
                   </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="AccountService.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/main/java/org/miage/m2/forum/service/AccountService.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="396">
+                  <caret line="19" column="10" lean-forward="false" selection-start-line="19" selection-start-column="10" selection-end-line="19" selection-end-column="10" />
+                  <folding />
                 </state>
               </provider>
             </entry>
@@ -290,7 +256,7 @@
           <file leaf-file-name="Topic.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/main/java/org/miage/m2/forum/modele/Topic.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="6105">
+                <state relative-caret-position="5511">
                   <caret line="207" column="0" lean-forward="false" selection-start-line="207" selection-start-column="0" selection-end-line="207" selection-end-column="0" />
                   <folding>
                     <element signature="e#3988#3989#0" expanded="true" />
@@ -306,8 +272,18 @@
           <file leaf-file-name="topics.html" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/main/resources/templates/topics.html">
               <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="290">
+                  <caret line="46" column="80" lean-forward="false" selection-start-line="46" selection-start-column="80" selection-end-line="46" selection-end-column="80" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="unfollow.html" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/main/resources/templates/unfollow.html">
+              <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="495">
-                  <caret line="24" column="61" lean-forward="false" selection-start-line="24" selection-start-column="61" selection-end-line="24" selection-end-column="61" />
+                  <caret line="15" column="22" lean-forward="false" selection-start-line="15" selection-start-column="22" selection-end-line="15" selection-end-column="22" />
                   <folding />
                 </state>
               </provider>
@@ -321,8 +297,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
-        <option value="HTML File" />
         <option value="Class" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -345,9 +321,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/org/miage/m2/forum/modele/Topic.java" />
-        <option value="$PROJECT_DIR$/src/main/java/org/miage/m2/forum/modele/Utilisateur.java" />
-        <option value="$PROJECT_DIR$/src/main/java/org/miage/m2/forum/META-INF/persistence.xml" />
         <option value="$PROJECT_DIR$/src/main/java/org/miage/m2/forum/MainSpringApplication.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" />
@@ -357,11 +330,9 @@
         <option value="$PROJECT_DIR$/src/main/java/org/miage/m2/forum/query/ProjetRepository.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/miage/m2/forum/config/H2JpaConfig.java" />
         <option value="$PROJECT_DIR$/src/test/java/org/miage/m2/forum/service/AccountServiceImplTest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/org/miage/m2/forum/service/AccountService.java" />
         <option value="$PROJECT_DIR$/src/test/java/org/miage/m2/forum/config/H2TestProfileJPAConfig.java" />
         <option value="$PROJECT_DIR$/src/test/java/org/miage/m2/forum/controller/AccountControllerTest.java" />
         <option value="$PROJECT_DIR$/src/test/resources/application.properties" />
-        <option value="$PROJECT_DIR$/src/main/java/org/miage/m2/forum/service/AccountServiceImpl.java" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/src/test/resources/hibernate.properties" />
         <option value="$PROJECT_DIR$/src/main/java/org/miage/m2/forum/controller/AccountController.java" />
@@ -387,13 +358,18 @@
         <option value="$PROJECT_DIR$/src/main/java/org/miage/m2/forum/formValidation/TopicForm.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/miage/m2/forum/service/TopicService.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/miage/m2/forum/query/MessageRepository.java" />
-        <option value="$PROJECT_DIR$/src/main/java/org/miage/m2/forum/service/MessageServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/miage/m2/forum/service/MessageService.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/miage/m2/forum/service/TopicServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/miage/m2/forum/formValidation/MessageForm.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/index.html" />
+        <option value="$PROJECT_DIR$/src/main/java/org/miage/m2/forum/formValidation/FollowForm.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/miage/m2/forum/service/MessageServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/miage/m2/forum/service/AccountService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/miage/m2/forum/service/AccountServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/follow.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/unfollow.html" />
         <option value="$PROJECT_DIR$/src/main/java/org/miage/m2/forum/controller/TopicController.java" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/topics.html" />
-        <option value="$PROJECT_DIR$/src/main/resources/templates/index.html" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/projects.html" />
         <option value="$PROJECT_DIR$/src/main/java/org/miage/m2/forum/controller/ProjectController.java" />
       </list>
@@ -427,8 +403,8 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="5692" />
-    <option name="y" value="782" />
+    <option name="x" value="5459" />
+    <option name="y" value="787" />
     <option name="width" value="2734" />
     <option name="height" value="1744" />
   </component>
@@ -520,16 +496,6 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="forum" type="462c0819:PsiDirectoryNode" />
-              <item name="formValidation" type="462c0819:PsiDirectoryNode" />
-              <item name="annotation" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ForumSpringBoot" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ForumSpringBoot" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="forum" type="462c0819:PsiDirectoryNode" />
               <item name="mail" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -590,6 +556,15 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ForumSpringBoot" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ForumSpringBoot" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="fragments" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ForumSpringBoot" type="b2602c69:ProjectViewProjectNode" />
@@ -688,11 +663,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Juluto\IdeaProjects\ForumSpringBoot\src\main\resources\templates" />
       <recent name="C:\Users\machin\IdeaProjects\ForumSpringBoot\src\main\resources\templates\js" />
       <recent name="C:\Users\machin\IdeaProjects\ForumSpringBoot\src\main\resources\templates\css" />
       <recent name="C:\Users\machin\IdeaProjects\ForumSpringBoot\src\main\resources" />
       <recent name="C:\Users\machin\IdeaProjects\ForumSpringBoot\src\test\resources" />
-      <recent name="C:\Users\Juluto\IdeaProjects\ForumSpringBoot\src\main" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Juluto\IdeaProjects\ForumSpringBoot\src\main\resources\static\font" />
@@ -968,7 +943,7 @@
       <workItem from="1514819257161" duration="1284000" />
       <workItem from="1514876174541" duration="19555000" />
       <workItem from="1516443440622" duration="208000" />
-      <workItem from="1516443707706" duration="37232000" />
+      <workItem from="1516443707706" duration="46366000" />
     </task>
     <servers />
   </component>
@@ -1005,7 +980,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="109646000" />
+    <option name="totallyTimeSpent" value="118780000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="5459" y="787" width="3866" height="2106" extended-state="6" />
@@ -1017,10 +992,10 @@
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32968277" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18176973" sideWeight="0.5176923" order="5" side_tool="true" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13646056" sideWeight="0.51731926" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3998915" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39946914" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32609874" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1028,11 +1003,11 @@
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29462832" sideWeight="0.4978678" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2794357" sideWeight="0.4978678" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32903227" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18176973" sideWeight="0.4823077" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13646056" sideWeight="0.4826807" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297943" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1054,91 +1029,11 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="6" />
+      <option name="time" value="7" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/hello.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/css/main.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/miage/m2/forum/query/ProjetRepositoryCustom.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="4" column="17" lean-forward="false" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/signin.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="858">
-          <caret line="50" column="65" lean-forward="true" selection-start-line="50" selection-start-column="65" selection-end-line="50" selection-end-column="65" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/miage/m2/forum/config/WebConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="12" column="35" lean-forward="false" selection-start-line="12" selection-start-column="35" selection-end-line="12" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/miage/m2/forum/controller/AccountController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4589">
-          <caret line="45" column="22" lean-forward="false" selection-start-line="45" selection-start-column="16" selection-end-line="45" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/miage/m2/forum/controller/OAuthController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-33">
-          <caret line="15" column="13" lean-forward="false" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/miage/m2/forum/controller/CurrentUserService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2878">
-          <caret line="24" column="13" lean-forward="false" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/miage/m2/forum/controller/MainController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="13" column="13" lean-forward="false" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/miage/m2/forum/query/ProjetRepositoryCustomImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="132">
@@ -1151,14 +1046,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="419">
           <caret line="38" column="17" lean-forward="false" selection-start-line="38" selection-start-column="17" selection-end-line="38" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/fragments/header.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="15" column="21" lean-forward="true" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="21" />
           <folding />
         </state>
       </provider>
@@ -1294,8 +1181,8 @@
         <state relative-caret-position="459">
           <caret line="130" column="0" lean-forward="true" selection-start-line="130" selection-start-column="0" selection-end-line="130" selection-end-column="0" />
           <folding>
-            <element signature="e#1595#1596#0" expanded="true" />
-            <element signature="e#1649#1650#0" expanded="true" />
+            <element signature="e#1595#1596#0" expanded="false" />
+            <element signature="e#1649#1650#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1304,14 +1191,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
           <caret line="6" column="17" lean-forward="false" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/miage/m2/forum/query/UtilisateurRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="7" column="17" lean-forward="false" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
           <folding />
         </state>
       </provider>
@@ -1334,42 +1213,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/miage/m2/forum/service/ProjetServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="24" column="0" lean-forward="true" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/miage/m2/forum/modele/Projet.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="800">
           <caret line="82" column="28" lean-forward="false" selection-start-line="82" selection-start-column="28" selection-end-line="82" selection-end-column="28" />
           <folding>
-            <element signature="e#1897#1898#0" expanded="true" />
-            <element signature="e#1916#1917#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/miage/m2/forum/modele/Utilisateur.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1617">
-          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/miage/m2/forum/service/TopicServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="445">
-          <caret line="102" column="27" lean-forward="false" selection-start-line="102" selection-start-column="27" selection-end-line="102" selection-end-column="27" />
-          <folding>
-            <element signature="e#1161#1162#0" expanded="true" />
-            <element signature="e#1214#1215#0" expanded="true" />
-            <element signature="e#3619#3620#0" expanded="true" />
-            <element signature="e#3673#3674#0" expanded="true" />
+            <element signature="e#1897#1898#0" expanded="false" />
+            <element signature="e#1916#1917#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1386,6 +1236,80 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="66">
           <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/miage/m2/forum/service/MessageService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="8" column="19" lean-forward="false" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="891">
+          <caret line="30" column="62" lean-forward="true" selection-start-line="30" selection-start-column="28" selection-end-line="30" selection-end-column="62" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/miage/m2/forum/formValidation/MessageForm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="363">
+          <caret line="11" column="30" lean-forward="false" selection-start-line="11" selection-start-column="30" selection-end-line="11" selection-end-column="30" />
+          <folding>
+            <element signature="e#266#267#0" expanded="true" />
+            <element signature="e#308#309#0" expanded="true" />
+            <element signature="e#342#343#0" expanded="true" />
+            <element signature="e#376#377#0" expanded="true" />
+            <element signature="e#406#407#0" expanded="true" />
+            <element signature="e#452#453#0" expanded="true" />
+            <element signature="e#490#491#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/miage/m2/forum/modele/Message.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="462">
+          <caret line="16" column="22" lean-forward="false" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/miage/m2/forum/controller/AccountController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3927">
+          <caret line="45" column="22" lean-forward="false" selection-start-line="45" selection-start-column="16" selection-end-line="45" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/miage/m2/forum/controller/MainController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="13" column="13" lean-forward="false" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/miage/m2/forum/controller/CurrentUserService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1353">
+          <caret line="24" column="13" lean-forward="false" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/miage/m2/forum/controller/OAuthController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="33">
+          <caret line="15" column="13" lean-forward="false" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
           <folding />
         </state>
       </provider>
@@ -1416,91 +1340,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/miage/m2/forum/service/MessageService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="8" column="19" lean-forward="false" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/miage/m2/forum/service/MessageServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="15" column="28" lean-forward="true" selection-start-line="15" selection-start-column="28" selection-end-line="15" selection-end-column="28" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/miage/m2/forum/controller/AdministrationController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="371">
-          <caret line="147" column="11" lean-forward="true" selection-start-line="147" selection-start-column="11" selection-end-line="147" selection-end-column="11" />
-          <folding>
-            <element signature="e#11648#11649#0" expanded="true" />
-            <element signature="e#11704#11705#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="891">
-          <caret line="30" column="62" lean-forward="true" selection-start-line="30" selection-start-column="28" selection-end-line="30" selection-end-column="62" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/miage/m2/forum/formValidation/MessageForm.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="363">
-          <caret line="11" column="30" lean-forward="false" selection-start-line="11" selection-start-column="30" selection-end-line="11" selection-end-column="30" />
-          <folding>
-            <element signature="e#266#267#0" expanded="true" />
-            <element signature="e#308#309#0" expanded="true" />
-            <element signature="e#342#343#0" expanded="true" />
-            <element signature="e#376#377#0" expanded="true" />
-            <element signature="e#406#407#0" expanded="true" />
-            <element signature="e#452#453#0" expanded="true" />
-            <element signature="e#490#491#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/topics.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="24" column="61" lean-forward="false" selection-start-line="24" selection-start-column="61" selection-end-line="24" selection-end-column="61" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/projects.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="856">
-          <caret line="51" column="0" lean-forward="false" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/miage/m2/forum/controller/TopicController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="889">
-          <caret line="119" column="58" lean-forward="false" selection-start-line="119" selection-start-column="58" selection-end-line="119" selection-end-column="58" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2548#2557#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/miage/m2/forum/modele/Topic.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6105">
+        <state relative-caret-position="5511">
           <caret line="207" column="0" lean-forward="false" selection-start-line="207" selection-start-column="0" selection-end-line="207" selection-end-column="0" />
           <folding>
             <element signature="e#3988#3989#0" expanded="true" />
@@ -1512,38 +1354,180 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/miage/m2/forum/modele/Message.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/miage/m2/forum/controller/AdministrationController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="462">
-          <caret line="16" column="23" lean-forward="false" selection-start-line="16" selection-start-column="12" selection-end-line="16" selection-end-column="23" />
+        <state relative-caret-position="470">
+          <caret line="147" column="11" lean-forward="true" selection-start-line="147" selection-start-column="11" selection-end-line="147" selection-end-column="11" />
+          <folding>
+            <element signature="e#11648#11649#0" expanded="true" />
+            <element signature="e#11704#11705#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/miage/m2/forum/query/UtilisateurRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="7" column="17" lean-forward="false" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/miage/m2/forum/service/ProjetServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="495">
+          <caret line="24" column="0" lean-forward="true" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/miage/m2/forum/service/MessageServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="627">
+          <caret line="19" column="50" lean-forward="false" selection-start-line="19" selection-start-column="50" selection-end-line="19" selection-end-column="50" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/miage/m2/forum/query/UtilisateurRepositoryImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/miage/m2/forum/service/AccountService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="19" column="10" lean-forward="false" selection-start-line="19" selection-start-column="10" selection-end-line="19" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/miage/m2/forum/service/AccountServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1091">
+          <caret line="128" column="10" lean-forward="false" selection-start-line="128" selection-start-column="10" selection-end-line="128" selection-end-column="10" />
+          <folding>
+            <element signature="e#4629#4630#0" expanded="true" />
+            <element signature="e#4684#4685#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/miage/m2/forum/service/TopicServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="535">
+          <caret line="102" column="27" lean-forward="false" selection-start-line="102" selection-start-column="27" selection-end-line="102" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/follow.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="495">
+          <caret line="15" column="19" lean-forward="true" selection-start-line="15" selection-start-column="19" selection-end-line="15" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/miage/m2/forum/modele/Utilisateur.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1452">
+          <caret line="47" column="25" lean-forward="true" selection-start-line="47" selection-start-column="25" selection-end-line="47" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/miage/m2/forum/formValidation/FollowForm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="6" column="30" lean-forward="false" selection-start-line="6" selection-start-column="30" selection-end-line="6" selection-end-column="30" />
+          <folding>
+            <element signature="e#155#156#0" expanded="true" />
+            <element signature="e#197#198#0" expanded="true" />
+            <element signature="e#231#232#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/unfollow.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="495">
+          <caret line="15" column="22" lean-forward="false" selection-start-line="15" selection-start-column="22" selection-end-line="15" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/fragments/header.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="594">
+          <caret line="33" column="81" lean-forward="false" selection-start-line="33" selection-start-column="24" selection-end-line="33" selection-end-column="81" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/projects.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="427">
+          <caret line="65" column="80" lean-forward="false" selection-start-line="65" selection-start-column="80" selection-end-line="65" selection-end-column="80" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/topics.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="290">
+          <caret line="46" column="80" lean-forward="false" selection-start-line="46" selection-start-column="80" selection-end-line="46" selection-end-column="80" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/miage/m2/forum/controller/TopicController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="681">
+          <caret line="164" column="8" lean-forward="true" selection-start-line="164" selection-start-column="8" selection-end-line="171" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2669#2678#0" expanded="true" />
+            <element signature="e#3117#3124#0" expanded="true" />
+            <element signature="e#5905#5912#0" expanded="true" />
+            <element signature="e#6043#6050#0" expanded="true" />
+            <element signature="e#7080#7087#0" expanded="true" />
+            <element signature="e#7353#7360#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/miage/m2/forum/controller/ProjectController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="658">
-          <caret line="224" column="21" lean-forward="false" selection-start-line="224" selection-start-column="21" selection-end-line="224" selection-end-column="21" />
+        <state relative-caret-position="922">
+          <caret line="188" column="11" lean-forward="true" selection-start-line="188" selection-start-column="11" selection-end-line="188" selection-end-column="11" />
           <folding>
             <element signature="e#3466#3473#0" expanded="true" />
             <element signature="e#5251#5260#0" expanded="true" />
-            <element signature="e#7508#7515#0" expanded="true" />
-            <element signature="e#8548#8549#0" expanded="true" />
-            <element signature="e#8592#8593#0" expanded="true" />
-            <element signature="e#8800#8801#0" expanded="true" />
-            <element signature="e#8839#8840#0" expanded="true" />
-            <element signature="e#8913#8914#0" expanded="true" />
-            <element signature="e#8969#8970#0" expanded="true" />
-            <element signature="e#9016#9017#0" expanded="true" />
-            <element signature="e#9052#9053#0" expanded="true" />
-            <element signature="e#9117#9118#0" expanded="true" />
-            <element signature="e#9167#9168#0" expanded="true" />
-            <element signature="e#9224#9225#0" expanded="true" />
-            <element signature="e#9265#9266#0" expanded="true" />
-            <element signature="e#9454#9455#0" expanded="true" />
-            <element signature="e#9491#9492#0" expanded="true" />
-            <element signature="e#9559#9560#0" expanded="true" />
-            <element signature="e#9611#9612#0" expanded="true" />
+            <element signature="e#6536#6543#0" expanded="true" />
+            <element signature="e#6668#6675#0" expanded="true" />
+            <element signature="e#8201#8208#0" expanded="true" />
+            <element signature="e#9241#9242#0" expanded="true" />
+            <element signature="e#9285#9286#0" expanded="true" />
+            <element signature="e#9493#9494#0" expanded="true" />
+            <element signature="e#9532#9533#0" expanded="true" />
+            <element signature="e#9606#9607#0" expanded="true" />
+            <element signature="e#9662#9663#0" expanded="true" />
+            <element signature="e#9709#9710#0" expanded="true" />
+            <element signature="e#9745#9746#0" expanded="true" />
+            <element signature="e#9810#9811#0" expanded="true" />
+            <element signature="e#9860#9861#0" expanded="true" />
+            <element signature="e#9917#9918#0" expanded="true" />
+            <element signature="e#9958#9959#0" expanded="true" />
+            <element signature="e#10147#10148#0" expanded="true" />
+            <element signature="e#10184#10185#0" expanded="true" />
+            <element signature="e#10252#10253#0" expanded="true" />
+            <element signature="e#10304#10305#0" expanded="true" />
           </folding>
         </state>
       </provider>

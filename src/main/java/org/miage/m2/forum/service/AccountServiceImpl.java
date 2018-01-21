@@ -125,4 +125,8 @@ public class AccountServiceImpl implements AccountService {
         }
         return generatedPassword;
     }
+
+    public Utilisateur updateSuiveur(Utilisateur user){
+        return utilisateurRepository.save(user);
+    }
 }

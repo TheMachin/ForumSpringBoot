@@ -173,6 +173,28 @@ public class ProjectController {
             return index(principal, model);
         }
 
+        /**
+         * l'utilisateur suit automatiquement le topic
+         */
+
+        creator = utilisateurRepository.findOne(currentUserService.getCurrentNameUser(principal));
+
+        List<Topic> followUser = new ArrayList<Topic>();
+        followUser.addAll(creator.getSuivi());
+
+        followUser.add(topic);
+        Set<Topic> setFollow = new HashSet<Topic>(followUser);
+        creator.setSuivi(setFollow);
+
+        /**
+         * update dans la bdd
+         */
+        Utilisateur utilisateur = accountService.updateSuiveur(creator);
+        if (utilisateur == null) {
+            logger.error("unable to update a user");
+            model.addAttribute("failUser", true);
+        }
+
         return getProjectChildAndTopics(title, principal, model);
     }
 

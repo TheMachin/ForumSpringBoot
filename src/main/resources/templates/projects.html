@@ -63,7 +63,7 @@
     </div>
 
 </div>
-<div class="container">
+<div class="container" th:if="${#authorization.expression('isAuthenticated()')}">
     <div></div><div class="col-lg-2"></div>
     <div class="col-lg-8">
         <h2>New topic</h2>
