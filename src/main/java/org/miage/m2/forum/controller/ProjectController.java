@@ -125,7 +125,7 @@ public class ProjectController {
     }
 
     @PostMapping(value = "/projects/{title}/")
-    public String createTopic(@Valid TopicForm topicForm, Principal principal, BindingResult bindingResult, Model model) {
+    public String createTopic(@Valid TopicForm topicForm, @PathVariable String title, Principal principal, BindingResult bindingResult, Model model) {
         /**
          * si ya des erreurs dans le formulaire, on notifue à l'utilisateur
          */
@@ -173,7 +173,7 @@ public class ProjectController {
             return index(principal, model);
         }
 
-        return "projects";
+        return getProjectChildAndTopics(title, principal, model);
     }
 
     private List<Projet> projectsByRights(Iterable<Projet> projets, String user, Utilisateur utilisateur) {
@@ -219,6 +219,10 @@ public class ProjectController {
             } else {
                 if (topic.isInvite()) {
                     topicList.add(topic);
+                } else {
+                    if (utilisateur != null && topic.getLecture().size() == 0) {
+                        topicList.add(topic);
+                    }
                 }
                 if (utilisateur != null) {
                     for (Utilisateur u : topic.getLecture()) {

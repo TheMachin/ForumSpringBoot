@@ -46,11 +46,15 @@
             <h2>List of topics</h2>
             <table class="table  table-striped">
                 <tr>
-                    <th>Title</th>
+                    <th>Subject</th>
+                    <th>Author</th>
+                    <th>Nb</th>
                     <th>Go to topic</th>
                 </tr>
                 <tr th:each="t,iterationStatus : ${topics}">
                     <td th:text="${t.titre}"></td>
+                    <td th:text="${t.creator.pseudo}"></td>
+                    <td th:text="${#lists.size(t.message)}"></td>
                     <td><a class="btn btn-primary" th:href="@{'/projects/' + ${nomProjet} + '/topics/' + ${t.titre} + '/'}">Go to topic</a></td>
                 </tr>
             </table>
