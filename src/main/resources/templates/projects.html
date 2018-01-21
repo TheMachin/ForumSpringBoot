@@ -2,8 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>ForumSpringBoot</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css"/>
     <link rel="stylesheet" th:href="@{/css/main.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/theme.css}" type="text/css"/>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
@@ -17,12 +19,12 @@
             <h2>List of projects</h2>
             <table class="table  table-striped">
                 <tr>
-                    <th>Title</th>
-                    <th>Description</th>
-                    <th>Date of creation</th>
-                    <th>NB topic</th>
-                    <th>Nb child projectc</th>
-                    <th>Go to project</th>
+                    <th th:text="#{home.title}">Title</th>
+                    <th th:text="#{home.description}">Description</th>
+                    <th th:text="#{home.dateCreation}">Date of creation</th>
+                    <th th:text="#{home.nbtopic}">NB topic</th>
+                    <th th:text="#{home.nbChildProject}">Nb child projectc</th>
+                    <th th:text="#{home.goToProject}">Go to project</th>
                 </tr>
                 <tr th:each="p,iterationStatus : ${projets}">
                     <td th:text="${p.titre}"></td>
@@ -49,12 +51,14 @@
                     <th>Subject</th>
                     <th>Author</th>
                     <th>Nb</th>
+                    <th>Date creation</th>
                     <th>Go to topic</th>
                 </tr>
                 <tr th:each="t,iterationStatus : ${topics}">
                     <td th:text="${t.titre}"></td>
                     <td th:text="${t.creator.pseudo}"></td>
                     <td th:text="${#lists.size(t.message)}"></td>
+                    <td th:text="${#dates.format(t.dateCreation,'dd-MM-yyyy HH:mm:ss')}"></td>
                     <td><a class="btn btn-primary" th:href="@{'/projects/' + ${nomProjet} + '/topics/' + ${t.titre} + '/'}">Go to topic</a></td>
                 </tr>
             </table>

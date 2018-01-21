@@ -94,7 +94,7 @@ public class TopicServiceImpl implements TopicService{
             return null;
         }
 
-        topic.addEcriture(lecture);
+        topic.addLecture(lecture);
 
         return topicRepository.save(topic);
     }
@@ -153,5 +153,11 @@ public class TopicServiceImpl implements TopicService{
 
     public void setTopicRepository(TopicRepository topicRepository) {
         this.topicRepository = topicRepository;
+    }
+
+    public Topic changeTitleTopic(Topic topic) {
+        Topic topicFinal = topicRepository.save(topic);
+
+        return topicFinal;
     }
 }
