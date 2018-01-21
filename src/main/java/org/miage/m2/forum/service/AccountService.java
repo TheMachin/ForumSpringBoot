@@ -17,4 +17,5 @@ public interface AccountService {
     public boolean deleteUser(Utilisateur user);
     public Utilisateur modifyUser(Utilisateur user, String emailModify, String pseudoModify, String mdpModify, boolean adminModify);
     public void setUtilisateurRepository(UtilisateurRepository utilisateurRepository);
+    public Utilisateur updateSuiveur(Utilisateur user);
 }
