@@ -1,6 +1,8 @@
 package org.miage.m2.forum.controller;
 
 import org.miage.m2.forum.formValidation.*;
+import org.miage.m2.forum.mail.MailBean;
+import org.miage.m2.forum.mail.StmpClient;
 import org.miage.m2.forum.modele.Message;
 import org.miage.m2.forum.modele.Projet;
 import org.miage.m2.forum.modele.Topic;
@@ -13,6 +15,7 @@ import org.miage.m2.forum.service.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,6 +24,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.mail.MessagingException;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.*;
@@ -30,6 +34,10 @@ import java.util.*;
 public class TopicController {
 
     public static final Logger logger = LoggerFactory.getLogger(TopicController.class);
+
+    @Autowired
+    private JavaMailSender sender ;
+    private StmpClient stmpClient = new StmpClient();
 
     @Autowired
     private UtilisateurRepository utilisateurRepository;
@@ -163,6 +171,26 @@ public class TopicController {
             logger.error("unable to create a message");
             model.addAttribute("failMessage", true);
         }
+
+        /**
+         * Envoi mail
+         */
+
+        MailBean mailBean = new MailBean();
+        mailBean.setFrom("forumspringboot2018@laposte.net");
+        for(Utilisateur u : topic.getSuiveurs()){
+            mailBean.setTo(u.getEmail());
+            mailBean.setSubject("New message in " + subject);
+            mailBean.setMessage("A new message is created. The message is : \n" + message.getMessage());
+            try {
+                stmpClient.sendEmail(mailBean,sender);
+            } catch (MessagingException e) {
+                e.printStackTrace();
+            }
+        }
+
+
+
         return getMessage(title, subject, principal, model);
     }
 
