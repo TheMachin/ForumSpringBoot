@@ -60,7 +60,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         //force redirect to login page if the authentication is needed
         http.csrf().disable() .exceptionHandling().authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/signin"));
         http.anonymous().and().authorizeRequests()
-                .antMatchers("/","/signin**","/signup**","/projects/**/", "/403").permitAll()
+                .antMatchers("/","/signin**/**","/signup**/**","/projects/**/", "/403").permitAll()
                 .antMatchers("/administration/**").access("hasRole('ADMIN')")
                 .antMatchers("/oauth/**").authenticated()
                 .anyRequest().authenticated()

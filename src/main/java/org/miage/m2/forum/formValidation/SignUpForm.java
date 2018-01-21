@@ -8,8 +8,7 @@ import org.miage.m2.forum.formValidation.annotation.FieldsValueMatch;
         @FieldsValueMatch(
                 field="password",
                 fieldsMatch = "confirmPassword",
-                message = "passwords are not same"
-                //message = "{message.key}" for internalization
+                message = "error.password.not.same"
         )
 })
 public class SignUpForm {

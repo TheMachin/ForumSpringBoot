@@ -140,11 +140,11 @@ public class AccountController {
      * @param model
      * @return
      */
-    @PostMapping(value = "account/setting")
+    @RequestMapping(value = "account/setting", method = RequestMethod.POST)
     public String settingForm(
             @Valid SettingForm settingForm,
-            Principal principal,
             BindingResult bindingResult,
+            Principal principal,
             Model model
     ){
         logger.info("POST setting");
@@ -169,7 +169,6 @@ public class AccountController {
             model.addAttribute("userOAuth",false);
         }
         if(bindingResult.hasErrors()){
-            logger.error("Error in input");
             return "setting";
         }
 

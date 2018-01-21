@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title th:text="#{login.title}">Login</title>
+    <title th:text="#{header.signin}">Login</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css"/>
     <link rel="stylesheet" th:href="@{/css/main.css}" type="text/css"/>
@@ -18,7 +18,7 @@
                 <h2 th:text="#{header.signin}">Login page</h2>
                 <div class="alert alert-success" th:if="${accountCreate != null}" th:text="#{login.create.success}" >Welcome, your account is created. Login you now!</div>
                 <div th:if="${param.error}">
-                    <div class="alert alert-danger" th:text="#{email.username.error}">
+                    <div class="alert alert-danger" th:text="#{email.username.invalid}">
                         Invalid email or password.
                     </div>
                 </div>

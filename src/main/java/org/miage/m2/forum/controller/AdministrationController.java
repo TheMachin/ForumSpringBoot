@@ -127,8 +127,8 @@ public class AdministrationController {
     @PostMapping(value = "/")
     public String createProject(
              @Valid ProjectForm projectForm
-            ,Principal principal
             ,BindingResult bindingResult
+            ,Principal principal
             ,Model model
     ){
         /**
@@ -186,7 +186,7 @@ public class AdministrationController {
     public String updateProject(
             @Valid ProjectForm projectForm
             ,BindingResult bindingResult
-            , Principal principal
+            ,Principal principal
             ,Model model
     ){
         accountService.setUtilisateurRepository(utilisateurRepository);

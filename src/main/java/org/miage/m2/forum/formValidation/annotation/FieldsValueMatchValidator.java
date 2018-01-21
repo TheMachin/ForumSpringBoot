@@ -1,7 +1,9 @@
 package org.miage.m2.forum.formValidation.annotation;
 
+import org.miage.m2.forum.config.internalization.MessageByLocaleServiceImpl;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeanWrapperImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -11,6 +13,9 @@ public class FieldsValueMatchValidator implements ConstraintValidator<FieldsValu
     private String field;
     private String fieldMatch;
     private String message;
+
+    @Autowired
+    MessageByLocaleServiceImpl messageByLocaleService;
 
     @Override
     public void initialize(FieldsValueMatch constraintAnnotation) {
@@ -40,7 +45,7 @@ public class FieldsValueMatchValidator implements ConstraintValidator<FieldsValu
         if(!toReturn) {
             cvc.disableDefaultConstraintViolation();
             //In the initialiaze method you get the errorMessage: constraintAnnotation.message();
-            cvc.buildConstraintViolationWithTemplate(message).addPropertyNode(field).addConstraintViolation();
+            cvc.buildConstraintViolationWithTemplate(messageByLocaleService.getMessage(message)).addPropertyNode(field).addConstraintViolation();
         }
         return toReturn;
     }

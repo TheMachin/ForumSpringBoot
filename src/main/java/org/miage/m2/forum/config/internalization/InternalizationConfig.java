@@ -1,4 +1,4 @@
-package org.miage.m2.forum.config;
+package org.miage.m2.forum.config.internalization;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -42,5 +42,14 @@ public class InternalizationConfig extends WebMvcConfigurerAdapter {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(localeChangeInterceptor());
+    }
+
+    @Bean
+    public ReloadableResourceBundleMessageSource messageSource() {
+        ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
+        messageSource.setBasename("classpath:i18n/messages");
+        messageSource.setDefaultEncoding("UTF-8");
+        messageSource.setCacheSeconds(3600); //refresh cache once per hour
+        return messageSource;
     }
 }

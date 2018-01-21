@@ -15,26 +15,26 @@
         <h2 th:text="#{signup.title}">Sign up on ForumSpringBoot</h2>
         <div class="alert alert-danger" th:if="${fail != null}" th:text="#{email.username.error}">Email or username already exist</div>
             <table>
-                <form action="#" th:action="@{/account/signup}" th:object="${signUpForm}" method="POST">
+                <form action="#" th:action="@{/signup}" th:object="${signUpForm}" method="POST">
                     <tr>
                         <td th:text="#{enter.email}">Enter email:</td>
                         <td><input type="text" th:field="*{email}"/></td>
-                        <td th:if="${#fields.hasErrors('email')}" class="errors" th:errors="*{email}"  ></td>
+                        <td th:if="${#fields.hasErrors('email')}" class="error" th:errors="*{email}"  ></td>
                     </tr>
                     <tr>
                         <td th:text="#{enter.username}">Enter username:</td>
                         <td><input type="text" th:field="*{username}"/></td>
-                        <td th:if="${#fields.hasErrors('username')}" class="errors" th:errors="*{username}" ></td>
+                        <td th:if="${#fields.hasErrors('username')}" class="error" th:errors="*{username}" ></td>
                     </tr>
                     <tr>
                         <td th:text="#{enter.password}">Enter password:</td>
                         <td><input type="password" th:field="*{password}"/></td>
-                        <td th:if="${#fields.hasErrors('password')}" class="errors" th:errors="*{password}"></td>
+                        <td th:if="${#fields.hasErrors('password')}" class="error" th:errors="*{password}"></td>
                     </tr>
                     <tr>
                         <td th:text="#{confirm.password}">Confirm password:</td>
                         <td><input type="password" th:field="*{confirmPassword}"/></td>
-                        <td th:if="${#fields.hasErrors('confirmPassword')}" class="errors" th:errors="*{confirmPassword}"></td>
+                        <td th:if="${#fields.hasErrors('confirmPassword')}" class="error" th:errors="*{confirmPassword}"></td>
                     </tr>
                     <tr>
                         <td><button type="submit" th:text="#{submit}">Submit</button></td>
