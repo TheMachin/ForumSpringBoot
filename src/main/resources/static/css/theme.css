@@ -1,0 +1,12 @@
+.container-fluid:lang(en), html:lang(en)
+{
+    background: white;
+}
+
+.container-fluid:lang(fr), body:lang(fr), html:lang(fr) {
+    background: #d2bde3;
+}
+
+.table-striped:lang(fr) > tbody > tr:nth-child(2n) > td, .table-striped > tbody > tr:nth-child(2n) > th {
+    background-color: #dfdcda;
+}

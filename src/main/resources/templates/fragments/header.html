@@ -18,9 +18,22 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" th:href="@{/}">ForumSpringBoot</a>
+                <ul class="nav navbar-nav navbar-left">
+                    <li>
+                    <a href="?lang=fr">
+                        <label>France</label>
+                    </a>
+                </li>
+                    <li>
+                        <a href="?lang=en">
+                            <label>English</label>
+                        </a>
+                    </li>
+                </ul>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
+
                     <li th:if="${#authorization.expression('isAuthenticated()')}">
                         <a href="#" th:text="${#authentication.name}">
                             The value of the "name" property of the authentication object should appear here.
@@ -45,7 +58,7 @@
                         <a th:href="@{#}" onclick="$('#form').submit();">
                             <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;<label th:text="#{header.logout}">Logout</label>
                         </a>
-                        <form style="visibility: hidden" id="form" method="post" action="#" th:action="@{/logout}"></form>
+                        <form id="form" method="post" action="#" th:action="@{/logout}"></form>
                     </li>
                 </ul>
             </div>
